@@ -1,12 +1,20 @@
 ---
-title: "Détection de fraudes et loi de Benford"
-author: "FERNANDEZ Christelle - PONCHEELE Clément - EL KAÏM Laura"
+title: "Détection de fraudes et loi de probabilité de Newcomb-Benford"
+author:
+  - FERNANDEZ Christelle
+  - PONCHEELE Clément
+  - EL KAÏM Laura
+  - Encadré par M.DUCHARME
 date: '*$3$ janvier $2021$*'
 output:
   pdf_document: default
 fontsize: 12pt
 header-includes: \usepackage[french]{babel}
 ---
+
+RESUME DU PROJET EN QLQ LIGNES
+
+REMERCIEMENTS
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -17,3 +25,16 @@ knitr::opts_chunk$set(echo = TRUE)
 
 \newpage
 # Introduction.
+
+&nbsp;
+La fraude est une pratique répandue dans de nombreux domaines. Il peut être tentant pour un être humain de tricher, si cela peut impliquer pour lui une position plus confortable dans la société, telle qu'une réduction de charges, ou même un avantage sur un de ses concurrents. Il semblerait donc logique que des personnes cherchent à déceler ces fraudes.
+
+Les données transmises par un individu ou un organisme peuvent faire l'objet de modifications, c'est de ce type de fraudes auquel nous nous intéresserons ici.
+
+La détection de fraudes a pour objectif de suspecter des potentielles modifications sur des données naturelles.  
+
+
+
+La loi de Newcomb-Benford ou 
+
+\newpage
