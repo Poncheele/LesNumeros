@@ -23,6 +23,20 @@ knitr::opts_chunk$set(echo = TRUE)
 \maketitle
 \tableofcontents
 
+#Introduction
+#Les origines/Description
+#Experimentations
+##Benford
+##Pas Benford
+#Tests
+
+
+
+
+
+
+
+
 \newpage
 # Introduction.
 
