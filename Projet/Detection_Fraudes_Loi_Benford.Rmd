@@ -29,10 +29,13 @@ knitr::opts_chunk$set(echo = TRUE)
 &nbsp;
 La fraude est une pratique répandue dans de nombreux domaines. Il peut être tentant pour un être humain de tricher, si cela peut impliquer pour lui une position plus confortable dans la société, telle qu'une réduction de charges, ou même un avantage sur un de ses concurrents. Il semblerait donc logique que des personnes cherchent à déceler ces fraudes.
 
-Les données transmises par un individu ou un organisme peuvent faire l'objet de modifications, c'est de ce type de fraudes auquel nous nous intéresserons ici.
+Les données transmises par un individu ou un organisme peuvent faire l'objet de modifications, c'est de ce type de fraudes auquel nous nous intéresserons ici. De telles modifications entrainent un changement de la répartition des chiffres présent naturellement. Il est évident que pour qu'une fraude soit plus crédible, le fraudeur ne modifira qu'un partie des données, pour apporter de la vérité à son mensonge. Si nous connaissont la répartition des chiffres présent, il est donc techniquement possible de savoir si un nombre a ete modifié ou non. 
+De manière intuitive nous pourrions penser que les nombres sont répartis de manière uniforme. Qu'en est-il vraiment ? C'est la question que ce sont poses Newcomb() et Benford(). D'après leurs travaux, les nombres ne sont pas répartis de manières uniforme. 
+Dans ce projet nous nous intéressont au premier chiffre significatif, ce dernier est le premier chiffre d'un nombre qui n'est pas un zéro, exemple: 1 pour 1234 et 2 pour 0,0234. D'après Newcomb-Benford ce chiffre aurait un répartition différente de la loi uniforme, il suit la loi de N-B, nous l'expliqueront plus en détail dans la suite, mais cette loi nous dit que la probabilité d'avoir le chiffre i comme premier chiffre significatif est log(1+1/i), par exemple le chiffre 1 serait présent à 30% alors que le 9 à seulement 4,6%.
 
-La détection de fraudes a pour objectif de suspecter des potentielles modifications sur des données naturelles.  
 
+
+La détection de fraudes a pour objectif de suspecter des potentielles modifications sur des données naturelles. 
 
 
 La loi de Newcomb-Benford ou 
