@@ -1,10 +1,19 @@
 ---
 title: "Détection de fraudes et loi de Benford"
-output: pdf_document
+author: "FERNANDEZ Christelle - PONCHEELE Clément - EL KAÏM Laura"
+date: '*$3$ janvier $2021$*'
+output:
+  pdf_document: default
+fontsize: 12pt
+header-includes: \usepackage[french]{babel}
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+\maketitle
+\tableofcontents
 
+\newpage
+# Introduction.
