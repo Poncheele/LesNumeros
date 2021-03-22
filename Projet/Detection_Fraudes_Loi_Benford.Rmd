@@ -17,7 +17,7 @@ RESUME DU PROJET EN QLQ LIGNES
 REMERCIEMENTS
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 ```
 
 \maketitle
@@ -33,20 +33,17 @@ Les données transmises par un individu ou un organisme peuvent faire l'objet de
 
 De telles modifications entraînent un changement de la répartition des chiffres présents naturellement[^n1]. Si nous connaissons la répartition des chiffres présentés dans un ensemble de données arbitraires, il est donc techniquement possible de savoir si un nombre a été modifié ou non. 
 
-Il nous vient donc les questions suivantes: *Qu'elle est cette répartition ? Est-il possible de la connaître et si oui, dans quels cas ?* 
+Il nous vient donc les questions suivantes: **Qu'elle est cette répartition ? Est-il possible de la connaître et si oui, dans quels cas ?**
 
-De manière intuitive nous pourrions penser que les nombres sont répartis de manière uniforme. Qu'en est-il vraiment ? 
+De manière intuitive nous pourrions penser que **les nombres sont répartis de manière uniforme**. Qu'en est-il vraiment ? 
 
-La première partie de notre projet consistera à **répondre à ces questions**. Nous nous appuierons sur les travaux de Simon Newcomb et Frank Benford, qui ont théorisé la **loi de Newcomb-Benford**, plus communément appelée loi de Benford. 
-Cette loi nous dit que, dans une liste de données dites naturelles, la probabilité d'avoir le chiffre $i$ comme premier chiffre significatif est de $log_{10}(1 + \frac{1}{i})$.  
-
-Par exemple, le chiffre $1$ en tant que premier chiffre significatif serait présent à hauteur de $30\%$ alors que le $9$ à seulement $4,6\%$.  
+La première partie de notre projet consistera à **répondre à ces questions**. Nous nous appuierons sur les travaux de Simon Newcomb et Frank Benford, qui ont théorisé la *loi de Newcomb-Benford*, plus communément appelée loi de Benford. 
 
 Dans la suite **nous mettrons en œuvre une série d'expérimentation** pour constater ou non la véracité de cette loi. Pour ce faire dans un premier temps nous récolterons des nombres pris dans des milieux censés satisfaire la loi de Newcomb-Benford et observerons la répartition du premier chiffre significatif. Puis nous répliquerons une version simplifiée de l’expérience de Hill (1988), qui consiste à observer la répartition du premier chiffre significatif d'une liste de nombre donnée au hasard par des êtres humains, en l'occurrence ses élèves. 
 
 Cette expérience est à la base des méthodes de détection de fraudes par la loi de Newcomb-Benford. Si un fraudeur modifie un jeu de données, ce jeu est donc influencé par la pensée humaine, il ne suit donc plus la loi de Newcomb-Benford. Pour détecter une fraude il suffit donc de comparer les premiers chiffres significatifs. Cependant ces comparaisons doivent se faire de manière rigoureuse et scientifique. Pour cela il existe des tests statistiques, dont le plus connu, le test du $\chi^2$, ou bien celui de Ducharme et collab. (2020). 
 
-Il nous vient donc les questions suivantes: *Ces tests sont-ils fiables ? Existe-t-il un test significativement meilleur que les autres ? Vont-ils dans le même sens ? Et sinon que faire ?*
+Il nous vient donc les questions suivantes: **Ces tests sont-ils fiables ? Existe-t-il un test significativement meilleur que les autres ? Vont-ils dans le même sens ? Et sinon que faire ?**
 
 La réponse à ces questions constituera donc la deuxième partie de ce projet, pour ce faire nous mettrons en œuvre différents tests sur des jeux de données comme la fiscalité italienne.  
 
@@ -56,10 +53,33 @@ La réponse à ces questions constituera donc la deuxième partie de ce projet, 
 
 # Naissance de la loi de Newcomb-Benford. 
 
-Notons que l'astronome, mathématicien, économiste et statisticien canadien Simon Newcomb fournira, en $1881$, une première approche au principe statistique qui se fera appeler *Loi de Benford*.  
-Cette découverte mise de côté pendant plusieurs années, ce n'est qu'en $1938$ que l'ingénieur et physicien américain Frank Benford pensera être le premier à l'initiative de cette loi. Les articles de Newcomb et Benford proposeront finalement les mêmes résultats. D'après leurs travaux, les nombres ne sont pas répartis de manière uniforme.  
+&nbsp;
+Il serait tentant de penser que les nombres sont répartis de manière uniforme, cela viendrait du biais d'équiprobabilité[^n2]. Ce dernier consiste à "penser qu'en l'absence d'information, tous les cas ont la même probabilité de se produire et que le hasard implique nécessairement l’uniformité".  
 
-Nous retrouvons cette loi dans énormément de domaines comme les mathématiques, l'environnement, la finance, la physique. Et plus précisément nous pourrions le voir sur des données telles que la longueur des fleuves, la population des villes dans un pays, des déclarations de revenus.
+Néanmoins cette hypothèse sera contredite une première fois par l'astronome, mathématicien, économiste et statisticien canadien Simon Newcomb. Ce dernier fournira en $1881$ une première approche au principe statistique, qui se fera injustement appeler *Loi de Benford*. Celui-ci remarquera que les premières pages des tables logarithmiques sont plus utilisées que les pages suivantes. Il publiera sa découverte dans un article de l'*"American Journal of Mathematics"*.  
+
+Cette découverte mise de côté pendant plusieurs années, ce n'est qu'en $1938$ que l'ingénieur et physicien américain Frank Benford arrivera au même résultat après avoir répertorié des dizaines de milliers de données. Celui-ci pensera être le premier à l'initiative de cette loi, et c'est pour cette raison que la *loi de Newcomb-Benford* se fera plus généralement appelée *loi de Benford*.  
+
+Cette loi nous dit que, dans une liste de données arbitraires, la probabilité d'avoir le chiffre $i$ comme premier chiffre significatif est de $log_{10}(1 + \frac{1}{i})$.  
+
+\begin{center}
+\underline{\*\*Répartition du premier chiffre significatif selon la loi de Newcomb-Benford.\*\*}
+\end{center}
+
+```{r Benford}
+library(captioner)
+PCS<-c("1","2","3","4","5","6","7","8","9")
+Benford<-c(rep(0,9))
+for (i in 1:9)
+  Benford[i]<-round(log(1+1/i,10),3)
+knitr::kable(rbind(PCS,Benford),booktabs="T",align="c")
+# VOIR POUR METTRE LE TITRE MIEUX!!!! (kableextra)
+```
+
+Nous retrouvons cette loi dans énormément de domaines comme les mathématiques, l'environnement, la finance, la physique, etc, plus précisément sur des données telles que la longueur des fleuves, la population des villes dans un pays, des déclarations de revenus, etc.  
+Notons cependant qu'il existe des cas où les données ne suivent pas cette loi, notamment des données dites non naturelles qui seraient influencé par la pensée humaine (nombres premiers, nombres générés par des humains, etc).  
+
+[^n2]: Défini en 1985 par Marie-Paule Lecoutre ([*source*](https://fr.wikipedia.org/wiki/Biais_d%27%C3%A9quiprobabilit%C3%A9)).
 
 \newpage
 # Expérimentation sur différents jeux de données.
@@ -109,17 +129,20 @@ for (i in 1:9)
 # knitr::kable(cbind(PCS,Proba,Benford),booktabs="T",align="c")
 ```
 
-GRAPHIQUE!!!!
+```{r histogramme_Fibonacci}
+knitr::include_graphics("Images/histogramme_Fibonacci.png")
+```
 
-Il apparaît clairement que la répartition des chiffres significatifs des $300$ premiers nombres de la suite de Fibonacci est semblable à celle de la loi de Benford.  
+Il apparaît clairement que la répartition des chiffres significatifs des $300$ premiers nombres de la suite de Fibonacci suit la loi de Benford.  
 
-Dans un second temps nous relevons les prix présents dans un magazine de mobilier de la marque *AMPM*. Nous récoltons $300$ nombres, et, de la même façon qu'énoncé précédemment calculons la répartition des chiffres significatifs de ces nombres.  
+Dans un second temps nous relevons les prix présents dans un magazine de mobilier de la marque *AMPM*. Nous récoltons $300$ nombres et, de la même façon qu'énoncé précédemment, calculons la répartition des chiffres significatifs de ces nombres.  
+
+```{r histogramme_AMPM}
+knitr::include_graphics("Images/histogramme_AMPM.png")
+```
+
 
 ## Pas Benford
-
-```{r nb_premier}
-# nb_premier<-read.table("C:/Users/laulau/LesNumeros/Projet/nombre_premier.csv",sep="\t",header=T)
-```
 
 # Tests
 
