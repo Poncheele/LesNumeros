@@ -17,25 +17,11 @@ RESUME DU PROJET EN QLQ LIGNES
 REMERCIEMENTS
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE)
 ```
 
 \maketitle
 \tableofcontents
-
-#Introduction
-#Les origines/Description
-#Experimentations
-##Benford
-##Pas Benford
-#Tests
-
-
-
-
-
-
-
 
 \newpage
 # Introduction.
@@ -58,3 +44,61 @@ La détection de fraudes a pour objectif de suspecter des potentielles modificat
 La loi de Newcomb-Benford ou 
 
 \newpage
+#Les origines/Description
+
+\newpage
+#Experimentations
+
+##Benford
+
+&nbsp;
+Intéressons-nous ici à la suite de Fibonacci. 
+
+Cette suite est une suite d'entiers dans laquelle chaque terme est la somme des deux termes qui le précèdent. Sa formulation est la suivante : $$F_{0} = 0, \, F_{1} = 1, \, \text{et} \, \forall \, n \ge 2, \, F_n = F_{n - 1} + F_{n - 2}.$$  
+
+Commençons par extraire les $300$ premiers termes de la suite de Fibonacci.  
+
+```{r, Fibonacci}
+F<-(c(rep(0,300)))
+F[2]<-1
+for (i in 3:300)
+F[i]<-F[i-2]+F[i-1]
+```
+
+Puis nous extrayons le premier chiffre significatif de chacun de ces nombres.
+
+```{r PCS}
+for (i in 1:300){
+  while(F[i]>=10)
+    F[i]=F[i]/10
+}
+pcs<-floor(F)
+```
+
+```{r benford}
+comp<-c(rep(0,9))
+for (i in 1:9){
+  for (j in 1:300){
+  if (pcs[j]==i)
+  comp[i]<-comp[i]+1
+  }
+}
+Proba<-c(rep(0,9))
+for (i in 1:9)
+  Proba[i]<-comp[i]/length(pcs-1)
+PCS<-c(1:9)
+
+Benford<-c(rep(0,9))
+for (i in 1:9)
+  Benford[i]<-log(1+1/i,10)
+knitr::kable(cbind(PCS,Proba,Benford),booktabs="T",align="c")
+```
+
+##Pas Benford
+
+```{r nb_premier}
+nb_premier<-read.table("C:/Users/laulau/LesNumeros/Projet/nombre_premier.csv",sep="\t",header=T)
+```
+
+
+#Tests
