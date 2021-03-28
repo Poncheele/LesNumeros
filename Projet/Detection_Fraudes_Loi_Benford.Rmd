@@ -17,6 +17,9 @@ header-includes:
 - \usepackage[french]{babel}
 - \usepackage[tableposition=top]{caption}
 - \captionsetup{labelformat=empty}
+- \usepackage{caption}
+- \captionsetup{position=below}
+
 ---
 
 RESUME DU PROJET EN QLQ LIGNES
@@ -81,7 +84,7 @@ Benford<-c(rep(0,9))
 for (i in 1:9)
   Benford[i]<-round(log(1+1/i,10),3)
 kbl(rbind(PCS,Benford),booktabs="T",align="c") %>%
-  # kable_paper(full_width=T) %>%
+  kable_paper(full_width=T) %>%
   kable_styling(latex_options="striped") %>%
   column_spec(1,bold=T) %>%
   add_footnote(notation="none",c("","Tableau 1 : Répartition du premier chiffre significatif selon la loi de Newcomb-Benford."))
@@ -127,6 +130,13 @@ pcs<-floor(F)
 Par la suite nous calculons la répartition de chaque chiffre significatif et obtenons l'histogramme suivant :  
 
 ```{r benford}
+comp<-c(rep(0,9))
+for (i in 1:9){
+  for (j in 1:300){
+  if (pcs[j]==i)
+  comp[i]<-comp[i]+1
+  }
+}
 Proba<-c(rep(0.0000000,9))
 for (i in 1:9)
   Proba[i]<-round(comp[i]/length(pcs-1),4)
@@ -135,16 +145,10 @@ PCS<-c(1:9)
 Benford<-c(rep(0,9))
 for (i in 1:9)
   Benford[i]<-log(1+1/i,10)
-knitr::kable(cbind(PCS,Proba,Benford),booktabs="T",align="c")
+#knitr::kable(cbind(PCS,Proba,Benford),booktabs="T",align="c")
 ```
 
-\vspace{0.7cm}
-
-```{r histogramme_Fibonacci}
-knitr::include_graphics("Images/histogramme_Fibonacci.png")
-```
-
-\vspace{0.7cm}
+![Figure 1 : Histrogramme de la répartition du 1er chiffre significatif de la suite de Fibonacci en comparaison avec la loi de Benford.](Images/histogramme_Fibonacci.png)
 
 Il semblerait que la répartition des chiffres significatifs des $300$ premiers nombres de la suite de Fibonacci suive la **loi de Newcomb-Benford**.  
 
@@ -154,17 +158,13 @@ Il semblerait que la répartition des chiffres significatifs des $300$ premiers 
 &nbsp;
 Dans un second temps, nous relevons les prix présents dans un magazine de mobilier de la marque *AMPM*, ainsi que tous les nombres répertoriés dans un journal *Les ECHOS*. Nous récoltons environ $300$ nombres par magazine et, de la même façon qu'énoncé précédemment, calculons la répartition des chiffres significatifs de ces nombres.  
 
-```{r histogramme_AMPM,fig.align='center'}
-knitr::include_graphics("Images/histogramme_AMPM.png")
-```
+![Figure 2 : Histrogramme de la répartition du 1er chiffre significatif des prix du magazine AMPM en comparaison avec la loi de Benford.](Images/histogramme_AMPM.png)
 
 La répartition des chiffres significatifs des prix du magazine *AMPM* parait fortement similaire à celle de la **loi de Newcomb-Benford**. Nous constatons tout de même une légère différence pour le chiffre $3$.  
 
 Observons maintenant la répartition des données issues du journal *Les ECHOS*.  
 
-```{r histogramme_journal,fig.align='center'}
-knitr::include_graphics("Images/histogramme_journalLESECHOS.png")
-```
+![Figure 3 : Histrogramme de la répartition du 1er chiffre significatif des nombres du journal LES ECHOS en comparaison avec la loi de Benford.](Images/histogramme_journalLESECHOS.png)
 
 Nous remarquons ici la même tendance décroissante. Cependant les proportions des chiffres significatifs entre les données du journal et celles de la **loi de Newcomb-Benford** sont relativement différentes.  
 
@@ -173,12 +173,11 @@ Nous remarquons ici la même tendance décroissante. Cependant les proportions d
 &nbsp;
 Dans ce paragraphe nous nous intéressons à la population des villes françaises. À l'aide des données de l'*INSEE*, nous répertorions environ $35000$ premiers chiffres significatifs et regardons leur répartition.  
 
-```{r histogramme_pop,fig.align='center'}
-knitr::include_graphics("Images/histogramme_populationfrancaise.png")
-```
+![Figure 4 : Histrogramme de la répartition du 1er chiffre significatif de la population française en comparaison avec la loi de Benford.](Images/histogramme_populationfrancaise.png)
 
 Ici les répartitions sont fortement ressemblantes, c'est aussi le cas pour de nombreuses données démographiques naturelles. Nous aurions pu également analyser les codes postaux, la longueur des rivières ou encore la distance des villes de France à Paris.  
 
+\newpage
 ## Passage journalier de vélos dans l'allée Beracasa à Montpellier.  
 
 &nbsp;
@@ -186,14 +185,14 @@ La ville de Montpellier étant en pleine transition écologique, elle ouvre de p
 
 Nous obtenons la répartition suivante :  
 
-```{r histogramme_velos,fig.align='center'}
-knitr::include_graphics("Images/histogramme_velos.png")
-```
+![Figure 5 : Histrogramme de la répartition du 1er chiffre significatif du passage journalier de vélos en comparaison avec la loi de Benford.](Images/histogramme_velos.png)
 
 Dans ce cas la proportion du chiffre $1$ est de plus de $50 \%$ contre $30 \%$ pour la **loi de Newcomb-Benford**. La différence de répartition des chiffres $2, 3, 4, 5$ est aussi notable, elle est même environ $2$ fois moins élevée.  
 Visuellement, nous pourrions penser que la répartition de ces données ne suit pas la **loi de Newcomb-Benford**.  
 
 ## Nombres générés par les humains.  
+
+TRANSITION AVEC LES TESTS
 
 # Tests
 
