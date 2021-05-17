@@ -41,26 +41,26 @@ La fraude est une pratique répandue dans de nombreux domaines comme par exemple
 
 Les données transmises par un individu ou un organisme peuvent faire l'objet de modifications, c'est de ce type de fraudes auquel nous nous intéresserons ici, et plus particulièrement la modification du premier chiffre significatif (le premier chiffre d"un nombre qui n'est pas un zéro) de nombres pris dans un certain ensemble de données.
 
-De telles modifications entraînent un changement de la répartition des chiffres présents naturellement[^n1].Si nous connaissons la répartition des chiffres présentés dans un ensemble de données arbitraires, il est donc techniquement possible de savoir si un nombre a été modifié ou non. 
+De telles modifications entraînent un changement de la répartition des chiffres présents naturellement[^n1]. Si nous connaissons la répartition des chiffres présentés dans un ensemble de données arbitraires, il est donc techniquement possible de savoir si un nombre a été modifié ou non. 
 
 Il nous vient donc les questions suivantes: *Qu'elle est cette répartition ? Est-il possible de la connaître et si oui, dans quels cas ?* 
 
 De manière intuitive nous pourrions penser que les nombres sont répartis de manière uniforme. Qu'en est-il vraiment ? 
 
-La première partie de notre projet consistera à **répondre à ces questions**, nous nous appuierons sur les travaux de Simon Newcom et Frank Benford, qui ont théorisé la **loi de Newcomb-Benford**, plus communément  appelée loi de Benford. 
+La première partie de notre projet consistera à **répondre à ces questions**, nous nous appuierons sur les travaux de Simon Newcomb et Frank Benford, qui ont théorisé la **loi de Newcomb-Benford**, plus communément  appelée loi de Benford. 
 Cette loi nous dit que, dans une liste de données dites naturelles, la probabilité d'avoir le chiffre $i$ comme premier chiffre significatif est de $log_{10}(1 + \frac{1}{i})$. 
 
 Par exemple, le chiffre $1$ en tant que premier chiffre significatif serait présent à hauteur de $30\%$ alors que le $9$ à seulement $4,6\%$.
 
 Dans la suite **nous mettrons en œuvre une série d'expérimentation** pour constater ou non la véracité de cette loi, pour ce faire dans un premier temps nous récolterons des nombres pris dans des milieux sensés satisfaire la loi de Newcomb-Benford et observerons la répartition du premier chiffre significatif. Puis nous répliquerons une version simplifiée de l’expérience de Hill (1988), qui consiste à observer la répartition du premier chiffre significatif d'une liste de nombre donnée au hasard par des êtres humains, en l'occurrence ses élèves. 
 
-Cette expérience est à la base des méthodes de détection de fraudes par la loi de Newcomb-Benford. Si un fraudeur modifie un jeu de données, ce jeu est donc influencé par la pensée humaine, il ne suit donc plus la loi de Newcomb-Benford. Pour detecter la fraude il suffit donc de comparer les premiers chiffres significatifs. Cependant ces comparaisons doivent se faire de manière rigoureuses et scientifiques. Pour cela il existe des test statistiques, dont le plus connu, le test du $\chi^2$, ou bien celui de Ducharme et collab. (2020). 
+Cette expérience est à la base des méthodes de détection de fraudes par la loi de Newcomb-Benford. Si un fraudeur modifie un jeu de données, ce jeu est donc influencé par la pensée humaine, il ne suit donc plus la loi de Newcomb-Benford. Pour détecter la fraude il suffit donc de comparer les premiers chiffres significatifs. Cependant ces comparaisons doivent se faire de manière rigoureuses et scientifiques. Pour cela il existe des test statistiques, dont le plus connu, le test du $\chi^2$, ou bien celui de Ducharme et collab. (2020). 
 
-Il nous vient donc les questions suivantes: *Ces test sont-ils fiable ? Existe-t-il un test significativement meilleur que les autres ? Vont-ils dans le même sens ? Et sinon que faire ?*
+Il nous vient donc les questions suivantes: *Ces tests sont-ils fiables ? Existe-t-il un test significativement meilleur que les autres ? Vont-ils dans le même sens ? Et sinon que faire ?*
 
-La réponse à ces question constituera donc la deuxième partie de ce projet, pour ce faire nous mettrons en oeuvre différents tests sur des jeux de données comme la fiscalité italienne.  
+La réponse à ces question constituera donc la deuxième partie de ce projet, pour ce faire nous mettrons en œuvre différents tests sur des jeux de données comme la fiscalité italienne.  
 
-[^n1]: Les données dites naturelles sont celles qui qui n'ont pas été influencé par la pensée de l'homme. .
+[^n1]: Les données dites naturelles sont celles qui n'ont pas été influencé par la pensée de l'homme.
 
 \newpage
 
@@ -84,8 +84,7 @@ Benford<-c(rep(0,9))
 for (i in 1:9)
   Benford[i]<-round(log(1+1/i,10),3)
 kbl(rbind(PCS,Benford),booktabs="T",align="c") %>%
-  kable_paper(full_width=T) %>%
-  kable_styling(latex_options="striped") %>%
+  kable_styling(latex_options=c("striped", "hold_position", "bordered", "condensed","responsive"), full_width=T) %>%
   column_spec(1,bold=T) %>%
   add_footnote(notation="none",c("","Tableau 1 : Répartition du premier chiffre significatif selon la loi de Newcomb-Benford."))
 ```
@@ -190,10 +189,36 @@ Nous obtenons la répartition suivante :
 Dans ce cas la proportion du chiffre $1$ est de plus de $50 \%$ contre $30 \%$ pour la **loi de Newcomb-Benford**. La différence de répartition des chiffres $2, 3, 4, 5$ est aussi notable, elle est même environ $2$ fois moins élevée.  
 Visuellement, nous pourrions penser que la répartition de ces données ne suit pas la **loi de Newcomb-Benford**.  
 
+PARLER DES DONNEES BRUTE (1ere et seconde génération)
+Les données brutes peuvent ne pas toujours suivre une loi se benford
+
 ## Nombres générés par les humains.  
 
 TRANSITION AVEC LES TESTS
+Une inspection visuelle ne suffit pas, 
+l'outil pour ça c'est les tests d'adéquation à la loi de Benford
+erreur 1ere espèce rejeter Ho (c'est dire que c'est pas benford alors que ca l'est, dire qu'il y a fraude alors que non)
+erreur seconde espece (ne pas rejeter H0 à tord, laisser passer une fraude)
+En stat l'erreur de 1ere espèce est souvent plus présente
+On se dit pas qu'il y a fraude on suspecte la fraude on lance une audit (ca coute des sous)
+dans tous les cas on risque de faire une erreur (mettre le tableau)
 
 # Tests
+
+PARLER DES TESTS DE MANIERE GENERALE, plutot theorique
+
+le test privilégié est le test de chi2
+quand c'est une problème qui a une certaine importance pleins d'autres tests qui existent (package R Benford test le seul test important dans ce package est celui du Chi2, 2ème package Benford smooth test créé par samuel et credo plus spécifique au problème disponible sur le site CRAN) Les deuxièmes tests sont mieux car plus puissantes, cad qu'ils détectent plus de fraudes. On veut le test le plus puissant possible, a 5%
+faire une description des outils/tests
+
+données fiscales sur plusieurs années de 20 régions italiennes, test de chi2 (c'est pas un test très puissant, ne permet pas nécessairement de détecter les fraudes.) Il ont mis que la statistique de test mais pas la p-value
+
+# Application des tests
+
+## Application a des données fiscales italiennes
+
+## CAS COVID
+
+Un chinois a affirmé qu'il n'y avait pas eu fraudes en Chine
 
 # Bibliographie
