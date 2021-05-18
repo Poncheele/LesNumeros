@@ -26,9 +26,7 @@ RESUME DU PROJET EN QLQ LIGNES
 
 REMERCIEMENTS
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
-```
+
 
 \maketitle
 \tableofcontents
@@ -77,17 +75,15 @@ Cette loi nous dit que, dans une liste de données arbitraires, la probabilité 
 
 \vspace{0.7cm}
 
-```{r Benford}
-library(kableExtra)
-PCS<-c("1","2","3","4","5","6","7","8","9")
-Benford<-c(rep(0,9))
-for (i in 1:9)
-  Benford[i]<-round(log(1+1/i,10),3)
-kbl(rbind(PCS,Benford),booktabs="T",align="c") %>%
-  kable_styling(latex_options=c("striped", "hold_position", "bordered", "condensed","responsive"), full_width=T) %>%
-  column_spec(1,bold=T) %>%
-  add_footnote(notation="none",c("","Tableau 1 : Répartition du premier chiffre significatif selon la loi de Newcomb-Benford."))
-```
+
+\begin{tabu} to \linewidth {>{}l>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X}
+\toprule
+\textbf{\cellcolor{gray!6}{PCS}} & \cellcolor{gray!6}{1} & \cellcolor{gray!6}{2} & \cellcolor{gray!6}{3} & \cellcolor{gray!6}{4} & \cellcolor{gray!6}{5} & \cellcolor{gray!6}{6} & \cellcolor{gray!6}{7} & \cellcolor{gray!6}{8} & \cellcolor{gray!6}{9}\\
+\textbf{Benford} & 0.301 & 0.176 & 0.125 & 0.097 & 0.079 & 0.067 & 0.058 & 0.051 & 0.046\\
+\bottomrule
+\multicolumn{10}{l}{\textsuperscript{} }\\
+\multicolumn{10}{l}{\textsuperscript{} Tableau 1 : Répartition du premier chiffre significatif selon la loi de Newcomb-Benford.}\\
+\end{tabu}
 
 \vspace{0.7cm}
 
@@ -111,41 +107,13 @@ Cette suite est une suite d'entiers dans laquelle chaque terme est la somme des 
 
 Nous commençons par recueillir les $1000$ premiers termes de la suite de Fibonacci, pour extraire le premier chiffre significatif de chacun de ces nombres.
 
-```{r, Fibonacci}
-F<-(c(rep(0,1000)))
-F[2]<-1
-for (i in 3:1000)
-F[i]<-F[i-2]+F[i-1]
-```
 
-```{r PCS}
-for (i in 1:1000){
-  while(F[i]>=10)
-    F[i]=F[i]/10
-}
-pcs<-floor(F)
-```
+
+
 
 Par la suite nous calculons la répartition de chaque chiffre significatif et obtenons l'histogramme suivant :  
 
-```{r benford}
-comp<-c(rep(0,9))
-for (i in 1:9){
-  for (j in 1:300){
-  if (pcs[j]==i)
-  comp[i]<-comp[i]+1
-  }
-}
-Proba<-c(rep(0.0000000,9))
-for (i in 1:9)
-  Proba[i]<-round(comp[i]/length(pcs-1),4)
 
-PCS<-c(1:9)
-Benford<-c(rep(0,9))
-for (i in 1:9)
-  Benford[i]<-log(1+1/i,10)
-#knitr::kable(cbind(PCS,Proba,Benford),booktabs="T",align="c")
-```
 
 ![Figure 1 : Histrogramme de la répartition du 1er chiffre significatif de la suite de Fibonacci en comparaison avec la loi de Benford.](Images/histogramme_Fibonacci.png)
 
