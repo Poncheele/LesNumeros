@@ -1,0 +1,7 @@
+﻿;Réalité sur la population;
+"Décision d'après
+l'échantillon";H0 est vraie;H0 est fausse
+Ne pas rejeter H0;"Décision juste 
+(probabilité = 1 - α)";Erreur de 2ème espèce : acceptation de H0 alors que celle-ci est fausse (probabilité = β) 
+Rejeter H0;Erreur de 1ère espèce : rejet de H0 alors que celle-ci est vraie (probabilité = α);"Décision juste
+(probabilité = 1 - β)"

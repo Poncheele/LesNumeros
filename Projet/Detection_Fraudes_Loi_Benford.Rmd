@@ -187,19 +187,16 @@ Nous obtenons la répartition suivante :
 ![Figure 5 : Histrogramme de la répartition du 1er chiffre significatif du passage journalier de vélos en comparaison avec la loi de Benford.](Images/histogramme_velos.png)
 
 Dans ce cas la proportion du chiffre $1$ est de plus de $50 \%$ contre $30 \%$ pour la **loi de Newcomb-Benford**. La différence de répartition des chiffres $2, 3, 4, 5$ est aussi notable, elle est même environ $2$ fois moins élevée.  
-Visuellement, nous pourrions penser que la répartition de ces données ne suit pas la **loi de Newcomb-Benford**. Il est courant de ne pas retrouver la loi de Newcomb-Benford dans des données brutes commme celles-ci, on la retrouve empiriquement plus souvent dans des données dîtes de **deuxième génération** comme des sommes ou des produits.
+Visuellement, nous pourrions penser que la répartition de ces données ne suit pas la **loi de Newcomb-Benford**. Il est courant de ne pas retrouver la loi de Newcomb-Benford dans des données brutes comme celles-ci, on la retrouve empiriquement plus souvent dans des données dîtes de **deuxième génération** comme des sommes ou des produits.
 
 
 ## Nombres générés par les humains.  
 
-Après avoir observé ces quelques jeux de données, nous étions en mesure de dire si ces données semblaient ou non suivre la loi de Newcomb-Benford, le problème qui en découle est qu'une simple observation n'est pas très fiable, difficile de prendre une décision sur un constat visuel. En effet, se tromper dans l'interprétation peut entrainer deux types d'erreur, la première étant de faussement déceler une fraude (ce que nous appelerons **le risque de première espèce**) et la deuxième de laisser passer une fraude. Ces erreurs ont un coût pour l'institut qui essaye de les réprimer, celui d'engager des démarches de détections approffondies inutiles ou de ne pas percevoir les taxes dues dans le cas de la fraude fiscale par exemple. 
+Après avoir observé ces quelques jeux de données, nous étions en mesure de dire si ces données semblaient ou non suivre la loi de Newcomb-Benford, le problème qui en découle est qu'une simple observation n'est pas très fiable, difficile de prendre une décision sur un constat visuel. En effet, se tromper dans l'interprétation peut entraîner deux types d'erreur, la première étant de faussement déceler une fraude (ce que nous appellerons **le risque de première espèce**) et la deuxième de laisser passer une fraude. Ces erreurs ont un coût pour l'institut qui essaye de les réprimer, celui d'engager des démarches de détections approfondies inutiles ou de ne pas percevoir les taxes dues dans le cas de la fraude fiscale par exemple. 
 
-Le but est donc de minimiser le coût que peuvent engendrer les erreurs sus-mentionnées, pour se faire l'utilisation d'outils scientifiques est de rigeur. Les outils que nous arboderons dans la suite sont les test d'adéquations, ces tests servent à vérifier si un ensemble de nombre suit ou non une loi de probabilité donnée (pour nous c'est la loi de Newcomb-Benford). 
+Le but est donc de minimiser le coût que peuvent engendrer les erreurs sus-mentionnées, pour se faire l'utilisation d'outils scientifiques est de rigueur. Les outils que nous aborderons dans la suite sont les test d'adéquations, ces tests servent à vérifier si un ensemble de nombre suit ou non une loi de probabilité donnée (pour nous c'est la loi de Newcomb-Benford). 
 
 
-TRANSITION AVEC LES TESTS
-Une inspection visuelle ne suffit pas, 
-l'outil pour ça c'est les tests d'adéquation à la loi de Benford
 erreur 1ere espèce rejeter Ho (c'est dire que c'est pas benford alors que ca l'est, dire qu'il y a fraude alors que non)
 erreur seconde espece (ne pas rejeter H0 à tord, laisser passer une fraude)
 En stat l'erreur de 1ere espèce est souvent plus présente
@@ -208,7 +205,21 @@ dans tous les cas on risque de faire une erreur (mettre le tableau)
 
 # Tests
 
-PARLER DES TESTS DE MANIERE GENERALE, plutot theorique
+Comme nous l'avons dit précédemment, une inspection visuelle à elle seule ne permet pas d'affirmer ou infirmer si un jeu de données suit la loi de Newcomb-Benford. L'outil statistique permettant de le vérifier est le test d'adéquation à la loi de Newcomb-Benford.  
+Les tests d'adéquation servent à tester si un échantillon est distribué selon une loi de probabilité donnée. Ils permettent de décider, avec un certain seuil d'erreur, si les écarts présentés par l'échantillon par rapport aux valeurs théoriques sont dus au hasard, ou si au contraire ils sont significatifs.  
+
+Notons alors qu'aucun test d'hypothèse n'est fiable à $100 \%$, un test étant basé sur des probabilités, il existe toujours un risque de tirer une mauvaise conclusion. Lorsqu'un test d'hypothèse est effectué, nous pouvons observer deux types d'erreurs, l'erreur de Type I dite erreur de première espèce et l'erreur de Type II dite erreur de seconde espèce. Les risques de ces deux erreurs sont inversement proportionnels et sont déterminés par le seuil de significativité et la puissance du test. Il est important de déterminer l'erreur qui présente les conséquences les plus graves dans notre cas avant de définir le risque que nous accepterons pour chaque erreur.  
+
+L'erreur de Type I consiste à rejeter l'hypothèse nulle alors que celle-ci est vraie. La probabilité de commettre une erreur de première espèce est représentée par $\alpha$, qui désigne le seuil de significativité défini pour le test d'hypothèse. Un niveau $\alpha$ de $0.05$ indique que nous sommes disposé à avoir $5 \%$ de chances de rejeter l'hypothèse nulle à tort. Pour réduire ce risque, il est possible d'utiliser une valeur $\alpha$ plus faible. Cependant, cela implique d'être moins à même de détecter une vraie différence si celle-ci existe vraiment.  
+Dans notre contexte, l'erreur de Type I consiste à affirmer que les données ne suivent pas la loi de Newcomb-Benford alors que c'est le cas, soit faussement identifier une fraude.
+
+L'erreur de Type II repose sur le fait de ne pas rejeter l'hypothèse nulle alors que celle-ci est fausse. La probabilité de commettre une erreur de seconde espèce est notée $\beta$, et dépend de la puissance du test. Il est possible de réduire le risque de deuxième espèce en faisant en sorte que le test soit suffisamment puissant. Pour cela, il est nécessaire que l'effectif d'échantillon soit suffisamment grand pour permettre la détection d'une différence réelle.  
+La probabilité de rejeter l'hypothèse nulle à tort vaut $1 - \beta$, il s'agit de la puissance du test.  
+
+Notons $H_0$ l'hypothèse nulle.
+
+![Tableau 2 : Règle de décision.](Images/erreurs.png)
+
 
 le test privilégié est le test de chi2
 quand c'est une problème qui a une certaine importance pleins d'autres tests qui existent (package R Benford test le seul test important dans ce package est celui du Chi2, 2ème package Benford smooth test créé par samuel et credo plus spécifique au problème disponible sur le site CRAN) Les deuxièmes tests sont mieux car plus puissantes, cad qu'ils détectent plus de fraudes. On veut le test le plus puissant possible, a 5%
@@ -218,6 +229,8 @@ données fiscales sur plusieurs années de 20 régions italiennes, test de chi2 
 
 # Application des tests
 
+
+
 ## Application a des données fiscales italiennes
 
 ## CAS COVID
@@ -225,3 +238,7 @@ données fiscales sur plusieurs années de 20 régions italiennes, test de chi2 
 Un chinois a affirmé qu'il n'y avait pas eu fraudes en Chine
 
 # Bibliographie
+
+G. R. DUCHARME, S. KACI, C. VOVOR-DASSU *Tests d'adéquations lisses pour la loi de Newcomb-Benford*
+
+M. AUSLOOS, R. CERQUETI, T. A. MIR *Data science for assessing possible tax income manipulation: the case of Italy*
