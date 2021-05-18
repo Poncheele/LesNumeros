@@ -246,6 +246,26 @@ faire une description des outils/tests
 
 données fiscales sur plusieurs années de 20 régions italiennes, test de chi2 (c'est pas un test très puissant, ne permet pas nécessairement de détecter les fraudes.) Il ont mis que la statistique de test mais pas la p-value
 
+# Test du Khi-Deux
+
+Les tests du $\chi^2$  sont des tests d'hypothèses statistiques non-paramétriques. Ils comparent la distribution observée dans un échantillon statistique à une distribution théorique (*l'ajustement*), à tester si deux caractères d'une population sont indépendants (*l'indépendance*) et à tester si des échantillons sont issus d'une même population (*l'homogénéité*). Le test lit l'écart critique dans la table de la loi du chi-deux.  
+
+Le déroulement du test se procède en 5 étapes:  
+ 1) On calcule les effectifs théoriques (*$n_{pj}$*)  
+ 2) On calcule la valeur observée de la variable de test:  
+ $\chi^{2}=\sum_{j=1}^{k} \frac{\left(n_{j}-n _{p_{j}}\right)^{2}}{n_{ p_{j}}}$  
+ 3) On cherche la valeur critique $\chi^{2}_a$ dans la table de la loi du $\chi^2$ à k-1 degrés de liberté.  
+ 4) Si $\chi^{2}_a < \chi^2$, on accepte l'hypothèse $H_0$ (la distribution observée est conforme à la distribution théorique" avec un risque d'erreur a) sinon on la rejette.  
+ 5) Il faut vérifier que $n_{pj} \geq 5$ pour tout j.  
+![Tableau 3 : Dnsité du Chi-Deux en fonction du nombre de degrés de liberté.](Images/Chi-square.png)
+
+Rappel de la loi du $\chi^2$ à n degrés de liberté si elle est absolument continue, et admet pour densité:  
+
+$f(x)=\left\{\begin{array}{cl}\frac{1}{2^{n / 2} \Gamma(n / 2)} e^{-x / 2} x^{\frac{n}{2}-1} & \text { si } x>0 \\ 0 & \text { sinon. }\end{array}\right.$  
+
+où X admet alors une espérance et une variance
+$E(X)=n$ et $V(X)=2 n$  
+
 # Application des tests
 
 ## Application a des données fiscales italiennes
