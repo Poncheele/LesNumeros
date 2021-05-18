@@ -14,7 +14,6 @@ header-includes:
 - \oddsidemargin -1cm
 - \textwidth 18,5cm
 - \textheight 24cm
-- \usepackage[french]{babel}
 - \usepackage[tableposition=top]{caption}
 - \captionsetup{labelformat=empty}
 - \usepackage{caption}
@@ -180,21 +179,37 @@ Ici les répartitions sont fortement ressemblantes, c'est aussi le cas pour de n
 ## Passage journalier de vélos dans l'allée Beracasa à Montpellier.  
 
 &nbsp;
-La ville de Montpellier étant en pleine transition écologique, elle ouvre de plus en plus l'accès aux vélos sur ces routes. Pour en mesurer l'impact, elle a mit en place des éco-compteurs dans plusieurs rues. Les données issues de ces compteurs sont en libre accès, nous nous sommes donc intéressés au nombre de passages journaliers de vélos dans l'allée Beracasa sur une année.  
+La ville de Montpellier étant en pleine transition écologique, elle ouvre de plus en plus l'accès aux vélos sur ses routes. Pour en mesurer l'impact, elle a mit en place des éco-compteurs dans plusieurs rues. Les données issues de ces compteurs sont en libre accès, nous nous sommes donc intéressés au nombre de passages journaliers de vélos dans l'allée Beracasa sur une année.  
 
 Nous obtenons la répartition suivante :  
 
 ![Figure 5 : Histrogramme de la répartition du 1er chiffre significatif du passage journalier de vélos en comparaison avec la loi de Benford.](Images/histogramme_velos.png)
 
 Dans ce cas la proportion du chiffre $1$ est de plus de $50 \%$ contre $30 \%$ pour la **loi de Newcomb-Benford**. La différence de répartition des chiffres $2, 3, 4, 5$ est aussi notable, elle est même environ $2$ fois moins élevée.  
-Visuellement, nous pourrions penser que la répartition de ces données ne suit pas la **loi de Newcomb-Benford**. Il est courant de ne pas retrouver la loi de Newcomb-Benford dans des données brutes comme celles-ci, on la retrouve empiriquement plus souvent dans des données dîtes de **deuxième génération** comme des sommes ou des produits.
+
+Visuellement, nous pourrions penser que la répartition de ces données ne suit pas la **loi de Newcomb-Benford**. Il est courant de ne pas retrouver la loi de Newcomb-Benford dans des données brutes comme celles-ci, on la retrouve empiriquement plus souvent dans des données dîtes de **deuxième génération** comme des sommes ou des produits. Ceci à été démontré par Jeff Boyle en $1994$.
 
 
 ## Nombres générés par les humains.  
 
+&nbsp;
+Dans ce paragraphe nous tentons de reproduire à moindre échelle l'expérience de Theodore Preston Hill en $1988$. Dans le cadre de son expérience le professeur Ted HILL demande à ses élèves ($742$) d'écrire un nombre de $6$ chiffres au hasard sur un bout de papier, il recense ensuite le premier chiffre significatif de chacun de ces nombre dans le but de les comparer à la loi de Benford et à la répartition uniforme.
+
+Notre expérience partageant le même objectif que celle de HILL, est basée sur un protocole légèrement différent. N'ayant pas une troupe d'élèves à disposition nous avons recueilli un total de $300$ nombres. Ces $300$ nombres ont été obtenus de plusieurs manières, via des sondages sur internet ou réseaux sociaux, en demandant directement à des personnes rencontrées au hasard, notre famille ou nos amis. 
+
+D'après le biais d'équiprobabilité cité plus haut, si les nombres recensés pendant les expériences ont réellement été données de façon aléatoire les répartitions des premiers chiffres significatifs devraient être comparable à une loi uniforme.
+
+Comparons les répartitions obtenues durant les deux expériences:
+
+![Figure 6 : Comparaison des histrogrammes de la répartition du 1er chiffre significatif de l'expérience de Hill avec la loi de Benford et la loi uniforme puis de notre expérience avec ces deux mêmes lois.](Images/comparaison.png)
+
+À première vue, dans les deux expériences la répartition du premier chiffre significatif ne semble pas suivre la loi de Newcomb-Benford (le chiffre $1$ n'apparaît clairement pas aussi souvent par exemple), elles semblent cependant plus proche de la loi uniforme sans tout de même y correspondre parfaitement. Plusieurs facteurs pourraient expliquer ces différences entre l'uniforme et les expériences, celui qui revient souvent est qu'un nombre donné au hasard par un humain est souvent influencé par son expérience, même inconsciemment. Par exemple sa date d'anniversaire, un évènement marquant ou son chiffre préféré. Le fait d'avoir recueilli nos nombres par internet à aussi pu influencer le choix des personnes concernées. Un facteur psychologique est donc à prendre en considération pour approfondir la conclusion.
+
 Après avoir observé ces quelques jeux de données, nous étions en mesure de dire si ces données semblaient ou non suivre la loi de Newcomb-Benford, le problème qui en découle est qu'une simple observation n'est pas très fiable, difficile de prendre une décision sur un constat visuel. En effet, se tromper dans l'interprétation peut entraîner deux types d'erreur, la première étant de faussement déceler une fraude (ce que nous appellerons **le risque de première espèce**) et la deuxième de laisser passer une fraude. Ces erreurs ont un coût pour l'institut qui essaye de les réprimer, celui d'engager des démarches de détections approfondies inutiles ou de ne pas percevoir les taxes dues dans le cas de la fraude fiscale par exemple. 
 
-Le but est donc de minimiser le coût que peuvent engendrer les erreurs sus-mentionnées, pour se faire l'utilisation d'outils scientifiques est de rigueur. Les outils que nous aborderons dans la suite sont les test d'adéquations, ces tests servent à vérifier si un ensemble de nombre suit ou non une loi de probabilité donnée (pour nous c'est la loi de Newcomb-Benford). 
+Le but est donc de minimiser le coût que peuvent engendrer les erreurs sus-mentionnées, pour ce faire l'utilisation d'outils scientifiques est de rigueur. Les outils que nous arboderons dans la suite sont les test d'adéquations, ces tests servent à vérifier si un ensemble de nombre suit ou non une loi de probabilité donnée (pour nous c'est la loi de Newcomb-Benford).
+
+
 
 
 erreur 1ere espèce rejeter Ho (c'est dire que c'est pas benford alors que ca l'est, dire qu'il y a fraude alors que non)
@@ -205,6 +220,7 @@ dans tous les cas on risque de faire une erreur (mettre le tableau)
 
 # Tests
 
+&nbsp;
 Comme nous l'avons dit précédemment, une inspection visuelle à elle seule ne permet pas d'affirmer ou infirmer si un jeu de données suit la loi de Newcomb-Benford. L'outil statistique permettant de le vérifier est le test d'adéquation à la loi de Newcomb-Benford.  
 Les tests d'adéquation servent à tester si un échantillon est distribué selon une loi de probabilité donnée. Ils permettent de décider, avec un certain seuil d'erreur, si les écarts présentés par l'échantillon par rapport aux valeurs théoriques sont dus au hasard, ou si au contraire ils sont significatifs.  
 
@@ -220,6 +236,9 @@ Notons $H_0$ l'hypothèse nulle.
 
 ![Tableau 2 : Règle de décision.](Images/erreurs.png)
 
+\newpage
+
+PARLER DES TESTS DE MANIERE GENERALE, plutot theorique
 
 le test privilégié est le test de chi2
 quand c'est une problème qui a une certaine importance pleins d'autres tests qui existent (package R Benford test le seul test important dans ce package est celui du Chi2, 2ème package Benford smooth test créé par samuel et credo plus spécifique au problème disponible sur le site CRAN) Les deuxièmes tests sont mieux car plus puissantes, cad qu'ils détectent plus de fraudes. On veut le test le plus puissant possible, a 5%
@@ -228,8 +247,6 @@ faire une description des outils/tests
 données fiscales sur plusieurs années de 20 régions italiennes, test de chi2 (c'est pas un test très puissant, ne permet pas nécessairement de détecter les fraudes.) Il ont mis que la statistique de test mais pas la p-value
 
 # Application des tests
-
-
 
 ## Application a des données fiscales italiennes
 
@@ -242,3 +259,8 @@ Un chinois a affirmé qu'il n'y avait pas eu fraudes en Chine
 G. R. DUCHARME, S. KACI, C. VOVOR-DASSU *Tests d'adéquations lisses pour la loi de Newcomb-Benford*
 
 M. AUSLOOS, R. CERQUETI, T. A. MIR *Data science for assessing possible tax income manipulation: the case of Italy*
+
+https://hill.math.gatech.edu/publications/PAPER%20PDFS/RandomNumberGuessing_Hill_88.pdf
+https://archimede.mat.ulaval.ca/amq/bulletins/mai11/Article_Genest.pdf
+https://fr.wikipedia.org/wiki/Loi_de_Benford
+
