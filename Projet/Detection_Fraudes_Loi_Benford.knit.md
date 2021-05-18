@@ -14,7 +14,6 @@ header-includes:
 - \oddsidemargin -1cm
 - \textwidth 18,5cm
 - \textheight 24cm
-- \usepackage[french]{babel}
 - \usepackage[tableposition=top]{caption}
 - \captionsetup{labelformat=empty}
 - \usepackage{caption}
@@ -148,7 +147,7 @@ Ici les répartitions sont fortement ressemblantes, c'est aussi le cas pour de n
 ## Passage journalier de vélos dans l'allée Beracasa à Montpellier.  
 
 &nbsp;
-La ville de Montpellier étant en pleine transition écologique, elle ouvre de plus en plus l'accès aux vélos sur ces routes. Pour en mesurer l'impact, elle a mit en place des éco-compteurs dans plusieurs rues. Les données issues de ces compteurs sont en libre accès, nous nous sommes donc intéressés au nombre de passages journaliers de vélos dans l'allée Beracasa sur une année.  
+La ville de Montpellier étant en pleine transition écologique, elle ouvre de plus en plus l'accès aux vélos sur ses routes. Pour en mesurer l'impact, elle a mit en place des éco-compteurs dans plusieurs rues. Les données issues de ces compteurs sont en libre accès, nous nous sommes donc intéressés au nombre de passages journaliers de vélos dans l'allée Beracasa sur une année.  
 
 Nous obtenons la répartition suivante :  
 
@@ -159,6 +158,18 @@ Visuellement, nous pourrions penser que la répartition de ces données ne suit 
 
 
 ## Nombres générés par les humains.  
+
+Dans ce paragraphe nous tentons de reproduire à moindre échelle l'exprérience de Theodore Preston Hill en 1988. Dans le cadre de son expérience le professeur Ted HILL demande à ses élèves (742) d'écrire un nombre de 6 chiffres au hasard sur un bout de papier, il recense ensuite le premier chiffre significatif de chacun de ces nombre dans le but de les comparer à la loi de Benford et à la répartition uniforme.
+
+Notre expérience partageant le même objectif que celle de HILL, est basée sur un protocole légèrement différent. N'ayant pas une troupe d'élèves à disposition nous avons recueilli un total de 300 nombres. Ces 300 nombres ont été obtenus de plusieurs manières, via des sondages sur internet ou réseaux sociaux, en demandant directement à des personnes rencontrées au hasard, notre famille ou nos amis. 
+
+D'après le biais d'équiprobabilté sité plus haut, si les nombres recensés pendant les expériences ont réellement été données de façon aléatoire les répartions des premier chiffres significatifs devraient être comparable à une loi uniforme.
+
+Comparons les répartitions obtenues durant les deux expériences:
+
+![Figure 6 : Comparaison des histrogrammes de la répartition du 1er chiffre significatif du passage journalier de vélos en comparaison avec la loi de Benford.](Images/comparaison.png)
+
+A première vue on remarque que dans les deux expériences la répartition du premier chiffre significatif ne semble pas suivre la loi de Newcomb-Benford, elles ne semblent pas non plus correspondre à une loi uniforme. 
 
 Après avoir observé ces quelques jeux de données, nous étions en mesure de dire si ces données semblaient ou non suivre la loi de Newcomb-Benford, le problème qui en découle est qu'une simple observation n'est pas très fiable, difficile de prendre une décision sur un constat visuel. En effet, se tromper dans l'interprétation peut entrainer deux types d'erreur, la première étant de faussement déceler une fraude (ce que nous appelerons **le risque de première espèce**) et la deuxième de laisser passer une fraude. Ces erreurs ont un coût pour l'institut qui essaye de les réprimer, celui d'engager des démarches de détections approffondies inutiles ou de ne pas percevoir les taxes dues dans le cas de la fraude fiscale par exemple. 
 
@@ -193,3 +204,6 @@ données fiscales sur plusieurs années de 20 régions italiennes, test de chi2 
 Un chinois a affirmé qu'il n'y avait pas eu fraudes en Chine
 
 # Bibliographie
+
+https://hill.math.gatech.edu/publications/PAPER%20PDFS/RandomNumberGuessing_Hill_88.pdf
+https://archimede.mat.ulaval.ca/amq/bulletins/mai11/Article_Genest.pdf

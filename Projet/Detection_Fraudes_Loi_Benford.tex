@@ -63,7 +63,6 @@
 \oddsidemargin -1cm
 \textwidth 18,5cm
 \textheight 24cm
-\usepackage[french]{babel}
 \usepackage[tableposition=top]{caption}
 \captionsetup{labelformat=empty}
 \usepackage{caption}
@@ -338,7 +337,7 @@ la distance des villes de France à Paris.
 Montpellier.}\label{passage-journalier-de-vuxe9los-dans-lalluxe9e-beracasa-uxe0-montpellier.}}
 
 ~ La ville de Montpellier étant en pleine transition écologique, elle
-ouvre de plus en plus l'accès aux vélos sur ces routes. Pour en mesurer
+ouvre de plus en plus l'accès aux vélos sur ses routes. Pour en mesurer
 l'impact, elle a mit en place des éco-compteurs dans plusieurs rues. Les
 données issues de ces compteurs sont en libre accès, nous nous sommes
 donc intéressés au nombre de passages journaliers de vélos dans l'allée
@@ -367,6 +366,40 @@ dîtes de \textbf{deuxième génération} comme des sommes ou des produits.
 \hypertarget{nombres-guxe9nuxe9ruxe9s-par-les-humains.}{%
 \subsection{Nombres générés par les
 humains.}\label{nombres-guxe9nuxe9ruxe9s-par-les-humains.}}
+
+Dans ce paragraphe nous tentons de reproduire à moindre échelle
+l'exprérience de Theodore Preston Hill en 1988. Dans le cadre de son
+expérience le professeur Ted HILL demande à ses élèves (742) d'écrire un
+nombre de 6 chiffres au hasard sur un bout de papier, il recense ensuite
+le premier chiffre significatif de chacun de ces nombre dans le but de
+les comparer à la loi de Benford et à la répartition uniforme.
+
+Notre expérience partageant le même objectif que celle de HILL, est
+basée sur un protocole légèrement différent. N'ayant pas une troupe
+d'élèves à disposition nous avons recueilli un total de 300 nombres. Ces
+300 nombres ont été obtenus de plusieurs manières, via des sondages sur
+internet ou réseaux sociaux, en demandant directement à des personnes
+rencontrées au hasard, notre famille ou nos amis.
+
+D'après le biais d'équiprobabilté sité plus haut, si les nombres
+recensés pendant les expériences ont réellement été données de façon
+aléatoire les répartions des premier chiffres significatifs devraient
+être comparable à une loi uniforme.
+
+Comparons les répartitions obtenues durant les deux expériences:
+
+\begin{figure}
+\centering
+\includegraphics{Images/comparaison.png}
+\caption{Figure 6 : Comparaison des histrogrammes de la répartition du
+1er chiffre significatif du passage journalier de vélos en comparaison
+avec la loi de Benford.}
+\end{figure}
+
+A première vue on remarque que dans les deux expériences la répartition
+du premier chiffre significatif ne semble pas suivre la loi de
+Newcomb-Benford, elles ne semblent pas non plus correspondre à une loi
+uniforme.
 
 Après avoir observé ces quelques jeux de données, nous étions en mesure
 de dire si ces données semblaient ou non suivre la loi de
@@ -429,5 +462,8 @@ Un chinois a affirmé qu'il n'y avait pas eu fraudes en Chine
 
 \hypertarget{bibliographie}{%
 \section{Bibliographie}\label{bibliographie}}
+
+\url{https://hill.math.gatech.edu/publications/PAPER\%20PDFS/RandomNumberGuessing_Hill_88.pdf}
+\url{https://archimede.mat.ulaval.ca/amq/bulletins/mai11/Article_Genest.pdf}
 
 \end{document}
