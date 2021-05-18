@@ -257,7 +257,7 @@ Le déroulement du test se procède en 5 étapes:
  3) On cherche la valeur critique $\chi^{2}_a$ dans la table de la loi du $\chi^2$ à k-1 degrés de liberté.  
  4) Si $\chi^{2}_a < \chi^2$, on accepte l'hypothèse $H_0$ (la distribution observée est conforme à la distribution théorique" avec un risque d'erreur a) sinon on la rejette.  
  5) Il faut vérifier que $n_{pj} \geq 5$ pour tout j.  
-![Tableau 3 : Dnsité du Chi-Deux en fonction du nombre de degrés de liberté.](Images/Chi-square.png)
+![Tableau 3 : Densité du Chi-Deux en fonction du nombre de degrés de liberté.](Images/Chi-square.png)
 
 Rappel de la loi du $\chi^2$ à n degrés de liberté si elle est absolument continue, et admet pour densité:  
 
@@ -265,6 +265,20 @@ $f(x)=\left\{\begin{array}{cl}\frac{1}{2^{n / 2} \Gamma(n / 2)} e^{-x / 2} x^{\f
 
 où X admet alors une espérance et une variance
 $E(X)=n$ et $V(X)=2 n$  
+
+# Test de Freedman qui est la modification du test de Watson
+
+Ce test est pour des distribution discrètes entre les distributions des premiers chiffres et la distribution de Benford pour affirmer si les données sont conformes à la loi de Benford.  
+
+Spécifiquement, on a :  
+
+$U^{2}=\frac{n}{9 \cdot 10^{k-1}} \cdot\left[\sum_{i=10^{k-1}}^{10^{k}-2}\left(\sum_{j=1}^{i}\left(f_{j}^{o}-f_{j}^{e}\right)\right)^{2}-\frac{1}{9 \cdot 10^{k-1}} \cdot\left(\sum_{i=10^{k-1}}^{10^{k}-2} \sum_{j=1}^{i}\left(f_{i}^{o}-f_{i}^{c}\right)\right)^{2}\right]$  
+
+avec $f_{i}^{o}$ la fréquence observée du chiffre i et $f_{i}^{c}$ la fréquence attendue du chiffre i.  
+
+De plus grands écarts entres les fréquences conduisent à un plus grand $U^2$ ce qui rend le rejet plus probable. Ce test est reconnue comme plus performant que les autres tests, il est même recommandé par (LESPERANCE et collab. 2016) et (JOENSSEN 2014) .
+  
+  
 
 # Application des tests
 
