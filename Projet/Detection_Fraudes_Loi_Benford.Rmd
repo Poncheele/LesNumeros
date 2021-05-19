@@ -8,6 +8,8 @@ author:
 date: '*$5$ mars $2021$*'
 output:
   pdf_document:
+    toc: yes
+    toc_depth: 3
     fig_caption: yes
 fontsize: 12pt
 header-includes: 
@@ -18,8 +20,11 @@ header-includes:
 - \captionsetup{labelformat=empty}
 - \usepackage{caption}
 - \captionsetup{position=below}
+- \usepackage[french]{babel}
 
 ---
+
+\newpage
 
 RESUME DU PROJET EN QLQ LIGNES
 
@@ -29,10 +34,6 @@ REMERCIEMENTS
 knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 ```
 
-\maketitle
-\tableofcontents
-
-\newpage
 # Introduction.
 
 &nbsp;
@@ -183,14 +184,14 @@ La ville de Montpellier étant en pleine transition écologique, elle ouvre de p
 
 Nous obtenons la répartition suivante :  
 
-![Figure 5 : Histrogramme de la répartition du 1er chiffre significatif du passage journalier de vélos en comparaison avec la loi de Benford.](Images/histogramme_velos.png)
+![Figure 5 : Histrogramme de la répartition du 1er chiffre significatif du passage journalier de vélos en comparaison avec la loi de Benford](Images/histogramme_velos.png)
 
 Dans ce cas la proportion du chiffre $1$ est de plus de $50 \%$ contre $30 \%$ pour la **loi de Newcomb-Benford**. La différence de répartition des chiffres $2, 3, 4, 5$ est aussi notable, elle est même environ $2$ fois moins élevée.  
 
 Visuellement, nous pourrions penser que la répartition de ces données ne suit pas la **loi de Newcomb-Benford**. Il est courant de ne pas retrouver la loi de Newcomb-Benford dans des données brutes comme celles-ci, on la retrouve empiriquement plus souvent dans des données dîtes de **deuxième génération** comme des sommes ou des produits. Ceci à été démontré par Jeff Boyle en $1994$.
 
 
-## Nombres générés par les humains.  
+## Nombres générés par les humains  
 
 &nbsp;
 Dans ce paragraphe nous tentons de reproduire à moindre échelle l'expérience de Theodore Preston Hill en $1988$. Dans le cadre de son expérience le professeur Ted HILL demande à ses élèves ($742$) d'écrire un nombre de $6$ chiffres au hasard sur un bout de papier, il recense ensuite le premier chiffre significatif de chacun de ces nombre dans le but de les comparer à la loi de Benford et à la répartition uniforme.
@@ -212,29 +213,55 @@ Le but est donc de minimiser le coût que peuvent engendrer les erreurs sus-ment
 
 
 
-erreur 1ere espèce rejeter Ho (c'est dire que c'est pas benford alors que ca l'est, dire qu'il y a fraude alors que non)
-erreur seconde espece (ne pas rejeter H0 à tord, laisser passer une fraude)
+
 En stat l'erreur de 1ere espèce est souvent plus présente
 On se dit pas qu'il y a fraude on suspecte la fraude on lance une audit (ca coute des sous)
 dans tous les cas on risque de faire une erreur (mettre le tableau)
 
 # Tests
 
+## Généralités sur les tests
+
 &nbsp;
-Comme nous l'avons dit précédemment, une inspection visuelle à elle seule ne permet pas d'affirmer ou infirmer si un jeu de données suit la loi de Newcomb-Benford. L'outil statistique permettant de le vérifier est le test d'adéquation à la loi de Newcomb-Benford.  
-Les tests d'adéquation servent à tester si un échantillon est distribué selon une loi de probabilité donnée. Ils permettent de décider, avec un certain seuil d'erreur, si les écarts présentés par l'échantillon par rapport aux valeurs théoriques sont dus au hasard, ou si au contraire ils sont significatifs.  
+Un test d'hypothèse (ou test statistique) est un procédé d'inférence statistique ayant pour but de fournir une règle de décision permettant ainsi, à partir de l'étude d'un ou plusieurs échantillons de données, d'indiquer si une hypothèse statistique concernant une population doit être acceptée ou rejetée.  
 
-Notons alors qu'aucun test d'hypothèse n'est fiable à $100 \%$, un test étant basé sur des probabilités, il existe toujours un risque de tirer une mauvaise conclusion. Lorsqu'un test d'hypothèse est effectué, nous pouvons observer deux types d'erreurs, l'erreur de Type I dite erreur de première espèce et l'erreur de Type II dite erreur de seconde espèce. Les risques de ces deux erreurs sont inversement proportionnels et sont déterminés par le seuil de significativité et la puissance du test. Il est important de déterminer l'erreur qui présente les conséquences les plus graves dans notre cas avant de définir le risque que nous accepterons pour chaque erreur.  
+Nous distinguons deux classes de tests :   
 
-L'erreur de Type I consiste à rejeter l'hypothèse nulle alors que celle-ci est vraie. La probabilité de commettre une erreur de première espèce est représentée par $\alpha$, qui désigne le seuil de significativité défini pour le test d'hypothèse. Un niveau $\alpha$ de $0.05$ indique que nous sommes disposé à avoir $5 \%$ de chances de rejeter l'hypothèse nulle à tort. Pour réduire ce risque, il est possible d'utiliser une valeur $\alpha$ plus faible. Cependant, cela implique d'être moins à même de détecter une vraie différence si celle-ci existe vraiment.  
+- Les tests paramétriques sont l'étude de la moyenne, variance, ou de la fréquence des observations issues d'une distribution a priori paramétrée. Ils nécessitent un modèle à fortes contraintes (normalité des distributions ou approximation normale pour de grands échantillons). Ces hypothèses sont d'autant plus difficiles à vérifier que les effectifs étudiés sont plus réduits.    
+- Les tests non paramétriques sont l'étude des rangs des observations issues d'une distribution non paramétrée mais quelconque. Ce sont des tests dont le modèle ne précise pas les conditions que doivent remplir les paramètres de la population dont a été extrait l'échantillon. Il n'y a donc pas d'hypothèse de normalité au préalable.  
+
+Lorsque les conditions nécessaires sont valides, les tests paramétriques sont plus puissants que les tests non paramétriques. Les tests non paramétriques s'utilisent dès lors que les conditions d'application des autres méthodes ne sont pas satisfaites, même après d'éventuelles transformations de variables, et peuvent être employés pour des échantillons de taille très faible.  
+
+Comme nous l'avons précédemment énoncé, une inspection visuelle à elle seule ne permet pas d'affirmer ou infirmer si un jeu de données suit la loi de Newcomb-Benford. L'outil statistique permettant de le vérifier est le test d'adéquation à la loi de Newcomb-Benford.  
+Les tests d'adéquation servent à tester si un échantillon est distribué selon une loi de probabilité préalablement choisie. Ils permettent de décider, avec un certain seuil d'erreur, si les écarts présentés par l'échantillon par rapport aux valeurs théoriques sont dus au hasard, ou si au contraire ils sont significatifs.  
+
+## Hypothèse nulle et hypothèse alternative
+
+&nbsp;
+Un test statistique étudie deux hypothèses opposées concernant une population : l'hypothèse nulle et l'hypothèse alternative.  
+L'hypothèse nulle, notée $H_0$, est l'hypothèse que l'on souhaite contrôler, elle repose sur le fait de dire qu'il n'existe pas de différence entre les paramètres comparés ou que la différence observée n'est pas significative et résulte des fluctuations d'échantillonnage.   
+
+À partir des échantillons de données, un test statistique permet de déterminer si on peut rejeter l'hypothèse nulle. La $p$-valeur sert de détermination. Si la $p$-valeur est inférieure au seuil de signification (appelé $\alpha$), l'hypothèse nulle peut être rejetée.  
+
+L'hypothèse alternative, notée $H_1$, affirme qu'un paramètre de la population est plus petit, plus grand ou différent de la valeur hypothétisée dans l'hypothèse nulle. Elle peut être vue comme la négation de $H_0$ et est équivalente à dire que $H_0$ est fausse. La décision de rejeter $H_0$ signifie que $H_1$ est réalisée ou que $H_1$ est vraie.  
+
+On pense souvent à tort que les tests d'hypothèses statistiques visent à choisir l'hypothèse la plus probable parmi $H_0$ et $H_1$. Néanmoins l'hypothèse nulle est formulée dans le but d'être rejetée. Le seuil de signification fixé est bas (généralement $0.05$), et lorsque l'hypothèse nulle est rejetée cela prouve statistiquement que l'hypothèse alternative est vraie. En revanche, si l'hypothèse nulle ne peut être rejetée aucune preuve statistique ne montre que celle-ci est vraie. La raison est qu'il n'y a pas de valeur fixée assurant que la probabilité d'accepter à tort l'hypothèse nulle est petite.  
+
+Finalement, la décision d'accepter l'hypothèse nulle n'est pas équivalente à dire que $H_0$ est vraie et que $H_1$ est fausse, mais cela traduit uniquement l'idée selon laquelle il n'y a pas d'évidence nette pour que $H_0$ soit fausse. Un test conclu donc à rejeter ou à ne pas rejeter l'hypothèse nulle mais jamais à l'accepter directement.
+
+## Les risques d'erreurs
+
+&nbsp;
+Notons alors qu'aucun test d'hypothèse n'est fiable à $100 \%$, un test étant basé sur des probabilités, il existe toujours un risque de tirer une mauvaise conclusion. Lorsqu'un test d'hypothèse est effectué, nous pouvons observer deux types d'erreurs, l'erreur de Type I dite erreur de première espèce et l'erreur de Type II dite erreur de seconde espèce. Les risques de ces deux erreurs sont inversement proportionnels et sont déterminés par le seuil de signification (ou région critique) et la puissance du test. Il est important de déterminer l'erreur qui présente les conséquences les plus graves dans notre cas avant de définir le risque que nous accepterons pour chaque erreur.  
+
+L'erreur de Type I consiste à rejeter l'hypothèse nulle alors que celle-ci est vraie. La probabilité de commettre une erreur de première espèce est représentée par $\alpha$, qui désigne le seuil de signification défini pour le test d'hypothèse. Un niveau $\alpha$ de $0.05$ indique que nous sommes disposé à avoir $5 \%$ de chances de rejeter l'hypothèse nulle à tort. Pour réduire ce risque, il est possible d'utiliser une valeur $\alpha$ plus faible. Cependant, cela implique d'être moins à même de détecter une vraie différence si celle-ci existe vraiment.  
 Dans notre contexte, l'erreur de Type I consiste à affirmer que les données ne suivent pas la loi de Newcomb-Benford alors que c'est le cas, soit faussement identifier une fraude.
 
 L'erreur de Type II repose sur le fait de ne pas rejeter l'hypothèse nulle alors que celle-ci est fausse. La probabilité de commettre une erreur de seconde espèce est notée $\beta$, et dépend de la puissance du test. Il est possible de réduire le risque de deuxième espèce en faisant en sorte que le test soit suffisamment puissant. Pour cela, il est nécessaire que l'effectif d'échantillon soit suffisamment grand pour permettre la détection d'une différence réelle.  
 La probabilité de rejeter l'hypothèse nulle à tort vaut $1 - \beta$, il s'agit de la puissance du test.  
 
-Notons $H_0$ l'hypothèse nulle.
 
-![Tableau 2 : Règle de décision.](Images/erreurs.png)
+![Tableau 2 : Risques d'erreurs](Images/erreurs.png)
 
 \newpage
 
@@ -246,37 +273,39 @@ faire une description des outils/tests
 
 données fiscales sur plusieurs années de 20 régions italiennes, test de chi2 (c'est pas un test très puissant, ne permet pas nécessairement de détecter les fraudes.) Il ont mis que la statistique de test mais pas la p-value
 
-# Test du Khi-Deux
+## Test du Khi-Deux
 
-Les tests du $\chi^2$  sont des tests d'hypothèses statistiques non-paramétriques. Ils comparent la distribution observée dans un échantillon statistique à une distribution théorique (*l'ajustement*), à tester si deux caractères d'une population sont indépendants (*l'indépendance*) et à tester si des échantillons sont issus d'une même population (*l'homogénéité*). Le test lit l'écart critique dans la table de la loi du chi-deux.  
+Les tests du $\chi^2$  sont des tests d'hypothèses statistiques non-paramétriques. Ceux-ci permettent de comparer la distribution observée dans un échantillon statistique avec une distribution théorique (*test d'ajustement*), à tester si deux caractères d'une population sont indépendants (*test d'indépendance*) et à tester si des échantillons sont issus d'une même population (*test d'homogénéité*). Le test lit l'écart critique dans la table de la loi du chi-deux.  
 
-Le déroulement du test se procède en 5 étapes:  
+Le déroulement du test se procède en $5$ étapes :  
  1) On calcule les effectifs théoriques (*$n_{pj}$*)  
- 2) On calcule la valeur observée de la variable de test:  
- $\chi^{2}=\sum_{j=1}^{k} \frac{\left(n_{j}-n _{p_{j}}\right)^{2}}{n_{ p_{j}}}$  
- 3) On cherche la valeur critique $\chi^{2}_a$ dans la table de la loi du $\chi^2$ à k-1 degrés de liberté.  
- 4) Si $\chi^{2}_a < \chi^2$, on accepte l'hypothèse $H_0$ (la distribution observée est conforme à la distribution théorique" avec un risque d'erreur a) sinon on la rejette.  
- 5) Il faut vérifier que $n_{pj} \geq 5$ pour tout j.  
-![Tableau 3 : Densité du Chi-Deux en fonction du nombre de degrés de liberté.](Images/Chi-square.png)
+ 2) On calcule la valeur observée de la variable de test :  
+ $$\chi^{2}=\sum_{j=1}^{k} \frac{\left(n_{j}-n _{p_{j}}\right)^{2}}{n_{ p_{j}}}$$  
+ 3) On cherche la valeur critique $\chi^{2}_a$ dans la table de la loi du $\chi^2$ à $k - 1$ degrés de liberté.  
+ 4) Si $\chi^{2}_a < \chi^2$, on accepte l'hypothèse $H_0$ ("la distribution observée est conforme à la distribution théorique" avec un risque d'erreur $\alpha$), sinon on la rejette.  
+ 5) Il faut vérifier que $n_{pj} \geq 5$ pour tout $j$.  
+ 
+![Tableau 3 : Densité du Chi-Deux en fonction du nombre de degrés de liberté.](Images/Chi-square.png){width=50%}
 
-Rappel de la loi du $\chi^2$ à n degrés de liberté si elle est absolument continue, et admet pour densité:  
+\newpage
 
-$f(x)=\left\{\begin{array}{cl}\frac{1}{2^{n / 2} \Gamma(n / 2)} e^{-x / 2} x^{\frac{n}{2}-1} & \text { si } x>0 \\ 0 & \text { sinon. }\end{array}\right.$  
+Rappel de la loi du $\chi^2$ à $n$ degrés de liberté si elle est absolument continue, et admet pour densité :  
 
-où X admet alors une espérance et une variance
-$E(X)=n$ et $V(X)=2 n$  
+$$f(x)=\left\{\begin{array}{cl}\frac{1}{2^{n / 2} \Gamma(n / 2)} e^{-x / 2} x^{\frac{n}{2}-1} & \text { si } x>0, \\ 0 & \text { sinon, }\end{array}\right.$$
 
-# Test de Freedman qui est la modification du test de Watson
+où $X$ admet alors pour espérance et variance $E(X) = n$ et $V(X) = 2n$.  
 
-Ce test est pour des distribution discrètes entre les distributions des premiers chiffres et la distribution de Benford pour affirmer si les données sont conformes à la loi de Benford.  
+## Test de Freedman modification du test de Watson
+
+Ce test est pour des distributions discrètes entre les distributions des premiers chiffres et la distribution de Benford pour affirmer si les données sont conformes à la loi de Benford.  
 
 Spécifiquement, on a :  
 
-$U^{2}=\frac{n}{9 \cdot 10^{k-1}} \cdot\left[\sum_{i=10^{k-1}}^{10^{k}-2}\left(\sum_{j=1}^{i}\left(f_{j}^{o}-f_{j}^{e}\right)\right)^{2}-\frac{1}{9 \cdot 10^{k-1}} \cdot\left(\sum_{i=10^{k-1}}^{10^{k}-2} \sum_{j=1}^{i}\left(f_{i}^{o}-f_{i}^{c}\right)\right)^{2}\right]$  
+$$U^{2}=\frac{n}{9 \cdot 10^{k-1}} \cdot\left[\sum_{i=10^{k-1}}^{10^{k}-2}\left(\sum_{j=1}^{i}\left(f_{j}^{o}-f_{j}^{e}\right)\right)^{2}-\frac{1}{9 \cdot 10^{k-1}} \cdot\left(\sum_{i=10^{k-1}}^{10^{k}-2} \sum_{j=1}^{i}\left(f_{i}^{o}-f_{i}^{c}\right)\right)^{2}\right],$$  
 
-avec $f_{i}^{o}$ la fréquence observée du chiffre i et $f_{i}^{c}$ la fréquence attendue du chiffre i.  
+avec $f_{i}^{o}$ la fréquence observée du chiffre $i$ et $f_{i}^{c}$ la fréquence attendue du chiffre $i$.  
 
-De plus grands écarts entres les fréquences conduisent à un plus grand $U^2$ ce qui rend le rejet plus probable. Ce test est reconnue comme plus performant que les autres tests, il est même recommandé par (LESPERANCE et collab. 2016) et (JOENSSEN 2014) .
+De plus grands écarts entres les fréquences conduisent à un plus grand $U^2$ ce qui rend le rejet plus probable. Ce test est reconnu comme plus performant que les autres tests, il est même recommandé par LESPERANCE et collab. ($2016$) et JOENSSEN ($2014$).  
   
 # Test lisse pour la Loi de Newcomb-Benford 
 
@@ -293,13 +322,14 @@ Un chinois a affirmé qu'il n'y avait pas eu fraudes en Chine
 
 # Bibliographie
 
-G. R. DUCHARME, S. KACI, C. VOVOR-DASSU *Tests d'adéquations lisses pour la loi de Newcomb-Benford*
+V. GENEST, C. GENEST *La loi de Newcomb-Benford ou la loi du premier chiffre significatif* ($2011$)
 
-M. AUSLOOS, R. CERQUETI, T. A. MIR *Data science for assessing possible tax income manipulation: the case of Italy*
+WIKIPEDIA L'ENCYCLOPEDIE LIBRE *Loi de Benford* (dernière mise à jour $2021$)
 
-https://hill.math.gatech.edu/publications/PAPER%20PDFS/RandomNumberGuessing_Hill_88.pdf
-https://archimede.mat.ulaval.ca/amq/bulletins/mai11/Article_Genest.pdf
-https://fr.wikipedia.org/wiki/Loi_de_Benford
+T. P. HILL *Random-number guessing and the first digit phenomenon* ($1988$)
+
+G. R. DUCHARME, S. KACI, C. VOVOR-DASSU *Tests d'adéquations lisses pour la loi de Newcomb-Benford* ($2017$)
+
 
 Chi-deux:  
 http://www.bibmath.net/dico/index.php?action=affiche&quoi=./l/loichideux.html
@@ -311,4 +341,6 @@ Freedman:
 D. JOENSSEN et T. MUELLERLEILE *Package R "BenfordTest"* (2015) https://cran.r-project.org/web/packages/BenfordTests/BenfordTests.pdf
 D. JOENSSEN (2014) https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2545243 
 LESPERANCE M., REED W.J., STEPHENS M.A., TSAO C., WILTON B.,(2016) "*Assessing conformance with Benford's law : Goodness-ff-fit fets and simultaneous confidence interval*" 
+
+M. AUSLOOS, R. CERQUETI, T. A. MIR *Data science for assessing possible tax income manipulation: the case of Italy* ($2017$)
 
