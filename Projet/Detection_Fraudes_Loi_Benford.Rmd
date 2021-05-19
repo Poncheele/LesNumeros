@@ -305,17 +305,52 @@ avec $f_{i}^{o}$ la fréquence observée du chiffre $i$ et $f_{i}^{c}$ la fréqu
 
 Notons que de plus grands écarts entre les fréquences conduisent à un plus grand $U^2$, ce qui rend le rejet plus probable. Ce test est reconnu comme plus performant que d'autres tests, et a même été recommandé par la statisticienne M. Lesperance ainsi que ses collaborateurs ($2016$), puis également par Joenssen ($2014$).  
   
-## Test lisse pour la Loi de Newcomb-Benford 
+\newpage 
+
+## Tests lisses pour la Loi de Newcomb-Benford 
 
 nbsp;
 La famille des tests lisses introduite par Neyman$^1$ s'applique à des données autant discrètes que continues. Il est spécifique à la loi de probabilité en $H_0$.
 
-Pour construire une tactique de test lisse et de donner l'expression des statistiques de test, il existe deux théorèmes essentiels qui permettent de construire une famille pour l'hypothèse nulle $H_{0}: X \sim f(.)$ où $f(.)$ est la densité de la loi de Newcomb-Benford et comme tous les moments de cette loi existent nous pouvons utiliser les polynômes pour déterminer les fonctions orthonormales. Un des théorème est connu par Boulerice et Ducharme en 1997.
+Il existe deux théorèmes essentiels qui permettent de construire une famille de tests pour l'hypothèse nulle $H_{0}: X \sim f(.)$. Ici $f(.)$ est la densité de la loi de Newcomb-Benford.
 
+Le premier nous théorème nous dit:
 
+![](Images/theoreme1.png)
+
+Nous avons donc nos statistiques de test, les $T_K$ .Il faut maintenant exprimer les $h_k$. 
+Dans la suite l’indice 0 dénote un opérateur probabiliste calculé sous $H_0$ : X suit f(·).
+
+D'après Ducharmes & Collab. et le théorème suivant: 
+
+![](Images/theoreme2.png)
+Nous avons pour $0<k\leq5$, les $h_k$ suivants:
+
+$$
+\begin{array}{l}
+h_{1}(x)=-1.3979+0.4063 x \\
+h_{2}(x)=2.2836-1.6128 x+0.18247 x^{2} \\
+h_{3}(x)=4.0815+4.5719 x-1.2053 x^{2}+0.0862 x^{3} \\
+h_{4}(x)=8.0795-12.0946 x+5.1951 x^{2}-0.8249 x^{3}+0.0431 x^{4} \\
+h_{5}(x)=-18.1064+33.1385 x-19.7207 x^{2}+5.0168 x^{3}-0.5665 x^{4}+0.0233 x^{5}
+\end{array}
+$$
+
+Nous définissons $$
+\hat{K}=\underset{1 \leq k \leq K_{\max }}{\arg \max }\left\{T_{k}-k \log (n)\right\}$$
+et la statistique de test $T_{\hat{K}}$ qui $\stackrel{L}{\longrightarrow} \chi_{1}^{2}$ sous $H_{0}$.
+
+Dans la suite nous appliquerons les test $T_{\hat{K}}$ et $T_2$ qui d'après Ducharme & Collab sont les plus performants.
+
+\newpage
 
 # Application des tests
 
+Dans ce paragraphe nous traitons des données sur la fiscalité italienne de 20 régions, ces données nous servirons à appliquer différents tests (classique ou lisse). Chacun des tests teste l'hypothèse nulle "la répartition du premier chiffre significatif suit la loi de Newcomb-Benford" contre l'hypothèse alternative "la répartition du premier chiffre significatif ne suit pas la loi de Newcomb-Benford". L'objectif ici est de chercher à savoir si certaines régions d'Italie modifient ou non leurs chiffres, mais aussi de comparer les résultats de nos différents tests.
+
+Ici nous retenons le test du khi-deux qui est le plus connu et utilisé, il semblerait cependant qu'il fasse parti des moins performants (Ducharmes & Collab. 2020), le test de Freedman-Watson explicité plus haut. Pour ce qui est des tests lisses nous appliquerons les test $T_{\hat{K}}$ et $T_2$ comme sus-mentionné.
+
+Les données se présentent comme ci-après 
 ## Application a des données fiscales italiennes
 
 ```{r}
@@ -457,6 +492,9 @@ df=df[,1:14]
 opts <- options(knitr.kable.NA = "")
 knitr::kable(df, digits = 3, caption ="Tests sur la région de veneto")%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10)
 ```
+
+
+\newpage
 
 ## CAS COVID
 

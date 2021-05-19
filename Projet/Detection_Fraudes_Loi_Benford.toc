@@ -12,9 +12,8 @@
 \contentsline {subsection}{Hypothèse nulle et hypothèse alternative}{11}{section*.19}%
 \contentsline {subsection}{Les risques d'erreurs}{12}{section*.20}%
 \contentsline {subsection}{Test du Khi-Deux}{13}{section*.22}%
-\contentsline {subsection}{Test de Freedman-Watson}{15}{section*.24}%
-\contentsline {subsection}{Test lisse pour la Loi de Newcomb-Benford}{15}{section*.25}%
-\contentsline {section}{Application des tests}{15}{section*.26}%
-\contentsline {subsection}{Application a des données fiscales italiennes}{15}{section*.27}%
-\contentsline {subsection}{CAS COVID}{15}{section*.48}%
-\contentsline {section}{Bibliographie}{19}{section*.49}%
+\contentsline {subsection}{Test de Freedman-Watson}{14}{section*.24}%
+\contentsline {subsection}{Tests lisses pour la Loi de Newcomb-Benford}{15}{section*.25}%
+\contentsline {section}{Application des tests}{16}{section*.26}%
+\contentsline {subsection}{CAS COVID}{20}{section*.47}%
+\contentsline {section}{Bibliographie}{20}{section*.48}%
