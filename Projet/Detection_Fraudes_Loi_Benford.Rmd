@@ -327,7 +327,10 @@ Notons que de plus grands écarts entre les fréquences conduisent à un plus gr
 ## Test lisse pour la Loi de Newcomb-Benford 
 
 nbsp;
-La famille des tests lisses introduite par Neyman 
+La famille des tests lisses introduite par Neyman$^1$ s'applique à des données autant discrètes que continues. Il est spécifique à la loi de probabilité en $H_0$.
+
+Pour construire une tactique de test lisse et de donner l'expression des statistiques de test, il existe deux théorèmes essentiels qui permettent de construire une famille pour l'hypothèse nulle $H_{0}: X \sim f(.)$ où $f(.)$ est la densité de la loi de Newcomb-Benford et comme tous les moments de cette loi existent nous pouvons utiliser les polynômes pour déterminer les fonctions orthonormales. Un des théorème est connu par Boulerice et Ducharme en 1997.
+
 
 
 # Application des tests
@@ -502,3 +505,7 @@ LESPERANCE M., REED W.J., STEPHENS M.A., TSAO C., WILTON B.,(2016) "*Assessing c
 
 M. AUSLOOS, R. CERQUETI, T. A. MIR *Data science for assessing possible tax income manipulation: the case of Italy* ($2017$)
 
+Test lisse:
+BOULERICE B., DUCHARME G.R. (1997) "*Smooth test of goodness-of-fit for directional and axial data*", Journal Multivariate Analysis 60 : 154-175
+G.R. DUCHARME,S. KACI, C. VOVOR-DASSU (2017) article *Tests d'adéquations lisse pour la loi de Newcomb-Benford* https://www.researchgate.net/publication/339641985_Smooths_Tests_of_Goodness-of-fit_for_the_Newcomb-Benford_distribution 
+NEYMAN J. (1937) , "*Smooth tests for goodnesss-of-fit*", Skand. Aktuariedidskr 20 : 150-199.
