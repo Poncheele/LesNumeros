@@ -278,7 +278,10 @@ avec $f_{i}^{o}$ la fréquence observée du chiffre i et $f_{i}^{c}$ la fréquen
 
 De plus grands écarts entres les fréquences conduisent à un plus grand $U^2$ ce qui rend le rejet plus probable. Ce test est reconnue comme plus performant que les autres tests, il est même recommandé par (LESPERANCE et collab. 2016) et (JOENSSEN 2014) .
   
-  
+# Test lisse pour la Loi de Newcomb-Benford 
+
+La famille des tests lisses introduite par Neyman 
+
 
 # Application des tests
 
@@ -297,4 +300,15 @@ M. AUSLOOS, R. CERQUETI, T. A. MIR *Data science for assessing possible tax inco
 https://hill.math.gatech.edu/publications/PAPER%20PDFS/RandomNumberGuessing_Hill_88.pdf
 https://archimede.mat.ulaval.ca/amq/bulletins/mai11/Article_Genest.pdf
 https://fr.wikipedia.org/wiki/Loi_de_Benford
+
+Chi-deux:  
+http://www.bibmath.net/dico/index.php?action=affiche&quoi=./l/loichideux.html
+https://fr.wikipedia.org/wiki/Test_du_%CF%87%C2%B2#Test_du_%CF%872_de_Pearson
+http://www.bibmath.net/dico/index.php?action=affiche&quoi=./c/chideuxtest.html
+https://commons.wikimedia.org/wiki/File:Chi-square_pdf.svg?uselang=fr 
+
+Freedman:
+D. JOENSSEN et T. MUELLERLEILE *Package R "BenfordTest"* (2015) https://cran.r-project.org/web/packages/BenfordTests/BenfordTests.pdf
+D. JOENSSEN (2014) https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2545243 
+LESPERANCE M., REED W.J., STEPHENS M.A., TSAO C., WILTON B.,(2016) "*Assessing conformance with Benford's law : Goodness-ff-fit fets and simultaneous confidence interval*" 
 
