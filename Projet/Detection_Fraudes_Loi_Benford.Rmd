@@ -8,6 +8,8 @@ author:
 date: '*$5$ mars $2021$*'
 output:
   pdf_document:
+    toc: yes
+    toc_depth: 3
     fig_caption: yes
 fontsize: 12pt
 header-includes: 
@@ -18,8 +20,11 @@ header-includes:
 - \captionsetup{labelformat=empty}
 - \usepackage{caption}
 - \captionsetup{position=below}
+- \usepackage[french]{babel}
 
 ---
+
+\newpage
 
 RESUME DU PROJET EN QLQ LIGNES
 
@@ -29,10 +34,6 @@ REMERCIEMENTS
 knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 ```
 
-\maketitle
-\tableofcontents
-
-\newpage
 # Introduction.
 
 &nbsp;
@@ -238,11 +239,15 @@ Les tests d'adéquation servent à tester si un échantillon est distribué selo
 
 &nbsp;
 Un test statistique étudie deux hypothèses opposées concernant une population : l'hypothèse nulle et l'hypothèse alternative.  
-L'hypothèse nulle, notée $H_0$, est l'hypothèse que l'on souhaite contrôler, elle repose sur le fait de dire qu'il n'existe pas de différence entre les paramètres comparés ou que la différence observée n'est pas significative et résulte des fluctuations d'échantillonnage. Cette hypothèse est formulée dans le but d'être rejetée.  
+L'hypothèse nulle, notée $H_0$, est l'hypothèse que l'on souhaite contrôler, elle repose sur le fait de dire qu'il n'existe pas de différence entre les paramètres comparés ou que la différence observée n'est pas significative et résulte des fluctuations d'échantillonnage.   
+
+À partir des échantillons de données, un test statistique permet de déterminer si on peut rejeter l'hypothèse nulle. La $p$-valeur sert de détermination. Si la $p$-valeur est inférieure au seuil de signification (appelé $\alpha$), l'hypothèse nulle peut être rejetée.  
 
 L'hypothèse alternative, notée $H_1$, affirme qu'un paramètre de la population est plus petit, plus grand ou différent de la valeur hypothétisée dans l'hypothèse nulle. Elle peut être vue comme la négation de $H_0$ et est équivalente à dire que $H_0$ est fausse. La décision de rejeter $H_0$ signifie que $H_1$ est réalisée ou que $H_1$ est vraie.  
 
-Cependant, la décision d'accepter l'hypothèse nulle n'est pas équivalente à dire que $H_0$ est vraie et que $H_1$ est fausse, mais cela traduit uniquement l'idée selon laquelle il n'y a pas d'évidence nette pour que $H_0$ soit fausse. Finalement un test conclu à rejeter ou à ne pas rejeter l'hypothène nulle mais jamais à l'accepter directement.
+On pense souvent à tort que les tests d'hypothèses statistiques visent à choisir l'hypothèse la plus probable parmi $H_0$ et $H_1$. Néanmoins l'hypothèse nulle est formulée dans le but d'être rejetée. Le seuil de signification fixé est bas (généralement $0.05$), et lorsque l'hypothèse nulle est rejetée cela prouve statistiquement que l'hypothèse alternative est vraie. En revanche, si l'hypothèse nulle ne peut être rejetée aucune preuve statistique ne montre que celle-ci est vraie. La raison est qu'il n'y a pas de valeur fixée assurant que la probabilité d'accepter à tort l'hypothèse nulle est petite.  
+
+Finalement, la décision d'accepter l'hypothèse nulle n'est pas équivalente à dire que $H_0$ est vraie et que $H_1$ est fausse, mais cela traduit uniquement l'idée selon laquelle il n'y a pas d'évidence nette pour que $H_0$ soit fausse. Un test conclu donc à rejeter ou à ne pas rejeter l'hypothèse nulle mais jamais à l'accepter directement.
 
 ## Les risques d'erreurs
 
@@ -268,37 +273,39 @@ faire une description des outils/tests
 
 données fiscales sur plusieurs années de 20 régions italiennes, test de chi2 (c'est pas un test très puissant, ne permet pas nécessairement de détecter les fraudes.) Il ont mis que la statistique de test mais pas la p-value
 
-# Test du Khi-Deux
+## Test du Khi-Deux
 
-Les tests du $\chi^2$  sont des tests d'hypothèses statistiques non-paramétriques. Ils comparent la distribution observée dans un échantillon statistique à une distribution théorique (*l'ajustement*), à tester si deux caractères d'une population sont indépendants (*l'indépendance*) et à tester si des échantillons sont issus d'une même population (*l'homogénéité*). Le test lit l'écart critique dans la table de la loi du chi-deux.  
+Les tests du $\chi^2$  sont des tests d'hypothèses statistiques non-paramétriques. Ceux-ci permettent de comparer la distribution observée dans un échantillon statistique avec une distribution théorique (*test d'ajustement*), à tester si deux caractères d'une population sont indépendants (*test d'indépendance*) et à tester si des échantillons sont issus d'une même population (*test d'homogénéité*). Le test lit l'écart critique dans la table de la loi du chi-deux.  
 
-Le déroulement du test se procède en 5 étapes:  
+Le déroulement du test se procède en $5$ étapes :  
  1) On calcule les effectifs théoriques (*$n_{pj}$*)  
- 2) On calcule la valeur observée de la variable de test:  
- $\chi^{2}=\sum_{j=1}^{k} \frac{\left(n_{j}-n _{p_{j}}\right)^{2}}{n_{ p_{j}}}$  
- 3) On cherche la valeur critique $\chi^{2}_a$ dans la table de la loi du $\chi^2$ à k-1 degrés de liberté.  
- 4) Si $\chi^{2}_a < \chi^2$, on accepte l'hypothèse $H_0$ (la distribution observée est conforme à la distribution théorique" avec un risque d'erreur a) sinon on la rejette.  
- 5) Il faut vérifier que $n_{pj} \geq 5$ pour tout j.  
-![Tableau 3 : Densité du Chi-Deux en fonction du nombre de degrés de liberté.](Images/Chi-square.png)
+ 2) On calcule la valeur observée de la variable de test :  
+ $$\chi^{2}=\sum_{j=1}^{k} \frac{\left(n_{j}-n _{p_{j}}\right)^{2}}{n_{ p_{j}}}$$  
+ 3) On cherche la valeur critique $\chi^{2}_a$ dans la table de la loi du $\chi^2$ à $k - 1$ degrés de liberté.  
+ 4) Si $\chi^{2}_a < \chi^2$, on accepte l'hypothèse $H_0$ ("la distribution observée est conforme à la distribution théorique" avec un risque d'erreur $\alpha$), sinon on la rejette.  
+ 5) Il faut vérifier que $n_{pj} \geq 5$ pour tout $j$.  
+ 
+![Tableau 3 : Densité du Chi-Deux en fonction du nombre de degrés de liberté.](Images/Chi-square.png){width=50%}
 
-Rappel de la loi du $\chi^2$ à n degrés de liberté si elle est absolument continue, et admet pour densité:  
+\newpage
 
-$f(x)=\left\{\begin{array}{cl}\frac{1}{2^{n / 2} \Gamma(n / 2)} e^{-x / 2} x^{\frac{n}{2}-1} & \text { si } x>0 \\ 0 & \text { sinon. }\end{array}\right.$  
+Rappel de la loi du $\chi^2$ à $n$ degrés de liberté si elle est absolument continue, et admet pour densité :  
 
-où X admet alors une espérance et une variance
-$E(X)=n$ et $V(X)=2 n$  
+$$f(x)=\left\{\begin{array}{cl}\frac{1}{2^{n / 2} \Gamma(n / 2)} e^{-x / 2} x^{\frac{n}{2}-1} & \text { si } x>0, \\ 0 & \text { sinon, }\end{array}\right.$$
 
-# Test de Freedman qui est la modification du test de Watson
+où $X$ admet alors pour espérance et variance $E(X) = n$ et $V(X) = 2n$.  
 
-Ce test est pour des distribution discrètes entre les distributions des premiers chiffres et la distribution de Benford pour affirmer si les données sont conformes à la loi de Benford.  
+## Test de Freedman modification du test de Watson
+
+Ce test est pour des distributions discrètes entre les distributions des premiers chiffres et la distribution de Benford pour affirmer si les données sont conformes à la loi de Benford.  
 
 Spécifiquement, on a :  
 
-$U^{2}=\frac{n}{9 \cdot 10^{k-1}} \cdot\left[\sum_{i=10^{k-1}}^{10^{k}-2}\left(\sum_{j=1}^{i}\left(f_{j}^{o}-f_{j}^{e}\right)\right)^{2}-\frac{1}{9 \cdot 10^{k-1}} \cdot\left(\sum_{i=10^{k-1}}^{10^{k}-2} \sum_{j=1}^{i}\left(f_{i}^{o}-f_{i}^{c}\right)\right)^{2}\right]$  
+$$U^{2}=\frac{n}{9 \cdot 10^{k-1}} \cdot\left[\sum_{i=10^{k-1}}^{10^{k}-2}\left(\sum_{j=1}^{i}\left(f_{j}^{o}-f_{j}^{e}\right)\right)^{2}-\frac{1}{9 \cdot 10^{k-1}} \cdot\left(\sum_{i=10^{k-1}}^{10^{k}-2} \sum_{j=1}^{i}\left(f_{i}^{o}-f_{i}^{c}\right)\right)^{2}\right],$$  
 
-avec $f_{i}^{o}$ la fréquence observée du chiffre i et $f_{i}^{c}$ la fréquence attendue du chiffre i.  
+avec $f_{i}^{o}$ la fréquence observée du chiffre $i$ et $f_{i}^{c}$ la fréquence attendue du chiffre $i$.  
 
-De plus grands écarts entres les fréquences conduisent à un plus grand $U^2$ ce qui rend le rejet plus probable. Ce test est reconnue comme plus performant que les autres tests, il est même recommandé par (LESPERANCE et collab. 2016) et (JOENSSEN 2014) .
+De plus grands écarts entres les fréquences conduisent à un plus grand $U^2$ ce qui rend le rejet plus probable. Ce test est reconnu comme plus performant que les autres tests, il est même recommandé par LESPERANCE et collab. ($2016$) et JOENSSEN ($2014$).  
   
   
 
