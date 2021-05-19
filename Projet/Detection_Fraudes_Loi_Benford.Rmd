@@ -27,6 +27,8 @@ header-includes:
 
 RESUME DU PROJET EN QLQ LIGNES
 
+\underline{Mots-clés:} Loi de Benford-Newcomb, 1$^{er}$ chiffre significatif, Test d'hypothèses , Risque d'erreur.
+
 REMERCIEMENTS
 
 ```{r setup, include=FALSE}
@@ -217,15 +219,6 @@ Après avoir observé ces quelques jeux de données, nous étions en mesure de d
 
 Le but est donc de minimiser le coût que peuvent engendrer les erreurs sus-mentionnées, pour ce faire l'utilisation d'outils scientifiques est de rigueur. Les outils que nous arboderons dans la suite sont les test d'adéquations, ces tests servent à vérifier si un ensemble de nombre suit ou non une loi de probabilité donnée (pour nous c'est la loi de Newcomb-Benford).
 
-
-
-
-BLABLABLA En stat l'erreur de 1ere espèce est souvent plus présente
-On se dit pas qu'il y a fraude on suspecte la fraude on lance une audit (ca coute des sous)
-dans tous les cas on risque de faire une erreur (mettre le tableau) BLABLABLA
-
-
-
 # Tests
 
 ## Généralités sur les tests
@@ -274,20 +267,6 @@ La probabilité de rejeter l'hypothèse nulle à tort vaut $1 - \beta$, il s'agi
 
 \newpage
 
-
-
-BLABLABLA
-PARLER DES TESTS DE MANIERE GENERALE, plutot theorique
-
-le test privilégié est le test de chi2
-quand c'est une problème qui a une certaine importance pleins d'autres tests qui existent (package R Benford test le seul test important dans ce package est celui du Chi2, 2ème package Benford smooth test créé par samuel et credo plus spécifique au problème disponible sur le site CRAN) Les deuxièmes tests sont mieux car plus puissantes, cad qu'ils détectent plus de fraudes. On veut le test le plus puissant possible, a 5%
-faire une description des outils/tests
-
-données fiscales sur plusieurs années de 20 régions italiennes, test de chi2 (c'est pas un test très puissant, ne permet pas nécessairement de détecter les fraudes.) Il ont mis que la statistique de test mais pas la p-value
-BLABLABLA
-
-
-
 Au sujet de la loi de Newcomb-Benford, notons que le test d'adéquation le plus populaire est le test du khi-deux de Pearson dont la puissance, associée au risque d'erreur de Type II est relativement faible. C'est pourquoi, d'autres tests ont été mis en place récemment. L'ensemble de ces tests seront développés par la suite. G. Ducharme, S. Kaci et C. Vovor-Dassu ont introduits de nouveaux tests d'adéquation pour cette loi, basés sur le principe des tests lisses. Ils ont également comparés ces tests aux meilleurs tests existants et ont montrés qu'ils seraient globalement plus performants.  
 
 ## Test du Khi-Deux
@@ -329,7 +308,10 @@ Notons que de plus grands écarts entre les fréquences conduisent à un plus gr
 ## Test lisse pour la Loi de Newcomb-Benford 
 
 nbsp;
-La famille des tests lisses introduite par Neyman 
+La famille des tests lisses introduite par Neyman$^1$ s'applique à des données autant discrètes que continues. Il est spécifique à la loi de probabilité en $H_0$.
+
+Pour construire une tactique de test lisse et de donner l'expression des statistiques de test, il existe deux théorèmes essentiels qui permettent de construire une famille pour l'hypothèse nulle $H_{0}: X \sim f(.)$ où $f(.)$ est la densité de la loi de Newcomb-Benford et comme tous les moments de cette loi existent nous pouvons utiliser les polynômes pour déterminer les fonctions orthonormales. Un des théorème est connu par Boulerice et Ducharme en 1997.
+
 
 
 # Application des tests
@@ -504,3 +486,7 @@ LESPERANCE M., REED W.J., STEPHENS M.A., TSAO C., WILTON B.,(2016) "*Assessing c
 
 M. AUSLOOS, R. CERQUETI, T. A. MIR *Data science for assessing possible tax income manipulation: the case of Italy* ($2017$)
 
+Test lisse:
+BOULERICE B., DUCHARME G.R. (1997) "*Smooth test of goodness-of-fit for directional and axial data*", Journal Multivariate Analysis 60 : 154-175
+G.R. DUCHARME,S. KACI, C. VOVOR-DASSU (2017) article *Tests d'adéquations lisse pour la loi de Newcomb-Benford* https://www.researchgate.net/publication/339641985_Smooths_Tests_of_Goodness-of-fit_for_the_Newcomb-Benford_distribution 
+NEYMAN J. (1937) , "*Smooth tests for goodnesss-of-fit*", Skand. Aktuariedidskr 20 : 150-199.
