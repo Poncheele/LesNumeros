@@ -27,6 +27,8 @@ header-includes:
 
 RESUME DU PROJET EN QLQ LIGNES
 
+\underline{Mots-clés:} Loi de Benford-Newcomb, 1$^{er}$ chiffre significatif, Test d'hypothèses , Risque d'erreur.
+
 REMERCIEMENTS
 
 ```{r setup, include=FALSE}
