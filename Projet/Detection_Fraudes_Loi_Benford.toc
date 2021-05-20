@@ -1,11 +1,11 @@
 \babel@toc {french}{}
-\contentsline {section}{Introduction.}{3}{section*.2}%
-\contentsline {section}{Naissance de la loi de Newcomb-Benford.}{4}{section*.3}%
-\contentsline {section}{Expérimentation sur différents jeux de données.}{6}{section*.5}%
-\contentsline {subsection}{La suite de Fibonacci.}{6}{section*.6}%
-\contentsline {subsection}{Nombres extraits d'un magazine et d'un journal.}{7}{section*.8}%
-\contentsline {subsection}{Population des villes de France.}{8}{section*.11}%
-\contentsline {subsection}{Passage journalier de vélos dans l'allée Beracasa à Montpellier.}{9}{section*.13}%
+\contentsline {section}{Introduction}{3}{section*.2}%
+\contentsline {section}{Naissance de la loi de Newcomb-Benford}{4}{section*.3}%
+\contentsline {section}{Expérimentation sur différents jeux de données}{6}{section*.5}%
+\contentsline {subsection}{La suite de Fibonacci}{6}{section*.6}%
+\contentsline {subsection}{Nombres extraits d'un magazine et d'un journal}{7}{section*.8}%
+\contentsline {subsection}{Population des villes de France}{8}{section*.11}%
+\contentsline {subsection}{Passage journalier de vélos dans l'allée Beracasa à Montpellier}{9}{section*.13}%
 \contentsline {subsection}{Nombres générés par les humains}{9}{section*.15}%
 \contentsline {section}{Tests}{11}{section*.17}%
 \contentsline {subsection}{Généralités sur les tests}{11}{section*.18}%
@@ -15,5 +15,6 @@
 \contentsline {subsection}{Test de Freedman-Watson}{14}{section*.24}%
 \contentsline {subsection}{Tests lisses pour la Loi de Newcomb-Benford}{15}{section*.25}%
 \contentsline {section}{Application des tests}{16}{section*.26}%
-\contentsline {subsection}{CAS COVID}{20}{section*.47}%
-\contentsline {section}{Bibliographie}{20}{section*.48}%
+\contentsline {subsection}{Application a des données fiscales italiennes}{16}{section*.27}%
+\contentsline {subsection}{CAS COVID}{21}{section*.48}%
+\contentsline {section}{Bibliographie}{21}{section*.49}%
