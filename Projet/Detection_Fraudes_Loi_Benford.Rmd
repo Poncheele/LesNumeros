@@ -27,12 +27,31 @@ header-includes:
 ---
 
 \newpage
+# Remerciements
 
-RESUME DU PROJET EN QLQ LIGNES
+On remercie à la faculté des Sciences de Montpellier pour le Master MIND et Biostatistique et particulièrement à Monsieur **Ducharme** pour nous avoir proposé ce sujet.
+
+Ce rapport, nous a permis d'affiner le travail en équipe et de l'autonomie pour le bâtir et signe l'aboutissement de notre première année de master 1.
+
+On n'oublie pas non plus nos proches qui nous ont soutenu dans l'élaboration de notre rapport notamment à la participation de notre expérience.
+
+Remerciement spéciaux à nos relecteurs et correcteurs qui ont contribué au bon déroulement du rapport.
+
+
+# Résumé.
+
+
+Dans différents cadres, la fraude est existante. Une façon répandue pour commettre une fraude est de modifier des chiffres de données de façon comme le désire l'escroc. 
+Pour la signaler, nous pouvons utiliser la loi de Benford-Newcomb dans des données sur les premiers chiffres significatifs.
+L'objectif est de montrer l'émergence de la loi de Newcomb-Benford dans des données réelles, d'étudier un jeux de donnée ici sur la fiscalité italienne à l'aide de divers tests de statistique pour détecter si on suspecte d'avoir trafiquée les premiers chiffres significatifs des nombres et de voir si les tests vont dans le même sens ou si certains se contredisent.
+Pour répondre à ses différentes problématiques, nous allons effectuer des expériences à l'aide d'un journal, d'un magazine et d'autres données réelles puis d'appliquer les differents tests sur le jeux de données étudiés grâce au logiciel R et des packages "BenfordTests" et "BENFORDSMOOTHTEST".
+Les réponses recoltées dans le premier temps, nous montre que la loi de Benford-Newcomb n'apparaît pas partout comme dans les données influencés par la pensée de l'homme c'est-à-dire les données dite "non-naturelles". Et dans un second temps ...
+
+CC
+
 
 \underline{Mots-clés} : Loi de Newcomb-Benford, $1^{er}$ chiffre significatif, Test d'hypothèse, Hypothèse nulle/alternative, Risque d'erreur, Test d'adéquation, Test du khi-deux, Test lisse.
 
-REMERCIEMENTS
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
@@ -202,7 +221,6 @@ Dans ce cas la proportion du chiffre $1$ est de plus de $50 \%$ contre $30 \%$ p
 
 Visuellement, nous pourrions penser que la répartition de ces données ne suit pas la **loi de Newcomb-Benford**. Il est courant de ne pas retrouver la loi de Newcomb-Benford dans des données brutes comme celles-ci, on la retrouve empiriquement plus souvent dans des données dîtes de **deuxième génération** comme des sommes ou des produits. Ceci à été démontré par Jeff Boyle en $1994$.
 
-
 ## Nombres générés par les humains  
 
 &nbsp;
@@ -333,7 +351,7 @@ Notons que de plus grands écarts entre les fréquences conduisent à un plus gr
 &nbsp;
 La famille des tests lisses introduite par Neyman$^1$ s'applique à des données autant discrètes que continues. Celle-ci est spécifique à la loi de probabilité sous $H_0$.
 
-Il existe deux théorèmes essentiels qui permettent de construire une famille de tests pour l'hypothèse nulle $H_{0} : X \sim f(.)$. Ici $f(.)$ est la densité de la loi de Newcomb-Benford.
+Il existe deux théorèmes essentiels qui permettent de construire une famille de tests lisses pour l'hypothèse nulle $H_{0} : X \sim f(.)$. Ici $f(.)$ est la densité de la loi de Newcomb-Benford.
 
 Le premier nous théorème nous dit :  
 
@@ -380,7 +398,8 @@ Dans ce paragraphe nous traitons des données sur la fiscalité italienne de $20
 
 Ici nous retenons le test du khi-deux qui est le plus connu et utilisé, il semblerait cependant qu'il fasse parti des moins performants (Ducharmes & Collab. 2020), le test de Freedman-Watson explicité plus haut. Pour ce qui est des tests lisses nous appliquerons les test $T_{\hat{K}}$ et $T_2$ comme sus-mentionné.
 
-Les données se présentent comme ci-après.  
+Les données se présentent comme ci-après, chaque ligne correspond à une année, les 9 premières colonnes (sans compter la première qui correspond à l'année) représente la répartition du premier chiffre significatifs. Les 4 dernières colonnes quant à elles sont les p_values des différents test que nous avons cité plus haut. Une case est rouge si l'hypothèse nulle est rejettée au seuil de 5% d'erreur.
+
 
 ## Application a des données fiscales italiennes
 
@@ -566,9 +585,6 @@ colnames(df) <- c(" ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "$\\chi^2$",
 knitr::kable(df, escape=FALSE, digits = 3, caption ="Tests sur la région de veneto")%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
   column_spec(1, bold=TRUE) %>%kable_styling(font_size = 10)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
 ```
-
-
-\newpage
 
 ## CAS COVID
 
