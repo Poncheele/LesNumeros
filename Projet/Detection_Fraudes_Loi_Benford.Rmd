@@ -30,24 +30,22 @@ header-includes:
 
 &nbsp;
 Nous souhaitons remercier la faculté des Sciences de Montpellier pour les Master MIND (Mathématiques de l'Information et de la Décision) et Biostatistiques et plus particulièrement Monsieur **Ducharme** pour nous avoir permis de réaliser ce sujet.  
-
 Lors de ce projet, nous avons pu affiner notre travail en équipe et notre autonomie, consolider nos acquis et ce rapport signe l'aboutissement de notre première année de Master.  
-
-Nous remercions également nos proches qui nous ont soutenu dans l'élaboration de notre projet, et remercions notamment les participants à notre expérience.  
-
+Nous remercions également nos proches qui nous ont soutenu dans l'élaboration de notre projet et remercions notamment les participants à notre expérience.  
 Remerciements spéciaux à nos relecteurs et correcteurs qui ont contribué au bon déroulement du rapport.  
 
 
 # Résumé
 
 &nbsp;
-Dans différents cadres, la fraude est existante. Une façon répandue pour commettre une fraude est de modifier des chiffres de données de la manière dont le désire l'escroc, et notamment en modifiant le premier chiffre significatif. Ce que nous étudierons plus particulièrement ici.     
+Dans différents cadres, la fraude est existante. Une façon répandue pour commettre une fraude est de modifier des chiffres de données de la manière dont le désire l'escroc, et notamment en modifiant le premier chiffre significatif. Ce que nous étudierons plus particulièrement ici.
+
 Pour détecter ces fraudes, nous pouvons utiliser la loi de Newcomb-Benford sur des échantillons de données.  
 L'objectif étant d'exposer l'émergence de la loi de Newcomb-Benford dans des données réelles, d'étudier différents jeux de données comme ici la fiscalité italienne et à l'aide de divers tests statistiques suspecter ou non une fraude, par le biais de la modification du premier chiffre significatif des nombres. Nous pourrons utiliser différents tests et voir si ceux-ci vont plutôt dans le même sens ou si certains se contredisent. Nous aborderons les tests dits classiques d'adéquation à la loi de Newcomb-benford, ainsi que les tests lisses mis en place par Monsieur Ducharme et ses collaborateurs.  
 
-Pour répondre à nos différentes problématiques, nous allons effectuer des expériences d'abord visuelles, en extrayant des données d'un journal, d'un magazine ainsi que d'autres données réelles puis nous appliquerons différents tests sur ces jeux de données à l'aide du logiciel `R` et des packages `BenfordTests` et `BENFORDSMOOTHTEST`. Nous utiliseront également ces packages sur un jeu de données fiscales italiennes.  
+Pour répondre à nos différentes problématiques, nous allons effectuer des expériences d'abord visuelles, en extrayant des données d'un journal, d'un magazine ainsi que d'autres données réelles puis nous appliquerons différents tests sur ces jeux de données à l'aide du logiciel `R` et des packages `BenfordTests` et `BENFORDSMOOTHTEST`. Nous utiliserons également ces packages sur un jeu de données fiscales italiennes.  
 
-Les réponses récoltées dans le premier temps, nous montrerons que la loi de Newcomb-Benford n'apparaît pas partout notamment sur les données influencés par la pensée de l'homme, les données dites "non-naturelles". Nous observons également qu'une inspection visuelle n'est pas suffisante pour suspecter ou non une fraude. Puis dans un second temps, les tests réalisés nous permettrons de voir qu'il est parfois difficile de suspecter une frause, au risque de se tromper.  
+Les réponses récoltées dans le premier temps, nous montrerons que la loi de Newcomb-Benford n'apparaît pas partout notamment sur les données influencées par la pensée de l'homme, les données dites "non-naturelles". Nous observons également qu'une inspection visuelle n'est pas suffisante pour suspecter ou non une fraude. Puis dans un second temps, les tests réalisés nous permettrons de voir qu'il est parfois difficile de suspecter une fraude, au risque de se tromper.  
 
 \vspace{3.8cm}
 
@@ -74,28 +72,28 @@ knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, knitr.kabl
 # Introduction
 
 &nbsp;
-La fraude est une pratique répandue dans de nombreux domaines comme par exemple la finance, le secteur social ou médical. Il peut être tentant pour un être humain ou une société de tricher si cela peut impliquer pour lui une position plus confortable dans la société, telle qu'une réduction de charges, ou même un avantage sur un de ses concurrents. Il semblerait donc logique que des personnes cherchent à déceler ces fraudes.
+La fraude est une pratique répandue dans de nombreux domaines comme la finance, le secteur social ou médical. Il peut être tentant pour un être humain ou une société de tricher si cela peut impliquer pour lui une position plus confortable dans la société, telle qu'une réduction de charges, ou même un avantage sur un de ses concurrents. Il semblerait donc logique que des personnes cherchent à déceler ces fraudes.
 
 Les données transmises par un individu ou un organisme peuvent faire l'objet de modifications, c'est de ce type de fraudes auquel nous nous intéresserons ici, et plus particulièrement la modification du premier chiffre significatif (le premier chiffre d"un nombre qui n'est pas un zéro) de nombres pris dans un certain ensemble de données.
 
 De telles modifications entraînent un changement de la répartition des chiffres présents naturellement[^n1]. Si nous connaissons la répartition des chiffres présentés dans un ensemble de données arbitraires, il est donc techniquement possible de savoir si un nombre a été modifié ou non. 
 
-Il nous vient donc les questions suivantes: *Qu'elle est cette répartition ? Est-il possible de la connaître et si oui, dans quels cas ?* 
+Il nous vient donc les questions suivantes : *Qu'elle est cette répartition ? Est-il possible de la connaître et si oui, dans quels cas ?* 
 
-De manière intuitive nous pourrions penser que les nombres sont répartis de manière uniforme. Qu'en est-il vraiment ? 
+De manière intuitive, nous pourrions penser que les nombres sont répartis de manière uniforme. Qu'en est-il vraiment ? 
 
 La première partie de notre projet consistera à **répondre à ces questions**, nous nous appuierons sur les travaux de Simon Newcomb et Frank Benford, qui ont théorisé la **loi de Newcomb-Benford**, plus communément  appelée loi de Benford. 
 Cette loi nous dit que, dans une liste de données dites naturelles, la probabilité d'avoir le chiffre $i$ comme premier chiffre significatif est de $log_{10}(1 + \frac{1}{i})$. 
 
 Par exemple, le chiffre $1$ en tant que premier chiffre significatif serait présent à hauteur de $30\%$ alors que le $9$ à seulement $4,6\%$.
 
-Dans la suite **nous mettrons en œuvre une série d'expérimentation** pour constater ou non la véracité de cette loi, pour ce faire dans un premier temps nous récolterons des nombres pris dans des milieux sensés satisfaire la loi de Newcomb-Benford et observerons la répartition du premier chiffre significatif. Puis nous répliquerons une version simplifiée de l’expérience de Hill (1988), qui consiste à observer la répartition du premier chiffre significatif d'une liste de nombre donnée au hasard par des êtres humains, en l'occurrence ses élèves. 
+Dans la suite **nous mettrons en œuvre une série d'expérimentations** pour constater ou non la véracité de cette loi, pour ce faire dans un premier temps, nous récolterons des nombres pris dans des milieux censés satisfaire la loi de Newcomb-Benford et observerons la répartition du premier chiffre significatif. Puis nous répliquerons une version simplifiée de l’expérience de Hill (1988), qui consiste à observer la répartition du premier chiffre significatif d'une liste de nombre donnée au hasard par des êtres humains, en l'occurrence ses élèves. 
 
-Cette expérience est à la base des méthodes de détection de fraudes par la loi de Newcomb-Benford. Si un fraudeur modifie un jeu de données, ce jeu est donc influencé par la pensée humaine, il ne suit donc plus la loi de Newcomb-Benford. Pour détecter la fraude il suffit donc de comparer les premiers chiffres significatifs. Cependant ces comparaisons doivent se faire de manière rigoureuses et scientifiques. Pour cela il existe des test statistiques, dont le plus connu, le test du $\chi^2$, ou bien celui de Ducharme et collab. (2020). 
+Cette expérience est à la base des méthodes de détection de fraudes par la loi de Newcomb-Benford. Si un fraudeur modifie un jeu de données, ce jeu est donc influencé par la pensée humaine, il ne suit donc plus la loi de Newcomb-Benford. Pour détecter la fraude, il suffit donc de comparer les premiers chiffres significatifs. Cependant, ces comparaisons doivent se faire de manière rigoureuse et scientifique. Pour cela il existe des tests statistiques, dont le plus connu, le test du $\chi^2$, ou bien celui de Ducharme et collab. (2020). # ou bien des tests lisses réalisés par Ducharme et collab ?
 
-Il nous vient donc les questions suivantes: *Ces tests sont-ils fiables ? Existe-t-il un test significativement meilleur que les autres ? Vont-ils dans le même sens ? Et sinon que faire ?*
+Il nous vient donc les questions suivantes : *Ces tests sont-ils fiables ? Existe-t-il un test significativement meilleur que les autres ? Vont-ils dans le même sens ? Et sinon que faire ?*
 
-La réponse à ces question constituera donc la deuxième partie de ce projet, pour ce faire nous mettrons en œuvre différents tests sur des jeux de données comme la fiscalité italienne.  
+La réponse à ces questions constituera donc la deuxième partie de ce projet, pour ce faire nous mettrons en œuvre différents tests sur des jeux de données comme la fiscalité italienne.  
 
 [^n1]: Les données dites naturelles sont celles qui n'ont pas été influencé par la pensée de l'homme.
 
@@ -106,7 +104,7 @@ La réponse à ces question constituera donc la deuxième partie de ce projet, p
 &nbsp;
 Il serait tentant de penser que les nombres sont répartis de manière uniforme, cela viendrait du biais d'équiprobabilité[^n2]. Ce dernier consiste à "penser qu'en l'absence d'information, tous les cas ont la même probabilité de se produire et que le hasard implique nécessairement l’uniformité".  
 
-Néanmoins cette hypothèse sera contredite une première fois par l'astronome, mathématicien, économiste et statisticien canadien Simon Newcomb. Ce dernier fournira en $1881$ une première approche au principe statistique, qui se fera injustement appeler *Loi de Benford*. Celui-ci remarquera que les premières pages des tables logarithmiques sont plus utilisées que les pages suivantes (cf Figure 1). Il publiera sa découverte dans un article de l'*"American Journal of Mathematics"*.  
+Néanmoins, cette hypothèse sera contredite une première fois par l'astronome, mathématicien, économiste et statisticien canadien Simon Newcomb. Ce dernier fournira en $1881$ une première approche au principe statistique, qui se fera injustement appeler *Loi de Benford*. Celui-ci remarquera que les premières pages des tables logarithmiques sont plus utilisées que les pages suivantes (cf. Figure 1). Il publiera sa découverte dans un article de l'*"American Journal of Mathematics"*.  
 
 ```{r, fig.align='center', out.width='50%'}
 knitr::include_graphics("Images/table_loga1.jpg")
@@ -212,12 +210,12 @@ Observons maintenant la répartition des données issues du journal *Les ECHOS*.
 
 ![Figure 4 : Histrogramme de la répartition du 1er chiffre significatif des nombres du journal LES ECHOS en comparaison avec la loi de Benford](Images/histogramme_journalLESECHOS.png)
 
-Nous remarquons ici la même tendance décroissante. Cependant les proportions des chiffres significatifs entre les données du journal et celles de la **loi de Newcomb-Benford** sont relativement différentes.  
+Nous remarquons ici la même tendance décroissante. Cependant, les proportions des chiffres significatifs entre les données du journal et celles de la **loi de Newcomb-Benford** sont relativement différentes.  
 
 ## Population des villes de France  
 
 &nbsp;
-Dans ce paragraphe nous nous intéressons à la population des villes françaises. À l'aide des données de l'*INSEE*, nous répertorions environ $35000$ premiers chiffres significatifs et regardons leur répartition.  
+Dans ce paragraphe, nous nous intéressons à la population des villes françaises. À l'aide des données de l'*INSEE*, nous répertorions environ $35000$ premiers chiffres significatifs et regardons leur répartition.  
 
 ![Figure 5 : Histrogramme de la répartition du 1er chiffre significatif de la population française en comparaison avec la loi de Benford](Images/histogramme_populationfrancaise1.png)
 
@@ -227,7 +225,7 @@ Ici les répartitions sont fortement ressemblantes, c'est aussi le cas pour de n
 ## Passage journalier de vélos dans l'allée Beracasa à Montpellier  
 
 &nbsp;
-La ville de Montpellier étant en pleine transition écologique, elle ouvre de plus en plus l'accès aux vélos sur ses routes. Pour en mesurer l'impact, elle a mit en place des éco-compteurs dans plusieurs rues. Les données issues de ces compteurs sont en libre accès, nous nous sommes donc intéressés au nombre de passages journaliers de vélos dans l'allée Beracasa sur une année.  
+La ville de Montpellier étant en pleine transition écologique, elle ouvre de plus en plus l'accès aux vélos sur ses routes. Pour en mesurer l'impact, elle a mise en place des écocompteurs dans plusieurs rues. Les données issues de ces compteurs sont en libre accès, nous nous sommes donc intéressés au nombre de passages journaliers de vélos dans l'allée Beracasa sur une année.  
 
 Nous obtenons la répartition suivante :  
 
@@ -240,9 +238,9 @@ Visuellement, nous pourrions penser que la répartition de ces données ne suit 
 ## Nombres générés par les humains  
 
 &nbsp;
-Dans ce paragraphe nous tentons de reproduire à moindre échelle l'expérience de Theodore Preston Hill en $1988$. Dans le cadre de son expérience le professeur Ted HILL demande à ses élèves ($742$) d'écrire un nombre de $6$ chiffres au hasard sur un bout de papier, il recense ensuite le premier chiffre significatif de chacun de ces nombre dans le but de les comparer à la loi de Benford et à la répartition uniforme.
+Dans ce paragraphe, nous tentons de reproduire à moindre échelle l'expérience de Theodore Preston Hill en $1988$. Dans le cadre de son expérience le professeur Ted Hill demande à ses élèves ($742$) d'écrire un nombre de $6$ chiffres au hasard sur un bout de papier, il recense ensuite le premier chiffre significatif de chacun de ces nombres dans le but de les comparer à la loi de Benford et à la répartition uniforme.
 
-Notre expérience partageant le même objectif que celle de HILL, est basée sur un protocole légèrement différent. N'ayant pas une troupe d'élèves à disposition nous avons recueilli un total de $300$ nombres. Ces $300$ nombres ont été obtenus de plusieurs manières, via des sondages sur internet ou sur les réseaux sociaux, en demandant directement à des personnes rencontrées au hasard, notre famille ou nos amis.  Plus précisément, notre expérience a consisté à rechercher auprès de ces personnes un nombre à $2$ chiffres, soit un nombre compris entre $10$ et $99$. Nous reviendrons plus loin sur l'importance que peut avoir ce détail.   
+Notre expérience partageant le même objectif que celle de Hill, est basée sur un protocole légèrement différent. N'ayant pas une troupe d'élèves à disposition nous avons recueilli un total de $300$ nombres. Ces $300$ nombres ont été obtenus de plusieurs manières, via des sondages sur internet ou sur les réseaux sociaux, en demandant directement à des personnes rencontrées au hasard, notre famille ou nos amis.  Plus précisément, notre expérience a consisté à rechercher auprès de ces personnes un nombre à $2$ chiffres, soit un nombre compris entre $10$ et $99$. Nous reviendrons plus loin sur l'importance que peut avoir ce détail.   
 
 D'après le biais d'équiprobabilité cité plus haut, si les nombres recensés pendant les expériences ont réellement été données de façon aléatoire la répartition du premier chiffre significatif devrait être comparable à une loi uniforme.
 
@@ -250,13 +248,17 @@ Comparons les répartitions obtenues durant les deux expériences :
 
 ![Figure 7 : Comparaison des histrogrammes de la répartition du 1er chiffre significatif de l'expérience de Hill avec la loi de Benford et la loi uniforme puis de notre expérience avec ces deux mêmes lois](Images/comparaison.png)
 
-À première vue, dans les deux expériences la répartition du premier chiffre significatif ne semble pas suivre la loi de Newcomb-Benford (le chiffre $1$ n'apparaît clairement pas aussi souvent par exemple), elle semble cependant plus proche de la loi uniforme sans tout de même y correspondre parfaitement. Plusieurs facteurs pourraient expliquer les différences entre la distribution de la loi uniforme et la répartition du premier chiffre significatif de notre expérience, celui qui revient souvent est qu'un nombre donné au hasard par un humain est souvent influencé par son expérience, même inconsciemment. Par exemple sa date d'anniversaire, un évènement marquant ou son nombre préféré. Le fait d'avoir recueilli nos nombres par internet a aussi pu influencer le choix des personnes concernées. Un facteur psychologique est donc à prendre en considération pour approfondir la conclusion. Notons également que lors de notre expérience, la question posée stipulait de donner un nombre compris entre $10$ et $99$, soit un nombre à $2$ chiffres. Ainsi, il est important de retenir que dès lorsqu'on demande un  avec suffisamment de chiffres, plus le premier chiffre aura tendance à suivre la loi de Newcomb-Benford, mais la répartition des autres chiffres significatifs (deuxième, troisième, etc...) ne sera apparentée à aucune loi. De même si on demande un nombre avec peu de chiffres (choix d'un chiffre entre $1$ et $9$ par exemple) la répartition aura plutôt tendance à être uniforme. Ce phénomène a été exposé par A. Diekmann[^n3] en $2007$.  
+À première vue, dans les deux expériences la répartition du premier chiffre significatif ne semble pas suivre la loi de Newcomb-Benford (le chiffre $1$ n'apparaît clairement pas aussi souvent par exemple), elle semble cependant plus proche de la loi uniforme sans tout de même y correspondre parfaitement.
+
+Plusieurs facteurs pourraient expliquer les différences entre la distribution de la loi uniforme et la répartition du premier chiffre significatif de notre expérience, celui qui revient souvent est qu'un nombre donné au hasard par un humain est souvent influencé par son expérience, même inconsciemment. Par exemple sa date d'anniversaire, un évènement marquant ou son nombre préféré. Le fait d'avoir recueilli nos nombres par internet a aussi pu influencer le choix des personnes concernées. Un facteur psychologique est donc à prendre en considération pour approfondir la conclusion. Notons également que lors de notre expérience, la question posée stipulait de donner un nombre compris entre $10$ et $99$, soit un nombre à $2$ chiffres. Ainsi, il est important de retenir que dès lorsqu'on demande un  avec suffisamment de chiffres, plus le premier chiffre aura tendance à suivre la loi de Newcomb-Benford, mais la répartition des autres chiffres significatifs (deuxième, troisième, etc.) ne sera apparentée à aucune loi. De même si on demande un nombre avec peu de chiffres (choix d'un chiffre entre $1$ et $9$ par exemple) la répartition aura plutôt tendance à être uniforme. Ce phénomène a été exposé par A. Diekmann[^n3] en $2007$.  
+
+[n^3]: Tiré de l'article *Not the First Digit! Using Benford's Law To Detect Fraudulent Scientific Data* écrit par A. Diekmann en $2007$ ([*Source*](https://www.researchgate.net/publication/24083679_Not_the_First_Digit_Using_Benford%27s_Law_to_Detect_Fraudulent_Scientif_ic_Data)).
 
 Après avoir observé ces quelques jeux de données, nous étions en mesure de dire si ces données semblaient ou non suivre la loi de Newcomb-Benford, le problème qui en découle est qu'une simple observation n'est pas très fiable, difficile de prendre une décision sur un constat visuel. En effet, se tromper dans l'interprétation peut entraîner deux types d'erreur, la première étant de faussement déceler une fraude (ce que nous appellerons **le risque de première espèce**) et la deuxième de laisser passer une fraude. Ces erreurs ont un coût pour l'institut qui essaye de les réprimer, celui d'engager des démarches de détections approfondies inutiles ou de ne pas percevoir les taxes dues dans le cas de la fraude fiscale par exemple. 
 
-Le but est donc de minimiser le coût que peuvent engendrer les erreurs sus-mentionnées, pour ce faire l'utilisation d'outils scientifiques est de rigueur. Les outils que nous aborderons dans la suite sont les tests d'adéquation, ces tests servent à vérifier si un ensemble de nombre suit ou non une loi de probabilité donnée (dans notre cas c'est la loi de Newcomb-Benford).  
+Le but est donc de minimiser le coût que peuvent engendrer les erreurs susmentionnées, pour ce faire l'utilisation d'outils scientifiques est de rigueur. Les outils que nous aborderons dans la suite sont les tests d'adéquation, ces tests servent à vérifier si un ensemble de nombre suit ou non une loi de probabilité donnée (dans notre cas, c'est la loi de Newcomb-Benford).  
 
-[n^3]: Tiré de l'article *Not the First Digit! Using Benford's Law To Detect Fraudulent Scientific Data* écrit par A. Diekmann en $2007$ ([*Source*](https://www.researchgate.net/publication/24083679_Not_the_First_Digit_Using_Benford%27s_Law_to_Detect_Fraudulent_Scientif_ic_Data)).
+
 
 # Tests
 
@@ -270,9 +272,9 @@ Un test d'hypothèses (ou test statistique) est un procédé d'inférence statis
 Nous distinguons deux classes de tests :   
 
 - Les tests paramétriques sont l'étude de la moyenne, variance, ou de la fréquence des observations issues d'une distribution a priori paramétrée. Ils nécessitent un modèle à fortes contraintes (normalité des distributions ou approximation normale pour de grands échantillons). Ces hypothèses sont d'autant plus difficiles à vérifier que les effectifs étudiés sont plus réduits.    
-- Les tests non paramétriques sont l'étude des rangs des observations issues d'une distribution non paramétrée mais quelconque. Ce sont des tests dont le modèle ne précise pas les conditions que doivent remplir les paramètres de la population dont a été extrait l'échantillon. Il n'y a donc pas d'hypothèse de normalité au préalable.  
+- Les tests non paramétriques sont l'étude des rangs des observations issues d'une distribution non paramétrée, mais quelconque. Ce sont des tests dont le modèle ne précise pas les conditions que doivent remplir les paramètres de la population dont a été extrait l'échantillon. Il n'y a donc pas d'hypothèse de normalité au préalable.  
 
-Lorsque les conditions nécessaires sont valides, les tests paramétriques sont plus puissants que les tests non paramétriques. Les tests non paramétriques s'utilisent dès lors que les conditions d'application des autres méthodes ne sont pas satisfaites, même après d'éventuelles transformations de variables, et peuvent être employés pour des échantillons de taille très faible.  
+Lorsque les conditions nécessaires sont valides, les tests paramétriques sont plus puissants que les tests non paramétriques. Les tests non paramétriques s'utilisent dès lors que les conditions d'application des autres méthodes ne sont pas satisfaites, même après d'éventuelles transformations de variables et peuvent être employés pour des échantillons de taille très faible.  
 
 Comme nous l'avons précédemment énoncé, une inspection visuelle à elle seule ne permet pas d'affirmer ou infirmer si un jeu de données suit la loi de Newcomb-Benford. L'outil statistique permettant de le vérifier est le test d'adéquation à la loi de Newcomb-Benford.  
 Les tests d'adéquation servent à tester si un échantillon est distribué selon une loi de probabilité préalablement choisie. Ils permettent de décider, avec un certain seuil d'erreur, si les écarts présentés par l'échantillon par rapport aux valeurs théoriques sont dus au hasard, ou si au contraire ils sont significatifs.  
@@ -285,7 +287,7 @@ L'hypothèse nulle, notée $H_0$, est l'hypothèse que l'on souhaite contrôler,
 
 À partir des échantillons de données, un test statistique permet de déterminer si on peut rejeter l'hypothèse nulle. La $p$-valeur sert de détermination. Si la $p$-valeur est inférieure au seuil de signification (appelé $\alpha$), l'hypothèse nulle peut être rejetée.  
 
-L'hypothèse alternative, notée $H_1$, affirme qu'un paramètre de la population est plus petit, plus grand ou différent de la valeur hypothétisée dans l'hypothèse nulle. Elle peut être vue comme la négation de $H_0$ et est équivalente à dire que $H_0$ est fausse. La décision de rejeter $H_0$ signifie que $H_1$ est réalisée ou que $H_1$ est vraie.  
+L'hypothèse alternative, notée $H_1$, affirme qu'un paramètre de la population est plus petit, plus grand ou différent de la valeur hypothétique dans l'hypothèse nulle. Elle peut être vue comme la négation de $H_0$ et est équivalente à dire que $H_0$ est fausse. La décision de rejeter $H_0$ signifie que $H_1$ est réalisée ou que $H_1$ est vraie.  
 
 On pense souvent à tort que les tests d'hypothèses statistiques visent à choisir l'hypothèse la plus probable parmi $H_0$ et $H_1$. Néanmoins l'hypothèse nulle est formulée dans le but d'être rejetée. Le seuil de signification fixé est bas (généralement $0.05$), et lorsque l'hypothèse nulle est rejetée cela prouve statistiquement que l'hypothèse alternative est vraie. En revanche, si l'hypothèse nulle ne peut être rejetée aucune preuve statistique ne montre que celle-ci est vraie. La raison est qu'il n'y a pas de valeur fixée assurant que la probabilité d'accepter à tort l'hypothèse nulle est petite.  
 
@@ -303,11 +305,9 @@ $$\alpha = \mathbb{P}(\text{rejeter} \, H_0 | H_0 \, \text{vraie}).$$
 Un niveau $\alpha$ de $0.05$ indique que nous sommes disposé à avoir $5 \%$ de chances de rejeter l'hypothèse nulle à tort. Pour réduire ce risque, il est possible d'utiliser une valeur $\alpha$ plus faible. Cependant, cela implique d'être moins à même de détecter une vraie différence si celle-ci existe vraiment.  
 Dans notre contexte, l'erreur de Type I consiste à affirmer que les données ne suivent pas la loi de Newcomb-Benford alors que c'est le cas, soit faussement identifier une fraude.
 
-PARLER SEUIL DE SIGNIFICATION
-
 L'erreur de Type II repose sur le fait de ne pas rejeter l'hypothèse nulle alors que celle-ci est fausse. La probabilité de commettre une erreur de seconde espèce est notée $\beta$, et dépend de la puissance du test. Il est possible de réduire le risque de deuxième espèce en faisant en sorte que le test soit suffisamment puissant. Pour cela, il est nécessaire que l'effectif d'échantillon soit suffisamment grand pour permettre la détection d'une différence réelle.  
-La probabilité de rejeter l'hypothèse nulle à tort vaut $1 - \beta$, il s'agit de la puissance du test.  
-EXPLIQUER LA PUISSANCE DU TEST
+La probabilité de rejeter l'hypothèse nulle à tort vaut $1 - \beta$, il s'agit de la puissance du test. 
+
 
 \begin{table}
 
@@ -326,14 +326,16 @@ knitr::kable(rbind(c1, c2, c3), escape=F, row.names=F, align='c') %>%
 \end{table}
 
 Au sujet de la loi de Newcomb-Benford, notons que le test d'adéquation le plus populaire est le test du khi-deux de Pearson dont la puissance, associée au risque d'erreur de Type II est relativement faible. C'est pourquoi, d'autres tests ont été mis en place récemment. L'ensemble de ces tests seront développés par la suite.  
-G. Ducharme, S. Kaci et C. Vovor-Dassu[^n4] ont introduits de nouveaux tests d'adéquation pour cette loi, basés sur le principe des tests lisses. Ils ont également comparés ces tests aux meilleurs tests existants et ont montrés qu'ils seraient globalement plus performants. Notons aussi que la qualité d'un test dépend de sa puissance, plus forte elle est meilleur le test est. Cependant, différents tests peuvent conduire à des avantages différents. Par exemple, certains tests détecteront plus que d'autres la différence significative du premier chiffre significatif, quant à d'autres ce sera un autre chiffre significatif.  
+G. Ducharme, S. Kaci et C. Vovor-Dassu[^n4] ont introduits de nouveaux tests d'adéquation pour cette loi, basés sur le principe des tests lisses. Ils ont également comparés ces tests aux meilleurs tests existants et ont montrés qu'ils seraient globalement plus performants. Notons aussi que la qualité d'un test dépend de sa puissance, plus forte elle est meilleure le test est. Cependant, différents tests peuvent conduire à des avantages différents. Par exemple, certains tests détecteront plus que d'autres la différence significative du premier chiffre significatif, quant à d'autres, ce sera un autre chiffre significatif.  
 
 [^n4]: Tests d’adéquations lisses pour la loi de Newcomb-Benford écrit en $2020$ ([*source*](http://openscience.fr/IMG/pdf/iste_mas20v3n1_1.pdf)).
+
+\newpage
 
 ## Test du Khi-Deux
 
 &nbsp;
-Les tests du $\chi^2$ sont des tests d'hypothèses statistiques non-paramétriques[^n5]. Ceux-ci permettent de comparer la distribution observée dans un échantillon statistique avec une distribution théorique (*test d'ajustement*), à tester si deux caractères d'une population sont indépendants (*test d'indépendance*) et à tester si des échantillons sont issus d'une même population (*test d'homogénéité*). Le test lit l'écart critique dans la table de la loi du khi-deux.  
+Les tests du $\chi^2$ sont des tests d'hypothèses statistiques non paramétriques[^n5]. Ceux-ci permettent de comparer la distribution observée dans un échantillon statistique avec une distribution théorique (*test d'ajustement*), à tester si deux caractères d'une population sont indépendants (*test d'indépendance*) et à tester si des échantillons sont issus d'une même population (*test d'homogénéité*). Le test lit l'écart critique dans la table de la loi du khi-deux.  
 
 Le déroulement du test se procède en $5$ étapes :  
  1) On calcule les effectifs théoriques (*$n_{pj}$*).    
@@ -347,7 +349,7 @@ Le déroulement du test se procède en $5$ étapes :
 
 [n^5]: Cette partie a été fortement inspiré du site *Bibmath* (cf Bibliographie).
 
-\newpage
+
 
 La loi du $\chi^2$ à $n$ degrés de liberté si elle est absolument continue, admet pour densité :  
 
@@ -373,12 +375,12 @@ Spécifiquement, la statistique de test (dans le cas $k = 1$) est donnée par :
 \fbox{ \begin{minipage}{18.2cm}
 $$U^{2}=\frac{n}{9} \cdot\left[\sum_{i=1}^{8}\left(\sum_{j=1}^{i}\left(f_{j}^{o}-f_{j}^{e}\right)\right)^{2}-\frac{1}{9} \cdot\left(\sum_{i=1}^{8} \sum_{j=1}^{i}\left(f_{i}^{o}-f_{i}^{e}\right)\right)^{2}\right],$$  
 
-avec $f_{i}^{o}$ la fréquence observée du chiffre $i$ et $f_{i}^{e}$ la fréquence attendue du chiffre $i$.  
+Avec $f_{i}^{o}$ la fréquence observée du chiffre $i$ et $f_{i}^{e}$ la fréquence attendue du chiffre $i$.  
 \end{minipage}}
 
 \vspace{0.5cm}
 
-Notons que de plus grands écarts entre les fréquences conduisent à un plus grand $U^2$, ce qui rend le rejet plus probable. Ce test est reconnu comme plus performant que d'autres tests, et a même été recommandé par la statisticienne M. Lesperance ainsi que ses collaborateurs ($2016$), puis également par Joenssen ($2014$).  
+Notons que de plus grands écarts entre les fréquences conduisent à un plus grand $U^2$, ce qui rend le rejet plus probable. Ce test est reconnu comme plus performant que d'autres tests et a même été recommandé par la statisticienne M. Lesperance ainsi que ses collaborateurs ($2016$), puis également par Joenssen ($2014$).  
   
 \newpage 
 
@@ -387,22 +389,17 @@ Notons que de plus grands écarts entre les fréquences conduisent à un plus gr
 &nbsp;
 La famille des tests lisses introduite par Neyman s'applique à des données autant discrètes que continues. Celle-ci est spécifique à la loi de probabilité sous $H_0$.
 
-Il existe deux théorèmes essentiels tiré de l'article "*Smooth test of goodness-of-fit for directional and axial data*" écrit par BOULERICE B., DUCHARME G.R. en 1997 qui permettent de construire une famille de tests lisses pour l'hypothèse nulle $H_{0} : X \sim f(.)$. Ici $f(.)$ est la densité de la loi de Newcomb-Benford.
+Il existe deux théorèmes essentiels tirés de l'article "*Smooth test of goodness-of-fit for directional and axial data*" écrit par BOULERICE B., DUCHARME G.R. en 1997 qui permettent de construire une famille de tests lisses pour l'hypothèse nulle $H_{0} : X \sim f(.)$. Ici $f(.)$ est la densité de la loi de Newcomb-Benford.
 
-Le premier théorème nous dit :  
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-Il existe deux théorèmes essentiels qui permettent de construire une famille de tests lisses pour l'hypothèse nulle $H_{0}: X \sim f(.)$. Ici $f(.)$ est la densité de la loi de Newcomb-Benford.
 
 Le premier théorème nous dit:
 
 \vspace{0.5cm}
->>>>>>> 2507293422c2e7d11c83822e325cb682a59be187
+
 
 \fbox{ \begin{minipage}{18.2cm} \underline{Théorème 1} : Soit $X_{1}, \dots, X_{n}$ des copies indépendantes d'une variable aléatoire $X$ de densité $f(\cdot)$ par rapport à une mesure dominante $\nu .$ Soit $\left\{h_{0}(\cdot) \equiv 1, h_{k}(\cdot), k=1,2, \dots\right\}$ une suite de fonctions orthonormales par rapport à $f(\cdot) ;$ plus précisément, $\displaystyle \int h_{k}(x) h_{k^{\prime}}(x) f(x) d \nu(x)=\delta_{k k^{\prime}}$, la fonction delta de Kronecker. Soit $U_{k}=n^{-1 / 2} \displaystyle \sum_{i=1}^{n} h_{k}\left(X_{i}\right)$ et pour un entier $K \geq 1$, soit $T_{K} = \displaystyle \sum_{k=1}^{K} U_{k}^{2}$. \par
 Alors sous $H_{0}, T_{K} \stackrel{L}{\longrightarrow} \chi_{K}^{2}$, la loi khi-deux à $K$ degrés de liberté, et un test de niveau asymptotique $\alpha$ rejette $H_{0}$ si la valeur observée de $T_{K}$ dépasse $x_{K, 1-\alpha}^{2}$, le quantile d'ordre $1-\alpha$ de cette loi $\chi_{K}^{2}$.  \end{minipage} }
->>>>>>> 21ee8e76d6d19cb91fd9a3b85f65414cf0f42a53
+
 
 \vspace{0.5cm}
 
@@ -446,12 +443,13 @@ et la statistique de test $T_{\hat{K}} \stackrel{L}{\longrightarrow} \chi_{1}^{2
 
 \vspace{0.5cm}
 
-Dans la suite nous appliquerons les tests $T_{\hat{K}}$ et $T_2$ qui d'après Ducharme & Collab. sont les plus performants.
+Dans la suite, nous appliquerons les tests $T_{\hat{K}}$ et $T_2$ qui d'après Ducharme & Collab. sont les plus performants.
 
 \newpage
 
 # Application des tests
 
+<<<<<<< HEAD
 ## Application sur nos jeux de données
 
 
@@ -462,16 +460,32 @@ Dans la suite nous appliquerons les tests $T_{\hat{K}}$ et $T_2$ qui d'après Du
 
 &nbsp;
 Dans ce paragraphe nous traitons des données sur la fiscalité italienne de $20$ régions, ces données nous servirons à appliquer différents tests (classique ou lisse). Chacun des tests teste l'hypothèse nulle "la répartition du premier chiffre significatif suit la loi de Newcomb-Benford" contre l'hypothèse alternative "la répartition du premier chiffre significatif ne suit pas la loi de Newcomb-Benford". L'objectif ici est de chercher à savoir si certaines régions d'Italie modifient ou non leurs chiffres, mais aussi de comparer les résultats de nos différents tests.
+=======
 
-Ici nous retenons le test du khi-deux qui est le plus connu et utilisé, il semblerait cependant qu'il fasse parti des moins performants (Ducharme & Collab. 2020), le test de Freedman-Watson explicité plus haut. Pour ce qui est des tests lisses nous appliquerons les test $T_{\hat{K}}$ et $T_2$ comme sus-mentionné.
+&nbsp;
+Nous traitons des données recueillies dans la première partie sur AMPM... et sur la fiscalité italienne de $20$ régions, ces données nous servirons à appliquer différents tests (classique ou lisse). Chacun des tests teste l'hypothèse nulle "la répartition du premier chiffre significatif suit la loi de Newcomb-Benford" contre l'hypothèse alternative "la répartition du premier chiffre significatif ne suit pas la loi de Newcomb-Benford". L'objectif ici est d'approuver nos résultats si les données étudiées suivent ou non la loi de Newcomb-Benford et de chercher à savoir si certaines régions d'Italie modifient ou non leurs chiffres, mais aussi de comparer les résultats de nos différents tests.
+>>>>>>> e626474735b6f6480af86258febbecbf436d34df
 
-Les données se présentent comme ci-après, chaque ligne correspond à une année, les 9 premières colonnes (sans compter la première qui correspond à l'année) représente la répartition du premier chiffre significatifs. Les 4 dernières colonnes quant à elles sont les p_values des différents test que nous avons cité plus haut. Une case est rouge si l'hypothèse nulle est rejettée au seuil de 5% d'erreur.
 
+Ici nous retenons le test du khi-deux qui est le plus connu et utilisé, il semblerait cependant qu'il fasse partie des moins performants (Ducharme & Collab. 2020), le test de Freedman-Watson explicité plus haut. Pour ce qui est des tests lisses nous appliquerons les tests $T_{\hat{K}}$ et $T_2$ comme susmentionné.
+
+
+<<<<<<< HEAD
 
 
 \newpage
 
+=======
 
+
+\newpage
+## Application a des données fiscales italiennes
+>>>>>>> e626474735b6f6480af86258febbecbf436d34df
+
+Les données se présentent comme ci-après, chaque ligne correspond à une année, les 9 premières colonnes (sans compter la première qui correspond à l'année) représente la répartition du premier chiffre significatif. Les 4 dernières colonnes quant à elles sont les p_values des différents tests que nous avons cité plus haut. Une case est rouge si l'hypothèse nulle est rejetée au seuil de 5% d'erreur.
+
+
+Les 12 premiers tableaux ci-dessus ne montrent pas de suspections de fraude dans leurs données avec les divers tests sélectionnés.
 \begin{table}
 
 ```{r}
@@ -520,7 +534,7 @@ knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11:14, bold = T, backg
 \begin{table}
 
 ```{r}
-df =  read.csv2('Campania2.csv', header = TRUE, sep = ',', dec = '.',stringsAsFactors = FALSE)
+df =  read.csv2('Lazio2.csv', header = TRUE, sep = ',', dec = '.',stringsAsFactors = FALSE)
 df=df[,1:14]
 opts <- options(knitr.kable.NA = "")
 colnames(df) <- c(" ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "$\\chi^2$", "$Freedman$", "$T_2$", "$T_{\\hat{K}}$")
@@ -528,21 +542,7 @@ knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, backgrou
   column_spec(1, bold=TRUE) %>%kable_styling(font_size = 10)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
 ```
 
-\caption{Tableau 6 : Tests sur la région de Campania}
-\end{table}
-
-\begin{table}
-
-```{r}
-df =  read.csv2('emilia-romagna2.csv', header = TRUE, sep = ',', dec = '.',stringsAsFactors = FALSE)
-df=df[,1:14]
-opts <- options(knitr.kable.NA = "")
-colnames(df) <- c(" ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "$\\chi^2$", "$Freedman$", "$T_2$", "$T_{\\hat{K}}$")
-knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
-  column_spec(1, bold=TRUE) %>%kable_styling(font_size = 10)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
-```
-
-\caption{Tableau 7 : Tests sur la région d'Emilia-romagna}
+\caption{Tableau 6 : Tests sur la région de la Lazio}
 \end{table}
 
 \begin{table}
@@ -556,35 +556,7 @@ knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, backgrou
   column_spec(1, bold=TRUE) %>%kable_styling(font_size = 10, latex_options="HOLD_position")
 ```
 
-\caption{Tableau 8 : Tests sur la région de Friuli-Venezia-Giulia}
-\end{table}
-
-\begin{table}
-
-```{r}
-df =  read.csv2('Lazio2.csv', header = TRUE, sep = ',', dec = '.',stringsAsFactors = FALSE)
-df=df[,1:14]
-opts <- options(knitr.kable.NA = "")
-colnames(df) <- c(" ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "$\\chi^2$", "$Freedman$", "$T_2$", "$T_{\\hat{K}}$")
-knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
-  column_spec(1, bold=TRUE) %>%kable_styling(font_size = 10)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
-```
-
-\caption{Tableau 9 : Tests sur la région de la Lazio}
-\end{table}
-
-\begin{table}
-
-```{r}
-df =  read.csv2('Liguria2.csv', header = TRUE, sep = ',', dec = '.',stringsAsFactors = FALSE)
-df=df[,1:14]
-opts <- options(knitr.kable.NA = "")
-colnames(df) <- c(" ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "$\\chi^2$", "$Freedman$", "$T_2$", "$T_{\\hat{K}}$")
-knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
-  column_spec(1, bold=TRUE) %>%kable_styling(font_size = 10)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
-```
-
-\caption{Tableau 10 : Tests sur la région de la Liguria}
+\caption{Tableau 7 : Tests sur la région de Friuli-Venezia-Giulia}
 \end{table}
 
 \begin{table}
@@ -598,35 +570,7 @@ knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, backgrou
   column_spec(1, bold=TRUE) %>%kable_styling(font_size = 10)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
 ```
 
-\caption{Tableau 11 : Tests sur la région de Lombardia}
-\end{table}
-
-\begin{table}
-
-```{r}
-df =  read.csv2('Marche2.csv', header = TRUE, sep = ',', dec = '.',stringsAsFactors = FALSE)
-df=df[,1:14]
-opts <- options(knitr.kable.NA = "")
-colnames(df) <- c(" ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "$\\chi^2$", "$Freedman$", "$T_2$", "$T_{\\hat{K}}$")
-knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
-  column_spec(1, bold=TRUE) %>%kable_styling(font_size = 10)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
-```
-
-\caption{Tableau 12 : Tests sur la région de Marche}
-\end{table}
-
-\begin{table}
-
-```{r}
-df =  read.csv2('Molise2.csv', header = TRUE, sep = ',', dec = '.',stringsAsFactors = FALSE)
-df=df[,1:14]
-opts <- options(knitr.kable.NA = "")
-colnames(df) <- c(" ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "$\\chi^2$", "$Freedman$", "$T_2$", "$T_{\\hat{K}}$")
-knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
-  column_spec(1, bold=TRUE) %>%kable_styling(font_size = 10)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
-```
-
-\caption{Tableau 13 : Tests sur la région de Molise}
+\caption{Tableau 8 : Tests sur la région de Lombardia}
 \end{table}
 
 \begin{table}
@@ -640,7 +584,7 @@ knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, backgrou
   column_spec(1, bold=TRUE) %>%kable_styling(font_size = 10)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
 ```
 
-\caption{Tableau 14 : Tests sur la région de Piemonte}
+\caption{Tableau 9 : Tests sur la région de Piemonte}
 \end{table}
 
 \begin{table}
@@ -654,49 +598,7 @@ knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, backgrou
   column_spec(1, bold=TRUE) %>%kable_styling(font_size = 10)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
 ```
 
-\caption{Tableau 15 : Tests sur la région de Puglia}
-\end{table}
-
-\begin{table}
-
-```{r}
-df =  read.csv2('Sardegna2.csv', header = TRUE, sep = ',', dec = '.',stringsAsFactors = FALSE)
-df=df[,1:14]
-opts <- options(knitr.kable.NA = "")
-colnames(df) <- c(" ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "$\\chi^2$", "$Freedman$", "$T_2$", "$T_{\\hat{K}}$")
-knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
-  column_spec(1, bold=TRUE) %>%kable_styling(font_size = 10)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
-```
-
-\caption{Tableau 16 : Tests sur la région de la Sardegna}
-\end{table}
-
-\begin{table}
-
-```{r}
-df =  read.csv2('Sicilia2.csv', header = TRUE, sep = ',', dec = '.',stringsAsFactors = FALSE)
-df=df[,1:14]
-opts <- options(knitr.kable.NA = "")
-colnames(df) <- c(" ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "$\\chi^2$", "$Freedman$", "$T_2$", "$T_{\\hat{K}}$")
-knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
-  column_spec(1, bold=TRUE) %>%kable_styling(font_size = 10)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
-```
-
-\caption{Tableau 17 : Tests sur la région de la Sicilia}
-\end{table}
-
-\begin{table}
-
-```{r}
-df =  read.csv2('toscana2.csv', header = TRUE, sep = ',', dec = '.',stringsAsFactors = FALSE)
-df=df[,1:14]
-opts <- options(knitr.kable.NA = "")
-colnames(df) <- c(" ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "$\\chi^2$", "$Freedman$", "$T_2$", "$T_{\\hat{K}}$")
-knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
-  column_spec(1, bold=TRUE) %>%kable_styling(font_size = 10)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
-```
-
-\caption{Tableau 18 : Tests sur la région de Toscana}
+\caption{Tableau 10 : Tests sur la région de Puglia}
 \end{table}
 
 \begin{table}
@@ -710,21 +612,7 @@ knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, backgrou
   column_spec(1, bold=TRUE) %>%kable_styling(font_size = 10)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
 ```
 
-\caption{Tableau 19 : Tests sur la région de Trentino-alto}
-\end{table}
-
-\begin{table}
-
-```{r}
-df =  read.csv2('Umbria2.csv', header = TRUE, sep = ',', dec = '.',stringsAsFactors = FALSE)
-df=df[,1:14]
-opts <- options(knitr.kable.NA = "")
-colnames(df) <- c(" ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "$\\chi^2$", "$Freedman$", "$T_2$", "$T_{\\hat{K}}$")
-knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
-  column_spec(1, bold=TRUE) %>%kable_styling(font_size = 10)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
-```
-
-\caption{Tableau 20 : Tests sur la région de Umbria}
+\caption{Tableau 11 : Tests sur la région de Trentino-alto}
 \end{table}
 
 \begin{table}
@@ -738,8 +626,26 @@ knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, backgrou
   column_spec(1, bold=TRUE) %>%kable_styling(font_size = 10)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
 ```
 
-\caption{Tableau 21 : Tests sur la région de Valledaosta}
+\caption{Tableau 12 : Tests sur la région de Valle     D'aosta}
 \end{table}
+
+
+**Seulement un test**
+\begin{table}
+
+```{r}
+df =  read.csv2('Sicilia2.csv', header = TRUE, sep = ',', dec = '.',stringsAsFactors = FALSE)
+df=df[,1:14]
+opts <- options(knitr.kable.NA = "")
+colnames(df) <- c(" ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "$\\chi^2$", "$Freedman$", "$T_2$", "$T_{\\hat{K}}$")
+knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
+  column_spec(1, bold=TRUE) %>%kable_styling(font_size = 10)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
+```
+
+\caption{Tableau 13 : Tests sur la région de la Sicilia}
+\end{table}
+
+
 
 \begin{table}
 
@@ -752,12 +658,141 @@ knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, backgrou
   column_spec(1, bold=TRUE) %>%kable_styling(font_size = 10)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
 ```
 
-\caption{Tableau 22 : Tests sur la région de Veneto}
+\caption{Tableau 15 : Tests sur la région de Veneto}
 \end{table}
+
+
+
+
+\begin{table}
+
+```{r}
+df =  read.csv2('Campania2.csv', header = TRUE, sep = ',', dec = '.',stringsAsFactors = FALSE)
+df=df[,1:14]
+opts <- options(knitr.kable.NA = "")
+colnames(df) <- c(" ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "$\\chi^2$", "$Freedman$", "$T_2$", "$T_{\\hat{K}}$")
+knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
+  column_spec(1, bold=TRUE) %>%kable_styling(font_size = 10)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
+```
+
+
+\caption{Tableau 15 : Tests sur la région de Campania}
+\end{table}
+
+
+\begin{table}
+
+```{r}
+df =  read.csv2('emilia-romagna2.csv', header = TRUE, sep = ',', dec = '.',stringsAsFactors = FALSE)
+df=df[,1:14]
+opts <- options(knitr.kable.NA = "")
+colnames(df) <- c(" ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "$\\chi^2$", "$Freedman$", "$T_2$", "$T_{\\hat{K}}$")
+knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
+  column_spec(1, bold=TRUE) %>%kable_styling(font_size = 10)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
+```
+
+\caption{Tableau 16 : Tests sur la région d'Emilia-romagna}
+\end{table}
+
+
+
+\begin{table}
+
+```{r}
+df =  read.csv2('Liguria2.csv', header = TRUE, sep = ',', dec = '.',stringsAsFactors = FALSE)
+df=df[,1:14]
+opts <- options(knitr.kable.NA = "")
+colnames(df) <- c(" ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "$\\chi^2$", "$Freedman$", "$T_2$", "$T_{\\hat{K}}$")
+knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
+  column_spec(1, bold=TRUE) %>%kable_styling(font_size = 10)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
+```
+
+\caption{Tableau 17 : Tests sur la région de la Liguria}
+\end{table}
+
+
+
+\begin{table}
+
+```{r}
+df =  read.csv2('Marche2.csv', header = TRUE, sep = ',', dec = '.',stringsAsFactors = FALSE)
+df=df[,1:14]
+opts <- options(knitr.kable.NA = "")
+colnames(df) <- c(" ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "$\\chi^2$", "$Freedman$", "$T_2$", "$T_{\\hat{K}}$")
+knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
+  column_spec(1, bold=TRUE) %>%kable_styling(font_size = 10)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
+```
+
+\caption{Tableau 18 : Tests sur la région de Marche}
+\end{table}
+
+\begin{table}
+
+```{r}
+df =  read.csv2('Molise2.csv', header = TRUE, sep = ',', dec = '.',stringsAsFactors = FALSE)
+df=df[,1:14]
+opts <- options(knitr.kable.NA = "")
+colnames(df) <- c(" ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "$\\chi^2$", "$Freedman$", "$T_2$", "$T_{\\hat{K}}$")
+knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
+  column_spec(1, bold=TRUE) %>%kable_styling(font_size = 10)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
+```
+
+\caption{Tableau 19 : Tests sur la région de Molise}
+\end{table}
+
+
+\begin{table}
+
+```{r}
+df =  read.csv2('Sardegna2.csv', header = TRUE, sep = ',', dec = '.',stringsAsFactors = FALSE)
+df=df[,1:14]
+opts <- options(knitr.kable.NA = "")
+colnames(df) <- c(" ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "$\\chi^2$", "$Freedman$", "$T_2$", "$T_{\\hat{K}}$")
+knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
+  column_spec(1, bold=TRUE) %>%kable_styling(font_size = 10)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
+```
+
+\caption{Tableau 20 : Tests sur la région de la Sardegna}
+\end{table}
+
+
+\begin{table}
+
+```{r}
+df =  read.csv2('toscana2.csv', header = TRUE, sep = ',', dec = '.',stringsAsFactors = FALSE)
+df=df[,1:14]
+opts <- options(knitr.kable.NA = "")
+colnames(df) <- c(" ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "$\\chi^2$", "$Freedman$", "$T_2$", "$T_{\\hat{K}}$")
+knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
+  column_spec(1, bold=TRUE) %>%kable_styling(font_size = 10)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
+```
+
+\caption{Tableau 21 : Tests sur la région de Toscana}
+\end{table}
+
+
+
+\begin{table}
+
+```{r}
+df =  read.csv2('Umbria2.csv', header = TRUE, sep = ',', dec = '.',stringsAsFactors = FALSE)
+df=df[,1:14]
+opts <- options(knitr.kable.NA = "")
+colnames(df) <- c(" ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "$\\chi^2$", "$Freedman$", "$T_2$", "$T_{\\hat{K}}$")
+knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
+  column_spec(1, bold=TRUE) %>%kable_styling(font_size = 10)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
+```
+
+\caption{Tableau 22 : Tests sur la région de Umbria}
+\end{table}
+
+
+
+
 
 ## CAS COVID
 
-Un article écrit par Junyi Zhang qui teste le nombre de cas du Covid-19 en Chine avec la loi de Newcomb-Benford. Il trouve une p-value de 92.8 % en faveur que les numeros respectent la loi de Newcomb-Benford. Pour confirmer le résultat, Ducharme et ses coloborateurs ont utilisée les mêmes données pour retrouver la même chose que le chercheur chinois malheureusement cela ne collait pas avec les résultats attendus. Nous-mêmes nous sommes allées chercher les données de cette article mais le lien des données n'existe plus sur Wikipedia.
+Un article écrit par Junyi Zhang qui teste le nombre de cas du Covid-19 en Chine avec la loi de Newcomb-Benford. Il trouve une p-value de 92.8 % en faveur que les numéros respectent la loi de Newcomb-Benford. Pour confirmer le résultat, Ducharme et ses coloborateurs ont utilisée les mêmes données pour retrouver la même chose que le chercheur chinois malheureusement cela ne collait pas avec les résultats attendus. Nous-mêmes nous sommes allées chercher les données de cette article, mais le lien des données n'existe plus sur Wikipédia.
 On peut donc penser que les données ne sont pas cohérentes ou qu'il y a eu une erreur dans son étude ou frauder sur les chiffres. 
 
 \newpage
