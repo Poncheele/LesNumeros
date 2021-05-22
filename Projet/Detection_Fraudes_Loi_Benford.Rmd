@@ -396,9 +396,7 @@ Le premier théorème nous dit :
 Il existe deux théorèmes essentiels qui permettent de construire une famille de tests lisses pour l'hypothèse nulle $H_{0}: X \sim f(.)$. Ici $f(.)$ est la densité de la loi de Newcomb-Benford.
 
 Le premier théorème nous dit:
-=======
-Le premier nous théorème nous dit :  
-=======
+
 \vspace{0.5cm}
 >>>>>>> 2507293422c2e7d11c83822e325cb682a59be187
 
@@ -454,29 +452,25 @@ Dans la suite nous appliquerons les tests $T_{\hat{K}}$ et $T_2$ qui d'après Du
 
 # Application des tests
 
-<<<<<<< HEAD
+## Application sur nos jeux de données
+
+
+
+\newpage
+
 ## Application a des données fiscales italiennes
 
-Dans ce paragraphe nous traitons des données sur la fiscalité italienne de 20 régions, ces données nous servirons à appliquer différents tests (classique ou lisse). Chacun de ces tests teste l'hypothèse nulle ($H_0$) "la répartition du premier chiffre significatif suit la loi de Newcomb-Benford" contre l'hypothèse alternative "la répartition du premier chiffre significatif ne suit pas la loi de Newcomb-Benford". L'objectif ici est de chercher à savoir si certaines régions d'Italie modifient ou non leurs chiffres, mais aussi de comparer les résultats de nos différents tests.
-=======
 &nbsp;
 Dans ce paragraphe nous traitons des données sur la fiscalité italienne de $20$ régions, ces données nous servirons à appliquer différents tests (classique ou lisse). Chacun des tests teste l'hypothèse nulle "la répartition du premier chiffre significatif suit la loi de Newcomb-Benford" contre l'hypothèse alternative "la répartition du premier chiffre significatif ne suit pas la loi de Newcomb-Benford". L'objectif ici est de chercher à savoir si certaines régions d'Italie modifient ou non leurs chiffres, mais aussi de comparer les résultats de nos différents tests.
->>>>>>> 21ee8e76d6d19cb91fd9a3b85f65414cf0f42a53
 
 Ici nous retenons le test du khi-deux qui est le plus connu et utilisé, il semblerait cependant qu'il fasse parti des moins performants (Ducharme & Collab. 2020), le test de Freedman-Watson explicité plus haut. Pour ce qui est des tests lisses nous appliquerons les test $T_{\hat{K}}$ et $T_2$ comme sus-mentionné.
 
 Les données se présentent comme ci-après, chaque ligne correspond à une année, les 9 premières colonnes (sans compter la première qui correspond à l'année) représente la répartition du premier chiffre significatifs. Les 4 dernières colonnes quant à elles sont les p_values des différents test que nous avons cité plus haut. Une case est rouge si l'hypothèse nulle est rejettée au seuil de 5% d'erreur.
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
- \newpage
-=======
+
+
 \newpage
 
->>>>>>> 2507293422c2e7d11c83822e325cb682a59be187
-## Application a des données fiscales italiennes
->>>>>>> 21ee8e76d6d19cb91fd9a3b85f65414cf0f42a53
 
 \begin{table}
 
