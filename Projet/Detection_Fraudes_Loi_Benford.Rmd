@@ -391,11 +391,6 @@ La famille des tests lisses introduite par Neyman s'applique à des données aut
 
 Il existe deux théorèmes essentiels tirés de l'article "*Smooth test of goodness-of-fit for directional and axial data*" écrit par BOULERICE B., DUCHARME G.R. en 1997 qui permettent de construire une famille de tests lisses pour l'hypothèse nulle $H_{0} : X \sim f(.)$. Ici $f(.)$ est la densité de la loi de Newcomb-Benford.
 
-Le premier théorème nous dit :  
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-Il existe deux théorèmes essentiels qui permettent de construire une famille de tests lisses pour l'hypothèse nulle $H_{0}: X \sim f(.)$. Ici $f(.)$ est la densité de la loi de Newcomb-Benford.
 
 Le premier théorème nous dit:
 
