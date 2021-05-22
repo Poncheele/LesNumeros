@@ -393,10 +393,18 @@ Il existe deux théorèmes essentiels tirés de l'article "*Smooth test of goodn
 
 Le premier théorème nous dit :  
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+Il existe deux théorèmes essentiels qui permettent de construire une famille de tests lisses pour l'hypothèse nulle $H_{0}: X \sim f(.)$. Ici $f(.)$ est la densité de la loi de Newcomb-Benford.
+
+Le premier théorème nous dit:
+
 \vspace{0.5cm}
 
+
 \fbox{ \begin{minipage}{18.2cm} \underline{Théorème 1} : Soit $X_{1}, \dots, X_{n}$ des copies indépendantes d'une variable aléatoire $X$ de densité $f(\cdot)$ par rapport à une mesure dominante $\nu .$ Soit $\left\{h_{0}(\cdot) \equiv 1, h_{k}(\cdot), k=1,2, \dots\right\}$ une suite de fonctions orthonormales par rapport à $f(\cdot) ;$ plus précisément, $\displaystyle \int h_{k}(x) h_{k^{\prime}}(x) f(x) d \nu(x)=\delta_{k k^{\prime}}$, la fonction delta de Kronecker. Soit $U_{k}=n^{-1 / 2} \displaystyle \sum_{i=1}^{n} h_{k}\left(X_{i}\right)$ et pour un entier $K \geq 1$, soit $T_{K} = \displaystyle \sum_{k=1}^{K} U_{k}^{2}$. \par
-Alors sous $H_{0}, T_{K} \stackrel{L}{\longrightarrow} \chi_{K}^{2}$, la loi khi-deux à $K$ degrés de liberté et un test de niveau asymptotique $\alpha$ rejette $H_{0}$ si la valeur observée de $T_{K}$ dépasse $x_{K, 1-\alpha}^{2}$, le quantile d'ordre $1-\alpha$ de cette loi $\chi_{K}^{2}$.  \end{minipage} }
+Alors sous $H_{0}, T_{K} \stackrel{L}{\longrightarrow} \chi_{K}^{2}$, la loi khi-deux à $K$ degrés de liberté, et un test de niveau asymptotique $\alpha$ rejette $H_{0}$ si la valeur observée de $T_{K}$ dépasse $x_{K, 1-\alpha}^{2}$, le quantile d'ordre $1-\alpha$ de cette loi $\chi_{K}^{2}$.  \end{minipage} }
+
 
 \vspace{0.5cm}
 
@@ -446,15 +454,20 @@ Dans la suite, nous appliquerons les tests $T_{\hat{K}}$ et $T_2$ qui d'après D
 
 # Application des tests
 
+
+## Application a des données fiscales italiennes
+
 &nbsp;
 Nous traitons des données recueillies dans la première partie sur AMPM... et sur la fiscalité italienne de $20$ régions, ces données nous servirons à appliquer différents tests (classique ou lisse). Chacun des tests teste l'hypothèse nulle "la répartition du premier chiffre significatif suit la loi de Newcomb-Benford" contre l'hypothèse alternative "la répartition du premier chiffre significatif ne suit pas la loi de Newcomb-Benford". L'objectif ici est d'approuver nos résultats si les données étudiées suivent ou non la loi de Newcomb-Benford et de chercher à savoir si certaines régions d'Italie modifient ou non leurs chiffres, mais aussi de comparer les résultats de nos différents tests.
+
 
 Ici nous retenons le test du khi-deux qui est le plus connu et utilisé, il semblerait cependant qu'il fasse partie des moins performants (Ducharme & Collab. 2020), le test de Freedman-Watson explicité plus haut. Pour ce qui est des tests lisses nous appliquerons les tests $T_{\hat{K}}$ et $T_2$ comme susmentionné.
 
 
+## Application a des données fiscales italiennes
+
 \newpage
 
-## Application a des données fiscales italiennes
 
 Les données se présentent comme ci-après, chaque ligne correspond à une année, les 9 premières colonnes (sans compter la première qui correspond à l'année) représente la répartition du premier chiffre significatif. Les 4 dernières colonnes quant à elles sont les p_values des différents tests que nous avons cité plus haut. Une case est rouge si l'hypothèse nulle est rejetée au seuil de 5% d'erreur.
 
