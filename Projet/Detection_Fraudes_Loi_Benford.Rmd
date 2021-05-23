@@ -294,16 +294,16 @@ L'hypothèse nulle, notée $H_0$, est l'hypothèse que l'on souhaite contrôler,
 
 L'hypothèse alternative, notée $H_1$, affirme qu'un paramètre de la population est plus petit, plus grand ou différent de la valeur hypothétique dans l'hypothèse nulle. Elle peut être vue comme la négation de $H_0$ et est équivalente à dire que $H_0$ est fausse. La décision de rejeter $H_0$ signifie que $H_1$ est réalisée ou que $H_1$ est vraie.  
 
-On pense souvent à tort que les tests d'hypothèses statistiques visent à choisir l'hypothèse la plus probable parmi $H_0$ et $H_1$. Néanmoins l'hypothèse nulle est formulée dans le but d'être rejetée. Le seuil de signification fixé est bas (généralement $0.05$), et lorsque l'hypothèse nulle est rejetée cela prouve statistiquement que l'hypothèse alternative est vraie. En revanche, si l'hypothèse nulle ne peut être rejetée aucune preuve statistique ne montre que celle-ci est vraie. La raison est qu'il n'y a pas de valeur fixée assurant que la probabilité d'accepter à tort l'hypothèse nulle est petite.  
+On pense souvent à tort que les tests d'hypothèses statistiques visent à choisir l'hypothèse la plus probable parmi $H_0$ et $H_1$. Néanmoins l'hypothèse nulle est formulée dans le but d'être rejetée. Le seuil de signification fixé est bas (généralement $0.05$), et lorsque l'hypothèse nulle est rejetée cela prouve statistiquement que l'hypothèse alternative est vraie. En revanche, si l'hypothèse nulle ne peut être rejetée aucune preuve statistique ne montre que celle-ci est vraie. La raison est qu'il n'y a pas de valeur fixée assurant que la probabilité d'accepter à tort l'hypothèse nulle est petite.
 
-Finalement, la décision d'accepter l'hypothèse nulle n'est pas équivalente à dire que $H_0$ est vraie et que $H_1$ est fausse, mais cela traduit uniquement l'idée selon laquelle il n'y a pas d'évidence nette pour que $H_0$ soit fausse. Un test conclu donc à rejeter ou à ne pas rejeter l'hypothèse nulle mais jamais à l'accepter directement. Notons cependant que dans certains cas rares, on peut se permettre d'accepter $H_0$, par exemple dans les cas où $H_0$ et $H_1$ sont simples. Un test d'hypothèses est dit simple[^n5] si on pose sous $H_0$ le paramètre égal à une certaine valeur et sous $H_1$ celui-ci égal à une autre valeur.  
+Finalement, la décision d'accepter l'hypothèse nulle n'est pas équivalente à dire que $H_0$ est vraie et que $H_1$ est fausse, mais cela traduit uniquement l'idée selon laquelle il n'y a pas d'évidence nette pour que $H_0$ soit fausse. Un test conclu donc à rejeter ou à ne pas rejeter l'hypothèse nulle mais jamais à l'accepter directement. Notons cependant que dans certains cas rares, on peut se permettre d'accepter $H_0$, par exemple dans les cas où $H_0$ et $H_1$ sont simples. Un test d'hypothèses est dit simple[^n5] si on pose sous $H_0$ le paramètre égal à une certaine valeur et sous $H_1$ celui-ci égal à une autre valeur. 
 
 Exemple de test entre deux hypothèses simples :  
 Tester $H_0$ contre $H_1$ avec $H_0 : \text{"} \theta = \theta_0 \text{"}$ et $H_1 : \text{"} \theta = \theta_1 \text{"}$.  
 
-Le test d'hypothèses simples s'oppose au test d'hypothèses composites.  
+Le test d'hypothèses simples s'oppose au test d'hypothèses composites.
 
-Exemples de test entre deux hypothèses composites :  
+Exemples de test entre deux hypothèses composites : 
 Tester $H_0$ contre $H_1$ avec $H_0 : \text{"} \theta = \theta_0 \text{"}$ et $H_1 : \text{"} \theta \neq \theta_0 \text{"}$ (test bilatéral) et tester $H_0$ contre $H_1$ avec $H_0 : \text{"} \theta = \theta_0 \text{"}$ et $H_1 : \text{"} \theta \geq \theta_0 \text{"}$ (test unilatéral)
 
 Dans la suite de notre projet, nous nous intéresserons aux données fiscales de $20$ régions italiennes entre $2007$ et $2011$. Nous réaliserons donc pour chacune de ces régions et chacune des années le test d'hypothèses suivant : $H_0$ : "La répartition du premier chiffre significatif suit la loi de Newcomb-Benford" contre $H_1$ : "La répartition du premier chiffre significatif ne suit pas la loi de Newcomb-Benford".  
@@ -313,14 +313,14 @@ Dans la suite de notre projet, nous nous intéresserons aux données fiscales de
 ## Les risques d'erreurs
 
 &nbsp;
-Notons alors qu'aucun test d'hypothèses n'est fiable à $100 \%$, un test étant basé sur des probabilités, il existe toujours un risque de tirer une mauvaise conclusion. Lorsqu'un test d'hypothèses est effectué, nous pouvons observer deux types d'erreurs, l'erreur de Type I dite erreur de première espèce et l'erreur de Type II dite erreur de seconde espèce. Les risques de ces deux erreurs sont inversement proportionnels et sont déterminés par le seuil de signification (ou région critique) et la puissance du test. Il est important de déterminer l'erreur qui présente les conséquences les plus graves dans notre cas avant de définir le risque que nous accepterons pour chaque erreur.  
+Notons alors qu'aucun test d'hypothèses n'est fiable à $100 \%$, un test étant basé sur des probabilités, il existe toujours un risque de tirer une mauvaise conclusion. Lorsqu'un test d'hypothèses est effectué, nous pouvons observer deux types d'erreurs, l'erreur de Type I dite erreur de première espèce et l'erreur de Type II dite erreur de seconde espèce. Les risques de ces deux erreurs sont inversement proportionnels et sont déterminés par le seuil de signification (ou région critique) et la puissance du test. Il est important de déterminer l'erreur qui présente les conséquences les plus graves dans notre cas avant de définir le risque que nous accepterons pour chaque erreur.
 
 L'erreur de Type I consiste à rejeter l'hypothèse nulle alors que celle-ci est vraie. La probabilité de commettre une erreur de première espèce est représentée par $\alpha$, qui désigne le seuil de signification défini pour le test d'hypothèses. Ainsi, le seuil de signification du test s'énonce en probabilité :  
 
 $$\alpha = \mathbb{P}(\text{rejeter} \, H_0 | H_0 \, \text{vraie}).$$
 
 Un niveau $\alpha$ de $0.05$ indique que nous sommes disposé à avoir $5 \%$ de chances de rejeter l'hypothèse nulle à tort. Pour réduire ce risque, il est possible d'utiliser une valeur $\alpha$ plus faible. Cependant, cela implique d'être moins à même de détecter une vraie différence si celle-ci existe vraiment.  
-Dans notre contexte, l'erreur de Type I consiste à affirmer que les données ne suivent pas la loi de Newcomb-Benford alors que c'est le cas, soit faussement identifier une fraude.
+Dans notre contexte, l'erreur de Type I consiste à affirmer que les données ne suivent pas la loi de Newcomb-Benford alors que c'est le cas, soit faussement identifier une fraude. Il est important de noter que faussement identifier un fraude peut s'avérer très coûteux.
 
 L'erreur de Type II repose sur le fait de ne pas rejeter l'hypothèse nulle alors que celle-ci est fausse. La probabilité de commettre une erreur de seconde espèce est notée $\beta$, et dépend de la puissance du test. Il est possible de réduire le risque de deuxième espèce en faisant en sorte que le test soit suffisamment puissant. Pour cela, il est nécessaire que l'effectif d'échantillon soit suffisamment grand pour permettre la détection d'une différence réelle.  
 La probabilité de rejeter l'hypothèse nulle à tort vaut $1 - \beta$, il s'agit de la puissance du test. Finalement, la puissance d'un test est donnée par :  
@@ -816,16 +816,18 @@ On peut donc penser que les données ne sont pas cohérentes ou qu'il y a eu une
 # Conclusion 
 
 &nbsp;
-Au cours de ce projet, nous avons pu acquérir de nouvelles connaissances, ce fut intéressant et enrichissant de réaliser nos propres expériences et de nous initier au vaste problème de la détection de fraudes. Nous avons plus particulièrement découvert la loi de Newcomb-Benford, en exposant sa genèse, mais aussi en l'étudiant au travers de différents tests. De ce fait, nous avons tenté de répondre à certaines questions : quelle répartition suit le premier chiffre significatif d'une suite de nombres générés naturellement ? Les tests mis en place pour détecter une fraude sont-ils fiables et vont-ils toujours dans le même sens ? Certains sont-ils meilleurs que d'autres ?  
+Au cours de ce projet, nous avons pu acquérir de nouvelles connaissances, ce fut intéressant et enrichissant de réaliser nos propres expériences et de nous initier au vaste problème de la détection de fraudes. Nous avons tenté de répondre à certaines questions : quelle répartition suit le premier chiffre significatif d'une suite de nombres générés naturellement ? Les tests mis en place pour détecter une fraude sont-ils fiables et vont-ils toujours dans le même sens ? Certains sont-ils meilleurs que d'autres ?
+
+Nous avons pu voir que dans certains cas le premier chiffre peut suivre la loi de Newcomb-Benford, loi que nous avons découverte au cours de ce projet en exposant sa genèse, mais aussi en l'étudiant au travers de différents tests.
 
 Dans la suite de ce projet, nous avons appris que la détection de fraudes était délicate. En effet, nous avons remarqué que la loi de Newcomb-Benford ne s'applique pas systématiquement à toutes les données. Comme nous l'avons découvert dans l'expérience de Hill ainsi que lorsque nous l'avons reproduite à moindre échelle, les données influencées par la pensée humaine ne suivent généralement pas la loi de Newcomb-Benford. De plus, les données dites naturelles auront moins tendance à suivre la loi de Newcomb-Benford si celles-ci sont brutes.  
-Une observation visuelle n'étant que peu efficace, nous avons réalisé différents tests. Notons que la réalisation d'un test n'est pas complètement fiable, et qu'il faut tenir compte des risques d'erreurs ; le risque de suspecter à tort une fraude (risque de première espèce) et le risque de 
+Une observation visuelle n'étant que peu efficace, nous avons réalisé différents tests. Notons que la réalisation d'un test n'est pas complètement fiable, et qu'il faut tenir compte des risques d'erreurs, le risque de suspecter à tort une fraude et le risque de laisser passer une fraude.
 
-Il est également important de retenir que le risque de lancer un audit pour suspicion de fraude peut coûter cher, plus cher que le risque de laisser passer une fraude.  
+Il est également important de retenir que le risque de lancer un audit pour suspicion de fraude peut coûter cher, plus cher que le risque de laisser passer une fraude.
 
-De plus, lors des applications des tests, nous avons remarqué que certains tests avaient une $p$-value inférieurs à $5 \%$. Les tests paraissent fiables mais pour " détecter une fraude plus y a de test mieux c'est " Car les tests ne vont pas dans les mêmes directions car chaque test met en valeur leurs "propriétés " c'est- à-dire qu'un permet de ... et un autre de ..
-(Ouverture)
-Pour avoir un autre point de vue, il serait bien d'appliquer la loi de Newcomb-Benford avec le deuxième chiffre significatif et lui appliquer les différents tests pour permettre à une autre conclusion ?
+Lors de l'application des tests, nous avons remarqué que certains tests avaient mené à une suspicion de fraude, d'autre pas. Les tests sont rarement unanimes, cela vient du fait qu'ils sont performants pour des types de fraudes différents. Un test sera plus susceptible de mettre en évidence une manière de frauder qu'une autre. Ceci encourage l'utilisation de plusieurs tests, il n'y a donc pas vraisemblablement de meilleur test, cependant un test peut couvrir un plus large éventail de fraude.
+
+La loi de Newcomb-Benford ne s'applique pas qu'au premier chiffre significatif, pour avoir un autre point de vue, il serait bien d'appliquer la loi de Newcomb-Benford sur le deuxième chiffre significatif et lui appliquer les différents tests.  Ceci pourrait mener à une autre conclusion ?
 
 
 \newpage
