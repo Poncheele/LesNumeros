@@ -23,6 +23,18 @@ header-includes:
 - \usepackage{fancyhdr}
 ---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, knitr.kable.bottomcaption = TRUE)
+```
+
+\newpage
+\setcounter{page}{0}
+\thispagestyle{empty}
+
+```{r, fig.align='center', out.width='200%'}
+knitr::include_graphics("Images/page_de_garde.pdf")
+```
+
 \newpage
 \pagenumbering{roman}
 
@@ -60,11 +72,6 @@ Les réponses récoltées dans le premier temps, nous montrerons que la loi de N
 
 \newpage
 \listoftables
-
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, knitr.kable.bottomcaption = TRUE)
-```
 
 \newpage
 \pagenumbering{arabic}
@@ -139,7 +146,7 @@ knitr::kable(rbind(PCS,Benford),booktabs="T",align="c") %>%
 Nous retrouvons cette loi dans énormément de domaines comme les mathématiques, l'environnement, la finance, la physique, etc, plus précisément sur des données telles que la longueur des fleuves, la population des villes dans un pays, des déclarations de revenus, etc.  
 Notons cependant qu'il existe des cas où les données ne suivent pas cette loi, notamment des données dites non naturelles qui seraient influencé par la pensée humaine (nombres premiers, nombres générés par des humains, etc).  
 
-[^n2]: Défini en 1985 par Marie-Paule Lecoutre ([*Source*](https://fr.wikipedia.org/wiki/Biais_d%27%C3%A9quiprobabilit%C3%A9)).
+[^n2]: Défini en 1985 par Marie-Paule Lecoutre ([*source*](https://fr.wikipedia.org/wiki/Biais_d%27%C3%A9quiprobabilit%C3%A9)).
 
 \newpage
 # Expérimentation sur différents jeux de données
@@ -253,21 +260,18 @@ Comparons les répartitions obtenues durant les deux expériences :
 
 Plusieurs facteurs pourraient expliquer les différences entre la distribution de la loi uniforme et la répartition du premier chiffre significatif de notre expérience, celui qui revient souvent est qu'un nombre donné au hasard par un humain est souvent influencé par son expérience, même inconsciemment. Par exemple sa date d'anniversaire, un évènement marquant ou son nombre préféré. Le fait d'avoir recueilli nos nombres par internet a aussi pu influencer le choix des personnes concernées. Un facteur psychologique est donc à prendre en considération pour approfondir la conclusion. Notons également que lors de notre expérience, la question posée stipulait de donner un nombre compris entre $10$ et $99$, soit un nombre à $2$ chiffres. Ainsi, il est important de retenir que dès lorsqu'on demande un  avec suffisamment de chiffres, plus le premier chiffre aura tendance à suivre la loi de Newcomb-Benford, mais la répartition des autres chiffres significatifs (deuxième, troisième, etc.) ne sera apparentée à aucune loi. De même si on demande un nombre avec peu de chiffres (choix d'un chiffre entre $1$ et $9$ par exemple) la répartition aura plutôt tendance à être uniforme. Ce phénomène a été exposé par A. Diekmann[^n3] en $2007$.  
 
-[n^3]: Tiré de l'article *Not the First Digit! Using Benford's Law To Detect Fraudulent Scientific Data* écrit par A. Diekmann en $2007$ ([*Source*](https://www.researchgate.net/publication/24083679_Not_the_First_Digit_Using_Benford%27s_Law_to_Detect_Fraudulent_Scientif_ic_Data)).
-
 Après avoir observé ces quelques jeux de données, nous étions en mesure de dire si ces données semblaient ou non suivre la loi de Newcomb-Benford, le problème qui en découle est qu'une simple observation n'est pas très fiable, difficile de prendre une décision sur un constat visuel. En effet, se tromper dans l'interprétation peut entraîner deux types d'erreur, la première étant de faussement déceler une fraude (ce que nous appellerons **le risque de première espèce**) et la deuxième de laisser passer une fraude. Ces erreurs ont un coût pour l'institut qui essaye de les réprimer, celui d'engager des démarches de détections approfondies inutiles ou de ne pas percevoir les taxes dues dans le cas de la fraude fiscale par exemple. 
 
 Le but est donc de minimiser le coût que peuvent engendrer les erreurs susmentionnées, pour ce faire l'utilisation d'outils scientifiques est de rigueur. Les outils que nous aborderons dans la suite sont les tests d'adéquation, ces tests servent à vérifier si un ensemble de nombre suit ou non une loi de probabilité donnée (dans notre cas, c'est la loi de Newcomb-Benford).  
 
+[^n3]: Tiré de l'article *Not the First Digit! Using Benford's Law To Detect Fraudulent Scientific Data* écrit par A. Diekmann en $2007$ ([*source*](https://www.researchgate.net/publication/24083679_Not_the_First_Digit_Using_Benford%27s_Law_to_Detect_Fraudulent_Scientif_ic_Data)).
 
 # Tests
 
 ## Généralités sur les tests
 
-METTRE SOURCE
-
 &nbsp;
-Un test d'hypothèses (ou test statistique) est un procédé d'inférence statistique ayant pour but de fournir une règle de décision permettant ainsi, à partir de l'étude d'un ou plusieurs échantillons de données, d'indiquer si une hypothèse statistique concernant une population doit être acceptée ou rejetée.  
+Un test d'hypothèses[^n4] (ou test statistique) est un procédé d'inférence statistique ayant pour but de fournir une règle de décision permettant ainsi, à partir de l'étude d'un ou plusieurs échantillons de données, d'indiquer si une hypothèse statistique concernant une population doit être acceptée ou rejetée.  
 
 Nous distinguons deux classes de tests :   
 
@@ -278,6 +282,8 @@ Lorsque les conditions nécessaires sont valides, les tests paramétriques sont 
 
 Comme nous l'avons précédemment énoncé, une inspection visuelle à elle seule ne permet pas d'affirmer ou infirmer si un jeu de données suit la loi de Newcomb-Benford. L'outil statistique permettant de le vérifier est le test d'adéquation à la loi de Newcomb-Benford.  
 Les tests d'adéquation servent à tester si un échantillon est distribué selon une loi de probabilité préalablement choisie. Ils permettent de décider, avec un certain seuil d'erreur, si les écarts présentés par l'échantillon par rapport aux valeurs théoriques sont dus au hasard, ou si au contraire ils sont significatifs.  
+
+[^n4]: [*Source.*](https://www.imo.universite-paris-saclay.fr/~pansu/web_ifips/Tests.pdf)
 
 ## Hypothèse nulle et hypothèse alternative
 
@@ -291,9 +297,19 @@ L'hypothèse alternative, notée $H_1$, affirme qu'un paramètre de la populatio
 
 On pense souvent à tort que les tests d'hypothèses statistiques visent à choisir l'hypothèse la plus probable parmi $H_0$ et $H_1$. Néanmoins l'hypothèse nulle est formulée dans le but d'être rejetée. Le seuil de signification fixé est bas (généralement $0.05$), et lorsque l'hypothèse nulle est rejetée cela prouve statistiquement que l'hypothèse alternative est vraie. En revanche, si l'hypothèse nulle ne peut être rejetée aucune preuve statistique ne montre que celle-ci est vraie. La raison est qu'il n'y a pas de valeur fixée assurant que la probabilité d'accepter à tort l'hypothèse nulle est petite.  
 
-Finalement, la décision d'accepter l'hypothèse nulle n'est pas équivalente à dire que $H_0$ est vraie et que $H_1$ est fausse, mais cela traduit uniquement l'idée selon laquelle il n'y a pas d'évidence nette pour que $H_0$ soit fausse. Un test conclu donc à rejeter ou à ne pas rejeter l'hypothèse nulle mais jamais à l'accepter directement.  
+Finalement, la décision d'accepter l'hypothèse nulle n'est pas équivalente à dire que $H_0$ est vraie et que $H_1$ est fausse, mais cela traduit uniquement l'idée selon laquelle il n'y a pas d'évidence nette pour que $H_0$ soit fausse. Un test conclu donc à rejeter ou à ne pas rejeter l'hypothèse nulle mais jamais à l'accepter directement. Notons cependant que dans certains cas rares, on peut se permettre d'accepter $H_0$, par exemple dans les cas où $H_0$ et $H_1$ sont simples. Un test d'hypothèses est dit simple[^n5] si on pose sous $H_0$ le paramètre égal à une certaine valeur et sous $H_1$ celui-ci égal à une autre valeur.  
+
+Exemple de test entre deux hypothèses simples :  
+Tester $H_0$ contre $H_1$ avec $H_0 : \text{"} \theta = \theta_0 \text{"}$ et $H_1 : \text{"} \theta = \theta_1 \text{"}$.  
+
+Le test d'hypothèses simples s'oppose au test d'hypothèses composites.  
+
+Exemples de test entre deux hypothèses composites :  
+Tester $H_0$ contre $H_1$ avec $H_0 : \text{"} \theta = \theta_0 \text{"}$ et $H_1 : \text{"} \theta \neq \theta_0 \text{"}$ (test bilatéral) et tester $H_0$ contre $H_1$ avec $H_0 : \text{"} \theta = \theta_0 \text{"}$ et $H_1 : \text{"} \theta \geq \theta_0 \text{"}$ (test unilatéral)
 
 Dans la suite de notre projet, nous nous intéresserons aux données fiscales de $20$ régions italiennes entre $2007$ et $2011$. Nous réaliserons donc pour chacune de ces régions et chacune des années le test d'hypothèses suivant : $H_0$ : "La répartition du premier chiffre significatif suit la loi de Newcomb-Benford" contre $H_1$ : "La répartition du premier chiffre significatif ne suit pas la loi de Newcomb-Benford".  
+
+[^n5]: J. Y. BAUDOT ([*source*](http://www.jybaudot.fr/Inferentielle/tests.html#:~:text=Le%20but%20du%20test%20est,doit%20rejeter%20ou%20non%20H0.&text=Ce%20sont%20l%C3%A0%20des%20tests,test%20d%27hypoth%C3%A8se%20simple)).
 
 ## Les risques d'erreurs
 
@@ -301,13 +317,15 @@ Dans la suite de notre projet, nous nous intéresserons aux données fiscales de
 Notons alors qu'aucun test d'hypothèses n'est fiable à $100 \%$, un test étant basé sur des probabilités, il existe toujours un risque de tirer une mauvaise conclusion. Lorsqu'un test d'hypothèses est effectué, nous pouvons observer deux types d'erreurs, l'erreur de Type I dite erreur de première espèce et l'erreur de Type II dite erreur de seconde espèce. Les risques de ces deux erreurs sont inversement proportionnels et sont déterminés par le seuil de signification (ou région critique) et la puissance du test. Il est important de déterminer l'erreur qui présente les conséquences les plus graves dans notre cas avant de définir le risque que nous accepterons pour chaque erreur.  
 
 L'erreur de Type I consiste à rejeter l'hypothèse nulle alors que celle-ci est vraie. La probabilité de commettre une erreur de première espèce est représentée par $\alpha$, qui désigne le seuil de signification défini pour le test d'hypothèses. Ainsi, le seuil de signification du test s'énonce en probabilité :  
+
 $$\alpha = \mathbb{P}(\text{rejeter} \, H_0 | H_0 \, \text{vraie}).$$
+
 Un niveau $\alpha$ de $0.05$ indique que nous sommes disposé à avoir $5 \%$ de chances de rejeter l'hypothèse nulle à tort. Pour réduire ce risque, il est possible d'utiliser une valeur $\alpha$ plus faible. Cependant, cela implique d'être moins à même de détecter une vraie différence si celle-ci existe vraiment.  
 Dans notre contexte, l'erreur de Type I consiste à affirmer que les données ne suivent pas la loi de Newcomb-Benford alors que c'est le cas, soit faussement identifier une fraude.
 
 L'erreur de Type II repose sur le fait de ne pas rejeter l'hypothèse nulle alors que celle-ci est fausse. La probabilité de commettre une erreur de seconde espèce est notée $\beta$, et dépend de la puissance du test. Il est possible de réduire le risque de deuxième espèce en faisant en sorte que le test soit suffisamment puissant. Pour cela, il est nécessaire que l'effectif d'échantillon soit suffisamment grand pour permettre la détection d'une différence réelle.  
-La probabilité de rejeter l'hypothèse nulle à tort vaut $1 - \beta$, il s'agit de la puissance du test. 
-
+La probabilité de rejeter l'hypothèse nulle à tort vaut $1 - \beta$, il s'agit de la puissance du test. Finalement, la puissance d'un test est donnée par :  
+$$1 - \beta = \mathbb{P}(\text{rejeter} \, H_0 | H_1 \, \text{vraie}).$$
 
 \begin{table}
 
@@ -326,16 +344,16 @@ knitr::kable(rbind(c1, c2, c3), escape=F, row.names=F, align='c') %>%
 \end{table}
 
 Au sujet de la loi de Newcomb-Benford, notons que le test d'adéquation le plus populaire est le test du khi-deux de Pearson dont la puissance, associée au risque d'erreur de Type II est relativement faible. C'est pourquoi, d'autres tests ont été mis en place récemment. L'ensemble de ces tests seront développés par la suite.  
-G. Ducharme, S. Kaci et C. Vovor-Dassu[^n4] ont introduits de nouveaux tests d'adéquation pour cette loi, basés sur le principe des tests lisses. Ils ont également comparés ces tests aux meilleurs tests existants et ont montrés qu'ils seraient globalement plus performants. Notons aussi que la qualité d'un test dépend de sa puissance, plus forte elle est meilleure le test est. Cependant, différents tests peuvent conduire à des avantages différents. Par exemple, certains tests détecteront plus que d'autres la différence significative du premier chiffre significatif, quant à d'autres, ce sera un autre chiffre significatif.  
+G. Ducharme, S. Kaci et C. Vovor-Dassu[^n6] ont introduits de nouveaux tests d'adéquation pour cette loi, basés sur le principe des tests lisses. Ils ont également comparés ces tests aux meilleurs tests existants et ont montrés qu'ils seraient globalement plus performants. Notons aussi que la qualité d'un test dépend de sa puissance, plus forte elle est meilleur est le test. Cependant, différents tests peuvent conduire à des avantages différents. Par exemple, certains tests détecteront plus que d'autres la différence significative du premier chiffre significatif, quant à d'autres, ce sera un autre chiffre significatif.  
 
-[^n4]: Tests d’adéquations lisses pour la loi de Newcomb-Benford écrit en $2020$ ([*source*](http://openscience.fr/IMG/pdf/iste_mas20v3n1_1.pdf)).
+[^n6]: Tests d’adéquations lisses pour la loi de Newcomb-Benford écrit en $2020$ ([*source*](http://openscience.fr/IMG/pdf/iste_mas20v3n1_1.pdf)).
 
 \newpage
 
 ## Test du Khi-Deux
 
 &nbsp;
-Les tests du $\chi^2$ sont des tests d'hypothèses statistiques non paramétriques[^n5]. Ceux-ci permettent de comparer la distribution observée dans un échantillon statistique avec une distribution théorique (*test d'ajustement*), à tester si deux caractères d'une population sont indépendants (*test d'indépendance*) et à tester si des échantillons sont issus d'une même population (*test d'homogénéité*). Le test lit l'écart critique dans la table de la loi du khi-deux.  
+Les tests du $\chi^2$ sont des tests d'hypothèses statistiques non paramétriques[^n7]. Ceux-ci permettent de comparer la distribution observée dans un échantillon statistique avec une distribution théorique (*test d'ajustement*), à tester si deux caractères d'une population sont indépendants (*test d'indépendance*) et à tester si des échantillons sont issus d'une même population (*test d'homogénéité*). Le test lit l'écart critique dans la table de la loi du khi-deux.  
 
 Le déroulement du test se procède en $5$ étapes :  
  1) On calcule les effectifs théoriques (*$n_{pj}$*).    
@@ -347,9 +365,7 @@ Le déroulement du test se procède en $5$ étapes :
  
 ![Figure 8 : Densité de la loi du Khi-Deux en fonction du nombre de degrés de liberté](Images/Chi-square.png){width=50%}
 
-[n^5]: Cette partie a été fortement inspiré du site *Bibmath* (cf Bibliographie).
-
-
+[^n7]: Cette partie a été fortement inspiré du site *Bibmath* (cf Bibliographie).
 
 La loi du $\chi^2$ à $n$ degrés de liberté si elle est absolument continue, admet pour densité :  
 
@@ -375,7 +391,7 @@ Spécifiquement, la statistique de test (dans le cas $k = 1$) est donnée par :
 \fbox{ \begin{minipage}{18.2cm}
 $$U^{2}=\frac{n}{9} \cdot\left[\sum_{i=1}^{8}\left(\sum_{j=1}^{i}\left(f_{j}^{o}-f_{j}^{e}\right)\right)^{2}-\frac{1}{9} \cdot\left(\sum_{i=1}^{8} \sum_{j=1}^{i}\left(f_{i}^{o}-f_{i}^{e}\right)\right)^{2}\right],$$  
 
-Avec $f_{i}^{o}$ la fréquence observée du chiffre $i$ et $f_{i}^{e}$ la fréquence attendue du chiffre $i$.  
+avec $f_{i}^{o}$ la fréquence observée du chiffre $i$ et $f_{i}^{e}$ la fréquence attendue du chiffre $i$.  
 \end{minipage}}
 
 \vspace{0.5cm}
@@ -391,7 +407,6 @@ La famille des tests lisses introduite par Neyman s'applique à des données aut
 
 Il existe deux théorèmes essentiels tirés de l'article "*Smooth test of goodness-of-fit for directional and axial data*" écrit par BOULERICE B., DUCHARME G.R. en 1997 qui permettent de construire une famille de tests lisses pour l'hypothèse nulle $H_{0} : X \sim f(.)$. Ici $f(.)$ est la densité de la loi de Newcomb-Benford.
 
-
 Le premier théorème nous dit:
 
 \vspace{0.5cm}
@@ -399,7 +414,6 @@ Le premier théorème nous dit:
 
 \fbox{ \begin{minipage}{18.2cm} \underline{Théorème 1} : Soit $X_{1}, \dots, X_{n}$ des copies indépendantes d'une variable aléatoire $X$ de densité $f(\cdot)$ par rapport à une mesure dominante $\nu .$ Soit $\left\{h_{0}(\cdot) \equiv 1, h_{k}(\cdot), k=1,2, \dots\right\}$ une suite de fonctions orthonormales par rapport à $f(\cdot) ;$ plus précisément, $\displaystyle \int h_{k}(x) h_{k^{\prime}}(x) f(x) d \nu(x)=\delta_{k k^{\prime}}$, la fonction delta de Kronecker. Soit $U_{k}=n^{-1 / 2} \displaystyle \sum_{i=1}^{n} h_{k}\left(X_{i}\right)$ et pour un entier $K \geq 1$, soit $T_{K} = \displaystyle \sum_{k=1}^{K} U_{k}^{2}$. \par
 Alors sous $H_{0}, T_{K} \stackrel{L}{\longrightarrow} \chi_{K}^{2}$, la loi khi-deux à $K$ degrés de liberté, et un test de niveau asymptotique $\alpha$ rejette $H_{0}$ si la valeur observée de $T_{K}$ dépasse $x_{K, 1-\alpha}^{2}$, le quantile d'ordre $1-\alpha$ de cette loi $\chi_{K}^{2}$.  \end{minipage} }
-
 
 \vspace{0.5cm}
 
@@ -454,9 +468,9 @@ Nous traitons sur nos différents jeux de données et sur la fiscalité italienn
 
 Nous retenons le test du khi-deux qui est le plus connu et utilisé, il semblerait cependant qu'il fasse partie des moins performants (Ducharme & Collab. 2020), le test de Freedman-Watson explicité plus haut. Pour ce qui est des tests lisses nous appliquerons les tests $T_{\hat{K}}$ et $T_2$ comme susmentionné.
 
-
 ## Application sur nos jeux de données
 
+&nbsp;
 Dans cette partie nous cherchons à confirmer ou non nos hypothèses formulées à la vu des graphiques. Nous utilisons les test cités plus haut.
 Les données se présentent comme ci-après, chaque ligne correspond à une de nos expérience, les 9 premières colonnes (sans compter la première qui correspond à l'expérience) représente la répartition du premier chiffre significatif. Les 4 dernières colonnes quant à elles sont les p_values des différents tests. Une case est rouge si l'hypothèse nulle est rejetée au seuil de 5% d'erreur.
 
@@ -471,24 +485,35 @@ knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, backgrou
 
 Les tests sont unanimes, la suite de Fibonacci et les données relevées sur le magazine AMPM suivent la loi de Newcomb-Benford, du moins on ne rejette pas cette hypothèse, ce résultat est en accord avec nos suppositions.
 
-Regardons maintenant les tests appliqués au jeu de données tirés du magazine *les échos*, nous avions remarqué une tendance décroissante similaire à celle de la répartition de la loi de Newcomb-Benford, avec cependant des valeurs relativement différentes. Les deux tests lisses ainsi que le test de Freedman donnent une p_value proche de zéro qui nous mène à un fort rejet de l'hypothèse nulle (avec un risque d'erreur presque nul), contrairement au test du $\chi^2$ (ici une p_value d'environ 0,1 nous indique que si nous rejettons l'yhopthèse nulle nous avons environ 10% de chance de nous tromper). On remarque ici que ce dernier est possiblement moins puissant que les autres.
+Regardons maintenant les tests appliqués au jeu de données tirés du magazine *les échos*, nous avions remarqué une tendance décroissante similaire à celle de la répartition de la loi de Newcomb-Benford, avec cependant des valeurs relativement différentes. Les deux tests lisses ainsi que le test de Freedman donnent une $p$-value proche de zéro qui nous mène à un fort rejet de l'hypothèse nulle (avec un risque d'erreur presque nul), contrairement au test du $\chi^2$ (ici une $p$-value d'environ 0,1 nous indique que si nous rejetons l'hypothèse nulle nous avons environ 10% de chance de nous tromper). On remarque ici que ce dernier est possiblement moins puissant que les autres.
 
 Pour terminer tous les tests mènent à un rejet de l'hypothèse nulle "le jeu de donnée suit la loi de N-B" pour les jeux de données sur les population des villes de France, le passage journalier de vélos et les nombres générés par les humains. 
 Pour les deux derniers pas de surprise, cependant le rejet de l'hypothèse nulle pour le jeu de données sur les population des villes de France nous paraît étonnant, l'inspection visuelle nous donnait l'impression que la répartition du PCS collait à celle de la loi de Neewcomb-Benford, mais le nombre important de données à fortement amplifié les différences.
 
+<<<<<<< HEAD
 Les différents tests nous ont permis ici de déceler des différences avec la loi de N-B qui nous ont échappés à l'oeil nu, mais aussi de nous rendre compte de la différence d'efficacité entre les tests. 
 
 
 
+=======
+Les différents tests nous ont permis ici de déceler des différences avec la loi de N-B qui nous ont échappés à l'œil nu, mais aussi de nous rendre compte de la différence d'efficacité entre les tests. 
+
+>>>>>>> b025a5b0721c8d8f0fa0d7f106dd9fd2d93d120a
 ## Application à des données fiscales italiennes
 
+nbsp;
 Les données utilisées dans cette partie sont tirées d'un article (voir bibliographie) traitant sur la fraude de données fiscales en Italie.
+Les données se présentent comme ci-après, chaque ligne correspond à une année, les $9$ premières colonnes (sans compter la première qui correspond à l'année) représente la répartition du premier chiffre significatif. Les $4$ dernières colonnes quant à elles sont les $p$-values des différents tests que nous avons cité plus haut. Une case est rouge si l'hypothèse nulle est rejetée au seuil de $5 \%$ d'erreur.
 
+<<<<<<< HEAD
 Les données se présentent comme ci-après, chaque ligne correspond à une année, les 9 premières colonnes (sans compter la première qui correspond à l'année) représente la répartition du premier chiffre significatif. Les 4 dernières colonnes quant à elles sont les p-values des différents tests que nous avons cité plus haut. Une case est rouge si l'hypothèse nulle est rejetée au seuil de 5% d'erreur.
 
 
 Les 12 premiers tableaux ci-dessous ne montrent pas de suspections de fraude dans leurs données avec les divers tests sélectionnés.   
 
+=======
+Les $12$ premiers tableaux ci-dessus ne montrent pas de suspections de fraude dans leurs données avec les divers tests sélectionnés.
+>>>>>>> b025a5b0721c8d8f0fa0d7f106dd9fd2d93d120a
 
 \begin{table}
 
@@ -807,9 +832,16 @@ On voit clairement que sur chacune des années (ou presque) les test s'affolent,
 
 ## CAS COVID
 
+<<<<<<< HEAD
 La crise du COVID-19 étant au cœur des débats actuels et ayant un impact non négligeable sur notre scolarité, nous avons voulu nous intéresser aux chiffres que la Chine à publié. La Chine, à l'origine du départ de cette pandémie à publié des données sur l'expansion des cas dans son territoire.
 Un article écrit par Junyi Zhang qui recense le nombre de cas de personne atteinte du Covid-19 en Chine et compare la répartition des premiers chiffres significatifs avec la loi de Newcomb-Benford. 
 D'après cette article le test qui teste l'hypothèse nulle "les données diffusées par la Chine suivent la loi de Newcomb-Benford" contre l'hypothèse alternative "les données diffusées par la Chine ne suivent pas la loi de Newcomb-Benford" donne une p-value de $92.8\%$.
+=======
+&nbsp;
+La crise du COVID-$19$ étant au cœur des débats actuels et ayant un impact non négligeable sur notre scolarité, nous avons voulu nous intéresser aux chiffres que la Chine à publié. La Chine, à l'origine du départ de cette pandémie à publié des données sur l'expansion des cas dans son territoire.
+Un article écrit par Junyi Zhang qui recense le nombre de cas de personne atteinte du Covid-19 en Chine et compare la répartition des premiers chiffres significatifs avec la loi de Newcomb-Benford. 
+D'après cette article le test qui teste l'hypothèse nulle "les données diffusées par la Chine suivent la loi de Newcomb-Benford" contre l'hypothèse alternative "les données diffusées par la Chine ne suivent pas la loi de Newcomb-Benford" donne une $p$-value de $92.8\%$.
+>>>>>>> b025a5b0721c8d8f0fa0d7f106dd9fd2d93d120a
 Pour confirmer le résultat, Ducharme et ses collaborateurs ont utilisé les mêmes données pour appliquer des tests avec les mêmes hypothèses. Malheureusement cela ne collait pas avec les résultats attendus. Nous-mêmes nous sommes allées chercher les données de cette article, mais le lien des données n'existe plus sur Wikipédia.
 On peut donc penser que les données ne sont pas cohérentes ou qu'il y a eu une erreur dans son étude ou fraude sur les chiffres.
 
@@ -818,13 +850,15 @@ On peut donc penser que les données ne sont pas cohérentes ou qu'il y a eu une
 
 &nbsp;
 (Rappel de la problématique)
+<<<<<<< HEAD
 Ce projet nous a permis d'approfondir nos connaissances, de pouvoir faire des expériences nous-mêmes et de nous initier au vaste problème qu'est la detection de fraude. Et plus particulierement à la loi de Benford-Newcomb en exposant sa genèse mais aussi de l'étudier avec divers tests. 
+=======
+Ce projet nous a permis d'approfondir nos connaissances, de pouvoir faire des expériences nous-mêmes et de nous initier au vaste problème pour détecter une fraude. Et plus particulièrement à la loi de Newcomb-Benford en exposant sa genèse mais aussi de l'étudier avec divers tests. 
+>>>>>>> b025a5b0721c8d8f0fa0d7f106dd9fd2d93d120a
 (Reponse)
-Dans le déroulement de notre projet, nous avons appris que la loi de Benford-Newcomb n'est pas applicable à toutes les données comme l'expérience de Hill sité plus haut qui sont influencées par la penseé de l'Homme. De plus, lors des applications des tests, nous avons remarqué que certains tests avaient une p-value inferieurs à 5%. Les tests parraissent fiables mais pour " detecter une fraude plus y a de test mieux c'est " Car les tests ne vont pas dans les mêmes directions car chaque tests mettent en valeurs leurs "propriétés " c'est- à-dire que un permet de ... et un autre de ..
+Dans le déroulement de notre projet, nous avons appris que la loi de Newcomb-Benford n'est pas applicable à toutes les données comme l'expérience de Hill cité plus haut qui sont influencées par la pensée de l'Homme. De plus, lors des applications des tests, nous avons remarqué que certains tests avaient une $p$-value inférieurs à 5%. Les tests paraissent fiables mais pour " détecter une fraude plus y a de test mieux c'est " Car les tests ne vont pas dans les mêmes directions car chaque tests mettent en valeurs leurs "propriétés " c'est- à-dire que un permet de ... et un autre de ..
 (Ouverture)
-Pour avoir un autre point de vue, il serait bien d'appliquer la loi de Newcomb-Benford avec le deuxieme chiffre significatif et lui appliquer les differents tests pour permettre à une autre conclusion ?
-
-
+Pour avoir un autre point de vue, il serait bien d'appliquer la loi de Newcomb-Benford avec le deuxième chiffre significatif et lui appliquer les différents tests pour permettre à une autre conclusion ?
 
 
 
@@ -876,8 +910,6 @@ D. JOENSSEN *Testing for Benford's Law: A Monte Carlo Comparison of Methods* ($2
 
 LESPERANCE M., REED W.J., STEPHENS M.A., TSAO C., WILTON B., *Assessing conformance with Benford's law : Goodness-ff-fit fets and simultaneous confidence interval* ($2016$)  ([*Source*](https://storage.googleapis.com/plos-corpus-prod/10.1371/journal.pone.0151235/1/pone.0151235.pdf?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=wombat-sa%40plos-prod.iam.gserviceaccount.com%2F20210522%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20210522T115455Z&X-Goog-Expires=86400&X-Goog-SignedHeaders=host&X-Goog-Signature=15ee92de490a5ad03c0a988bd684e565f8f4c27b54c41baa8ad1f65a4797da38755fbeb5cb9de7015d9e116b4d6a48826faf7bbc830ddc22081a55d5e79c96b16ccf18034b8f5db6eea250cee093045800e9ebb0ad6aa045b152178a9741233648a79ed1392573d541c5c7f765210a0842dfcfbe92fde5458e42d450a1f10d41754197e86c01b09fdae2629cce26e69754feafb6209114ae9a8cad08dfd2698e1353fd67a0f8c4afd2b265cbade44accd33bc6b3661d086b6ab1c4996e7273a1577f39076d29d1f45cf113aaa2a4ce0800de08b9e4be80a12f7fc67a2c0d2861a3439255425e3cbdc181dfb8cdb54612070e49570d433ff6f1304d8d33afbaf5))  
 
-M. AUSLOOS, R. CERQUETI, T. A. MIR *Data science for assessing possible tax income manipulation: the case of Italy* ($2017$) ([*Source*](https://arxiv.org/pdf/1709.02129.pdf))  
-
 \medskip
 
 **\underline{Test lisse}** :  
@@ -894,7 +926,7 @@ NEYMAN J. *Smooth tests for goodnesss-of-fit*, Skand. Aktuariedidskr $20$ : $150
 
 **\underline{Cas fiscalité italienne}** :
 
-MARCEL AUSLOOS, ROY CERQUETI, TARIC A. MIR *Data science for assessing possible tax incomemanipulation: the case of Italy* (2017)
+MARCEL AUSLOOS, ROY CERQUETI, TARIC A. MIR *Data science for assessing possible tax incomemanipulation: the case of Italy* ($2017$) ([*Source*](https://arxiv.org/pdf/1709.02129.pdf)) 
 
 **\underline{Cas Covid-$19$}** :
 
