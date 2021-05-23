@@ -330,7 +330,8 @@ L'erreur de Type II repose sur le fait de ne pas rejeter l'hypothèse nulle alor
 La probabilité de rejeter l'hypothèse nulle à tort vaut $1 - \beta$, il s'agit de la puissance du test. Finalement, la puissance d'un test est donnée par :  
 $$1 - \beta = \mathbb{P}(\text{rejeter} \, H_0 | H_1 \, \text{vraie}).$$
 
-Dans ce projet, l'erreur de Type II 
+Dans ce projet, l'erreur de Type II repose sur le fait de laisser passer une fraude.  
+En définitive, dans tous les cas on risque de faire une erreur. Ainsi, nous pouvons observer le tableau $2$ donnant la règle de décision associée aux deux types de risques d'erreurs.  
 
 \newpage
 \begin{table}
@@ -414,9 +415,9 @@ Notons que de plus grands écarts entre les fréquences conduisent à un plus gr
 &nbsp;
 La famille des tests lisses introduite par Neyman s'applique à des données autant discrètes que continues. Celle-ci est spécifique à la loi de probabilité sous $H_0$.
 
-Il existe deux théorèmes essentiels tirés de l'article "*Smooth test of goodness-of-fit for directional and axial data*" écrit par BOULERICE B., DUCHARME G.R. en 1997 qui permettent de construire une famille de tests lisses pour l'hypothèse nulle $H_{0} : X \sim f(.)$. Ici $f(.)$ est la densité de la loi de Newcomb-Benford.
+Il existe deux théorèmes essentiels tirés de l'article "*Smooth test of goodness-of-fit for directional and axial data*" écrit par BOULERICE B., DUCHARME G.R. en $1997$ qui permettent de construire une famille de tests lisses pour l'hypothèse nulle $H_{0} : X \sim f(.)$. Ici $f(.)$ est la densité de la loi de Newcomb-Benford.
 
-Le premier théorème nous dit:
+Le premier théorème nous dit :  
 
 \vspace{0.5cm}
 
@@ -438,12 +439,12 @@ $\boldsymbol{\mu}_{k}=\left(\mu_{k}, \mu_{k+1}, \dots \mu_{2 k-1}\right)^{T}$ et
 $$
 h_{k}(x)=c_{k}^{-1 / 2}\left(x^{k}-\left(1, x, x^{2}, \dots, x^{k-1}\right) \mathbf{M}_{k}^{-1} \boldsymbol{\mu}_{k}\right)
 $$
-satisfont la condition du Théorème 1.
+satisfont la condition du Théorème $1$.
 \end{minipage} }
 
 \vspace{0.5cm}
 
-D'après le Théorème 2, et Ducharme & Collab. nous avons pour $0<k\leq5$ les $h_k$ suivants :
+D'après le Théorème $2$, et Ducharme & Collab. nous avons pour $0<k\leq5$ les $h_k$ suivants :
 
 $$
 \begin{array}{l}
@@ -513,7 +514,7 @@ Les différents tests nous ont permis ici de déceler des différences avec la l
 Les données utilisées dans cette partie sont tirées d'un article (cf. bibliographie) traitant sur la fraude de données fiscales en Italie.
 Les données se présentent comme ci-après, chaque ligne correspond à une année, les $9$ premières colonnes (sans compter la première qui correspond à l'année) représente la répartition du premier chiffre significatif. Les $4$ dernières colonnes quant à elles sont les $p$-values des différents tests que nous avons cité plus haut. Une case est rouge si l'hypothèse nulle est rejetée au seuil de $5 \%$ d'erreur.
 
-Observons que les $12$ premiers tableaux ci-dessous ne montrent pas de suspections de fraudes. Ces régions italiennes, dont nous pouvons relever la région d'Abruzzo, de Basilicata, de Lombardia, ou encore de Puglia, ne permettent avec aucun des tests sélectionnés de rejeter l'hypothèse nulle, au risque de $5 \%$. Ceci signifie donc que nous serions plutôt tentés de ne pas suspecter de fraudes pour ces régions italiennes
+Observons que les tableaux $1$ à $12$ ci-dessous ne montrent pas de suspections de fraudes. Ces régions italiennes, dont nous pouvons relever la région d'Abruzzo, de Basilicata, de Lombardia, ou encore de Puglia, ne permettent avec aucun des tests sélectionnés de rejeter l'hypothèse nulle, au risque de $5 \%$. Ceci signifie donc que nous serions plutôt tentés de ne pas suspecter de fraudes pour ces régions italiennes
 
 \begin{table}
 
@@ -660,7 +661,7 @@ knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, backgrou
 \end{table}
 
 \newpage
-Les tableaux suivants nous montrent dans certains cas des suspicions de fraude. Les tests ne sont souvent pas en accord, on remarque que pour les régions suivantes seul un test détecte une fraude et seulement sur une année. Les p-values des autres tests sont relativement élevés.
+Les tableaux suivants (cf. tableaux $14$ et $15$) nous montrent dans certains cas des suspicions de fraude. Les tests ne sont souvent pas en accord, on remarque que pour les régions suivantes seul un test détecte une fraude et seulement sur une année. Les p-values des autres tests sont relativement élevés.
 
 \begin{table}
 
@@ -691,7 +692,7 @@ knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, backgrou
 \end{table}
 
   
-Ici la région de Campagnia semble avoir fraudé presque tous les ans, tous les test n'ont pas mis en évidence une potentielle fraude, on remarque tout de même que le test lisse $T_2$ à relevé une fraude à chaque fois que les autres l'ont fait.
+Ici la région de Campagnia (cf. tableau $16$) semble avoir fraudé presque tous les ans, tous les test n'ont pas mis en évidence une potentielle fraude, on remarque tout de même que le test lisse $T_2$ à relevé une fraude à chaque fois que les autres l'ont fait.
 
 \begin{table}
 
@@ -710,7 +711,7 @@ knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, backgrou
 
 \newpage
 
-Les régions de Marche et Molisse semblent n'avoir fraudé que sur une seule année, cette fraude est suspectée par plusieurs tests, notamment les tests lisses. Nous voyons tout de même que pour la région de Molisse les $p$-values sont plutôt proches du seuil de $5 \%$ pour l'année $2010$ par exemple. Il est possible que cette région à modifié sa façon de frauder pour échapper aux tests, c'est pourquoi il est important d'apporter de nouveau tests.
+Les régions de Marche et Molisse (cf. tableaux $17$ et $18$) semblent n'avoir fraudé que sur une seule année, cette fraude est suspectée par plusieurs tests, notamment les tests lisses. Nous voyons tout de même que pour la région de Molisse les $p$-values sont plutôt proches du seuil de $5 \%$ pour l'année $2010$ par exemple. Il est possible que cette région ait modifié sa façon de frauder pour échapper aux tests, c'est pourquoi il est important d'apporter de nouveau tests.
 
 \begin{table}
 
@@ -743,7 +744,7 @@ knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, backgrou
 
 \newpage
    
-Cette partie regroupe les régions dont nous suspectons la fraude sur la quasi-totalité de l'étude.   
+Cette partie regroupe les régions dont nous suspectons la fraude sur la quasi-totalité de l'étude (cf. tableaux $19$ à $23$).   
 
 \begin{table}
 
@@ -827,9 +828,9 @@ On voit clairement que sur chacune des années (ou presque) les test s'affolent,
 ## CAS COVID
 
 &nbsp;
-La crise du COVID-$19$ étant au coeur des débats actuels et ayant un impact non négligeable sur notre scolarité, nous avons voulu nous intéresser aux chiffres que la Chine à publié. La Chine, à l'origine du départ de cette pandémie à publié des données sur l'expansion des cas dans son territoire.
-Un article écrit par Junyi Zhang qui recense le nombre de cas de personne atteinte du Covid-$19$ en Chine et compare la répartition des premiers chiffres significatifs avec la loi de Newcomb-Benford. 
-D'après cet article le test qui teste l'hypothèse nulle "les données diffusées par la Chine suivent la loi de Newcomb-Benford" contre l'hypothèse alternative "les données diffusées par la Chine ne suivent pas la loi de Newcomb-Benford" donne une $p$-value de $92.8 \%$.
+La crise du COVID-$19$ étant au coeur des débats actuels et ayant un impact non négligeable sur notre scolarité, nous avons voulu nous intéresser aux chiffres de la Chine à ce sujet. La Chine, à l'origine du départ de cette pandémie a publié des données sur l'expansion des cas dans son territoire.
+Un article écrit par Junyi Zhang qui recense le nombre de personne atteinte du Covid-$19$ en Chine et compare la répartition du premier chiffre significatif avec la distribution de la loi de Newcomb-Benford. 
+D'après cet article, le test qui teste l'hypothèse nulle "les données diffusées par la Chine suivent la loi de Newcomb-Benford" contre l'hypothèse alternative "les données diffusées par la Chine ne suivent pas la loi de Newcomb-Benford" donne une $p$-value de $92.8 \%$.
 Pour confirmer le résultat, Ducharme et ses collaborateurs ont utilisé les mêmes données pour appliquer des tests avec les mêmes hypothèses. Malheureusement cela ne collait pas avec les résultats attendus. Nous-mêmes sommes allés chercher les données de cette article, mais le lien des données n'existe plus sur Wikipédia.
 On peut donc penser que les données ne sont pas cohérentes, qu'il y a eu une erreur dans l'étude de J. Zhang ou peut-être une fraude sur les chiffres.
 
