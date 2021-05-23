@@ -449,38 +449,30 @@ Dans la suite, nous appliquerons les tests $T_{\hat{K}}$ et $T_2$ qui d'après D
 
 # Application des tests
 
-<<<<<<< HEAD
-## Application sur nos jeux de données
-
-
-
-\newpage
-
-## Application a des données fiscales italiennes
-
-&nbsp;
-Dans ce paragraphe nous traitons des données sur la fiscalité italienne de $20$ régions, ces données nous servirons à appliquer différents tests (classique ou lisse). Chacun des tests teste l'hypothèse nulle "la répartition du premier chiffre significatif suit la loi de Newcomb-Benford" contre l'hypothèse alternative "la répartition du premier chiffre significatif ne suit pas la loi de Newcomb-Benford". L'objectif ici est de chercher à savoir si certaines régions d'Italie modifient ou non leurs chiffres, mais aussi de comparer les résultats de nos différents tests.
-=======
-
 &nbsp;
 Nous traitons des données recueillies dans la première partie sur AMPM... et sur la fiscalité italienne de $20$ régions, ces données nous servirons à appliquer différents tests (classique ou lisse). Chacun des tests teste l'hypothèse nulle "la répartition du premier chiffre significatif suit la loi de Newcomb-Benford" contre l'hypothèse alternative "la répartition du premier chiffre significatif ne suit pas la loi de Newcomb-Benford". L'objectif ici est d'approuver nos résultats si les données étudiées suivent ou non la loi de Newcomb-Benford et de chercher à savoir si certaines régions d'Italie modifient ou non leurs chiffres, mais aussi de comparer les résultats de nos différents tests.
->>>>>>> e626474735b6f6480af86258febbecbf436d34df
-
 
 Ici nous retenons le test du khi-deux qui est le plus connu et utilisé, il semblerait cependant qu'il fasse partie des moins performants (Ducharme & Collab. 2020), le test de Freedman-Watson explicité plus haut. Pour ce qui est des tests lisses nous appliquerons les tests $T_{\hat{K}}$ et $T_2$ comme susmentionné.
 
 
-<<<<<<< HEAD
+## Application sur nos jeux de données
 
+Dans cette partie nous cherchons à confirmer ou non nos hypothèses formulées à la vu des graphiques. Nous utilisons les test cités plus haut.
+Les données se présentent comme ci-après, chaque ligne correspond à une de nos expérience, les 9 premières colonnes (sans compter la première qui correspond à l'expérience) représente la répartition du premier chiffre significatif. Les 4 dernières colonnes quant à elles sont les p_values des différents tests. Une case est rouge si l'hypothèse nulle est rejetée au seuil de 5% d'erreur.
 
-\newpage
+```{r}
+df =  read.csv2('nosdonnees2.csv', header = TRUE, sep = ',', dec = '.',stringsAsFactors = FALSE)
+df=df[,1:14]
+opts <- options(knitr.kable.NA = "")
+colnames(df) <- c(" ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "$\\chi^2$", "$Freedman$", "$T_2$", "$T_{\\hat{K}}$")
+knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
+  column_spec(1, bold=TRUE) %>%kable_styling(font_size = 10)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
+```
 
-=======
-
+Les tests sont unanimes, la suite de Fibonacci et les données relevées sur le magazine AMPM suivent la loi de Newcomb-Benford, du moins on ne rejette pas cette hypothèse, ce résulat est en accord avec nos suppositions.   
 
 \newpage
 ## Application a des données fiscales italiennes
->>>>>>> e626474735b6f6480af86258febbecbf436d34df
 
 Les données se présentent comme ci-après, chaque ligne correspond à une année, les 9 premières colonnes (sans compter la première qui correspond à l'année) représente la répartition du premier chiffre significatif. Les 4 dernières colonnes quant à elles sont les p_values des différents tests que nous avons cité plus haut. Une case est rouge si l'hypothèse nulle est rejetée au seuil de 5% d'erreur.
 

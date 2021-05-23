@@ -1,0 +1,23 @@
+\babel@toc {french}{}
+\contentsline {section}{Remerciements}{i}{section*.1}%
+\contentsline {section}{Résumé}{i}{section*.2}%
+\contentsline {section}{Introduction}{1}{section*.6}%
+\contentsline {section}{Génèse de la loi de Newcomb-Benford}{2}{section*.7}%
+\contentsline {section}{Expérimentation sur différents jeux de données}{4}{section*.10}%
+\contentsline {subsection}{La suite de Fibonacci}{4}{section*.11}%
+\contentsline {subsection}{Nombres extraits d'un magazine et d'un journal}{5}{section*.13}%
+\contentsline {subsection}{Population des villes de France}{6}{section*.16}%
+\contentsline {subsection}{Passage journalier de vélos dans l'allée Beracasa à Montpellier}{7}{section*.18}%
+\contentsline {subsection}{Nombres générés par les humains}{7}{section*.20}%
+\contentsline {section}{Tests}{9}{section*.22}%
+\contentsline {subsection}{Généralités sur les tests}{9}{section*.23}%
+\contentsline {subsection}{Hypothèse nulle et hypothèse alternative}{10}{section*.24}%
+\contentsline {subsection}{Les risques d'erreurs}{10}{section*.25}%
+\contentsline {subsection}{Test du Khi-Deux}{12}{section*.28}%
+\contentsline {subsection}{Test de Freedman-Watson}{13}{section*.30}%
+\contentsline {subsection}{Tests lisses pour la Loi de Newcomb-Benford}{14}{section*.31}%
+\contentsline {section}{Application des tests}{16}{section*.32}%
+\contentsline {subsection}{Application sur nos jeux de données}{16}{section*.33}%
+\contentsline {subsection}{Application a des données fiscales italiennes}{17}{section*.35}%
+\contentsline {subsection}{CAS COVID}{22}{section*.76}%
+\contentsline {section}{Bibliographie}{23}{section*.77}%
