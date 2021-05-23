@@ -460,24 +460,45 @@ Dans la suite, nous appliquerons les tests $T_{\hat{K}}$ et $T_2$ qui d'après D
 
 \newpage
 
-## Application des tests
-
+# Application des tests
 
 &nbsp;
 Nous traitons sur nos différents jeux de données et sur la fiscalité italienne de $20$ régions, ces données nous servirons à appliquer différents tests (classique ou lisse). Chacun des tests teste l'hypothèse nulle "la répartition du premier chiffre significatif suit la loi de Newcomb-Benford" contre l'hypothèse alternative "la répartition du premier chiffre significatif ne suit pas la loi de Newcomb-Benford". L'objectif ici est d'approuver nos résultats si les données étudiées suivent ou non la loi de Newcomb-Benford et de chercher à savoir si certaines régions d'Italie modifient ou non leurs chiffres, mais aussi de comparer les résultats de nos différents tests.
 
-Ici nous retenons le test du khi-deux qui est le plus connu et utilisé, il semblerait cependant qu'il fasse partie des moins performants (Ducharme & Collab. 2020), le test de Freedman-Watson explicité plus haut. Pour ce qui est des tests lisses nous appliquerons les tests $T_{\hat{K}}$ et $T_2$ comme susmentionné.
+Nous retenons le test du khi-deux qui est le plus connu et utilisé, il semblerait cependant qu'il fasse partie des moins performants (Ducharme & Collab. 2020), le test de Freedman-Watson explicité plus haut. Pour ce qui est des tests lisses nous appliquerons les tests $T_{\hat{K}}$ et $T_2$ comme susmentionné.
 
-\newpage
 ## Application sur nos jeux de données
+
+&nbsp;
+Dans cette partie nous cherchons à confirmer ou non nos hypothèses formulées à la vu des graphiques. Nous utilisons les test cités plus haut.
+Les données se présentent comme ci-après, chaque ligne correspond à une de nos expérience, les 9 premières colonnes (sans compter la première qui correspond à l'expérience) représente la répartition du premier chiffre significatif. Les 4 dernières colonnes quant à elles sont les p_values des différents tests. Une case est rouge si l'hypothèse nulle est rejetée au seuil de 5% d'erreur.
+
+```{r}
+df =  read.csv2('nosdonnees2.csv', header = TRUE, sep = ',', dec = '.',stringsAsFactors = FALSE)
+df=df[,1:14]
+opts <- options(knitr.kable.NA = "")
+colnames(df) <- c(" ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "$\\chi^2$", "$Freedman$", "$T_2$", "$T_{\\hat{K}}$")
+knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
+  column_spec(1, bold=TRUE) %>%kable_styling(font_size = 10)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
+```
+
+Les tests sont unanimes, la suite de Fibonacci et les données relevées sur le magazine AMPM suivent la loi de Newcomb-Benford, du moins on ne rejette pas cette hypothèse, ce résultat est en accord avec nos suppositions.
+
+Regardons maintenant les tests appliqués au jeu de données tirés du magazine *les échos*, nous avions remarqué une tendance décroissante similaire à celle de la répartition de la loi de Newcomb-Benford, avec cependant des valeurs relativement différentes. Les deux tests lisses ainsi que le test de Freedman donnent une $p$-value proche de zéro qui nous mène à un fort rejet de l'hypothèse nulle (avec un risque d'erreur presque nul), contrairement au test du $\chi^2$ (ici une $p$-value d'environ 0,1 nous indique que si nous rejetons l'hypothèse nulle nous avons environ 10% de chance de nous tromper). On remarque ici que ce dernier est possiblement moins puissant que les autres.
+
+Pour terminer tous les tests mènent à un rejet de l'hypothèse nulle "le jeu de donnée suit la loi de N-B" pour les jeux de données sur les population des villes de France, le passage journalier de vélos et les nombres générés par les humains. 
+Pour les deux derniers pas de surprise, cependant le rejet de l'hypothèse nulle pour le jeu de données sur les population des villes de France nous paraît étonnant, l'inspection visuelle nous donnait l'impression que la répartition du PCS collait à celle de la loi de Neewcomb-Benford, mais le nombre important de données à fortement amplifié les différences.
+
+Les différents tests nous ont permis ici de déceler des différences avec la loi de N-B qui nous ont échappés à l'œil nu, mais aussi de nous rendre compte de la différence d'efficacité entre les tests. 
 
 ## Application à des données fiscales italiennes
 
 nbsp;
-Les données se présentent comme ci-après, chaque ligne correspond à une année, les 9 premières colonnes (sans compter la première qui correspond à l'année) représente la répartition du premier chiffre significatif. Les 4 dernières colonnes quant à elles sont les p_values des différents tests que nous avons cité plus haut. Une case est rouge si l'hypothèse nulle est rejetée au seuil de 5% d'erreur.
+Les données utilisées dans cette partie sont tirées d'un article (voir bibliographie) traitant sur la fraude de données fiscales en Italie.
+Les données se présentent comme ci-après, chaque ligne correspond à une année, les $9$ premières colonnes (sans compter la première qui correspond à l'année) représente la répartition du premier chiffre significatif. Les $4$ dernières colonnes quant à elles sont les $p$-values des différents tests que nous avons cité plus haut. Une case est rouge si l'hypothèse nulle est rejetée au seuil de $5 \%$ d'erreur.
 
+Les $12$ premiers tableaux ci-dessus ne montrent pas de suspections de fraude dans leurs données avec les divers tests sélectionnés.
 
-Les 12 premiers tableaux ci-dessus ne montrent pas de suspections de fraude dans leurs données avec les divers tests sélectionnés.
 \begin{table}
 
 ```{r}
@@ -782,8 +803,12 @@ knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, backgrou
 
 ## CAS COVID
 
-Un article écrit par Junyi Zhang qui teste le nombre de cas du Covid-19 en Chine avec la loi de Newcomb-Benford. Il trouve une p-value de 92.8 % en faveur que les numéros respectent la loi de Newcomb-Benford. Pour confirmer le résultat, Ducharme et ses coloborateurs ont utilisée les mêmes données pour retrouver la même chose que le chercheur chinois malheureusement cela ne collait pas avec les résultats attendus. Nous-mêmes nous sommes allées chercher les données de cette article, mais le lien des données n'existe plus sur Wikipédia.
-On peut donc penser que les données ne sont pas cohérentes ou qu'il y a eu une erreur dans son étude ou frauder sur les chiffres. 
+&nbsp;
+La crise du COVID-$19$ étant au cœur des débats actuels et ayant un impact non négligeable sur notre scolarité, nous avons voulu nous intéresser aux chiffres que la Chine à publié. La Chine, à l'origine du départ de cette pandémie à publié des données sur l'expansion des cas dans son territoire.
+Un article écrit par Junyi Zhang qui recense le nombre de cas de personne atteinte du Covid-19 en Chine et compare la répartition des premiers chiffres significatifs avec la loi de Newcomb-Benford. 
+D'après cette article le test qui teste l'hypothèse nulle "les données diffusées par la Chine suivent la loi de Newcomb-Benford" contre l'hypothèse alternative "les données diffusées par la Chine ne suivent pas la loi de Newcomb-Benford" donne une $p$-value de $92.8\%$.
+Pour confirmer le résultat, Ducharme et ses collaborateurs ont utilisé les mêmes données pour appliquer des tests avec les mêmes hypothèses. Malheureusement cela ne collait pas avec les résultats attendus. Nous-mêmes nous sommes allées chercher les données de cette article, mais le lien des données n'existe plus sur Wikipédia.
+On peut donc penser que les données ne sont pas cohérentes ou qu'il y a eu une erreur dans son étude ou fraude sur les chiffres.
 
 \newpage
 
@@ -847,8 +872,6 @@ D. JOENSSEN *Testing for Benford's Law: A Monte Carlo Comparison of Methods* ($2
 
 LESPERANCE M., REED W.J., STEPHENS M.A., TSAO C., WILTON B., *Assessing conformance with Benford's law : Goodness-ff-fit fets and simultaneous confidence interval* ($2016$)  ([*Source*](https://storage.googleapis.com/plos-corpus-prod/10.1371/journal.pone.0151235/1/pone.0151235.pdf?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=wombat-sa%40plos-prod.iam.gserviceaccount.com%2F20210522%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20210522T115455Z&X-Goog-Expires=86400&X-Goog-SignedHeaders=host&X-Goog-Signature=15ee92de490a5ad03c0a988bd684e565f8f4c27b54c41baa8ad1f65a4797da38755fbeb5cb9de7015d9e116b4d6a48826faf7bbc830ddc22081a55d5e79c96b16ccf18034b8f5db6eea250cee093045800e9ebb0ad6aa045b152178a9741233648a79ed1392573d541c5c7f765210a0842dfcfbe92fde5458e42d450a1f10d41754197e86c01b09fdae2629cce26e69754feafb6209114ae9a8cad08dfd2698e1353fd67a0f8c4afd2b265cbade44accd33bc6b3661d086b6ab1c4996e7273a1577f39076d29d1f45cf113aaa2a4ce0800de08b9e4be80a12f7fc67a2c0d2861a3439255425e3cbdc181dfb8cdb54612070e49570d433ff6f1304d8d33afbaf5))  
 
-M. AUSLOOS, R. CERQUETI, T. A. MIR *Data science for assessing possible tax income manipulation: the case of Italy* ($2017$) ([*Source*](https://arxiv.org/pdf/1709.02129.pdf))  
-
 \medskip
 
 **\underline{Test lisse}** :  
@@ -862,6 +885,10 @@ G.R. DUCHARME, S. KACI, C. VOVOR-DASSU *BenfordSmoothTest* ($2020$) ([*Source*](
 NEYMAN J. *Smooth tests for goodnesss-of-fit*, Skand. Aktuariedidskr $20$ : $150 - 199$ ($1937$)
 
 \medskip
+
+**\underline{Cas fiscalité italienne}** :
+
+MARCEL AUSLOOS, ROY CERQUETI, TARIC A. MIR *Data science for assessing possible tax incomemanipulation: the case of Italy* ($2017$) ([*Source*](https://arxiv.org/pdf/1709.02129.pdf)) 
 
 **\underline{Cas Covid-$19$}** :
 

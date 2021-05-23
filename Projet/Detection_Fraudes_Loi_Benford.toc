@@ -13,6 +13,7 @@
 \contentsline {subsection}{Généralités sur les tests}{9}{section*.23}%
 \contentsline {subsection}{Hypothèse nulle et hypothèse alternative}{10}{section*.24}%
 \contentsline {subsection}{Les risques d'erreurs}{10}{section*.25}%
+<<<<<<< HEAD
 \contentsline {subsection}{Test du Khi-Deux}{13}{section*.28}%
 \contentsline {subsection}{Test de Freedman-Watson}{14}{section*.30}%
 \contentsline {subsection}{Tests lisses pour la Loi de Newcomb-Benford}{15}{section*.31}%
@@ -22,3 +23,14 @@
 \contentsline {subsection}{CAS COVID}{23}{section*.75}%
 \contentsline {section}{Conclusion}{24}{section*.76}%
 \contentsline {section}{Bibliographie}{25}{section*.77}%
+=======
+\contentsline {subsection}{Test du Khi-Deux}{12}{section*.28}%
+\contentsline {subsection}{Test de Freedman-Watson}{13}{section*.30}%
+\contentsline {subsection}{Tests lisses pour la Loi de Newcomb-Benford}{14}{section*.31}%
+\contentsline {section}{Application des tests}{16}{section*.32}%
+\contentsline {subsection}{Application sur nos jeux de données}{16}{section*.33}%
+\contentsline {subsection}{Application a des données fiscales italiennes}{18}{section*.35}%
+\contentsline {subsection}{CAS COVID}{23}{section*.76}%
+\contentsline {section}{Conclusion}{24}{section*.77}%
+\contentsline {section}{Bibliographie}{25}{section*.78}%
+>>>>>>> 9f51a9b5d728cd51f075af283ee414c4f45b1d86
