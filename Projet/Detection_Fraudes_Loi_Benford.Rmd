@@ -38,10 +38,10 @@ Remerciements spéciaux à nos relecteurs et correcteurs qui ont contribué au b
 # Résumé
 
 &nbsp;
-Dans différents cadres, la fraude est existante. Une façon répandue pour commettre une fraude est de modifier des chiffres de données de la manière dont le désire l'escroc, et notamment en modifiant le premier chiffre significatif. Ce que nous étudierons plus particulièrement ici.
+Dans différents cadres, la fraude est existante. Une façon répandue pour commettre une fraude est de modifier des chiffres de données de la manière dont le désire l'escroc et notamment en modifiant le premier chiffre significatif. Ce que nous étudierons plus particulièrement ici.
 
 Pour détecter ces fraudes, nous pouvons utiliser la loi de Newcomb-Benford sur des échantillons de données.  
-L'objectif étant d'exposer l'émergence de la loi de Newcomb-Benford dans des données réelles, d'étudier différents jeux de données comme ici la fiscalité italienne et à l'aide de divers tests statistiques suspecter ou non une fraude, par le biais de la modification du premier chiffre significatif des nombres. Nous pourrons utiliser différents tests et voir si ceux-ci vont plutôt dans le même sens ou si certains se contredisent. Nous aborderons les tests dits classiques d'adéquation à la loi de Newcomb-benford, ainsi que les tests lisses mis en place par Monsieur Ducharme et ses collaborateurs.  
+L'objectif étant d'exposer l'émergence de la loi de Newcomb-Benford dans des données réelles, d'étudier différents jeux de données comme ici la fiscalité italienne et à l'aide de divers tests statistiques suspecter ou non une fraude, par le biais de la modification du premier chiffre significatif des nombres. Nous pourrons utiliser différents tests et voir si ceux-ci vont plutôt dans le même sens ou si certains se contredisent. Nous aborderons les tests dits classiques d'adéquation à la loi de Newcomb-Benford, ainsi que les tests lisses mis en place par Monsieur Ducharme et ses collaborateurs.  
 
 Pour répondre à nos différentes problématiques, nous allons effectuer des expériences d'abord visuelles, en extrayant des données d'un journal, d'un magazine ainsi que d'autres données réelles puis nous appliquerons différents tests sur ces jeux de données à l'aide du logiciel `R` et des packages `BenfordTests` et `BENFORDSMOOTHTEST`. Nous utiliserons également ces packages sur un jeu de données fiscales italiennes.  
 
@@ -450,11 +450,11 @@ Dans la suite, nous appliquerons les tests $T_{\hat{K}}$ et $T_2$ qui d'après D
 
 \newpage
 
-## Application a des données fiscales italiennes
+## Application des tests
 
 
 &nbsp;
-Nous traitons des données recueillies dans la première partie sur AMPM... et sur la fiscalité italienne de $20$ régions, ces données nous servirons à appliquer différents tests (classique ou lisse). Chacun des tests teste l'hypothèse nulle "la répartition du premier chiffre significatif suit la loi de Newcomb-Benford" contre l'hypothèse alternative "la répartition du premier chiffre significatif ne suit pas la loi de Newcomb-Benford". L'objectif ici est d'approuver nos résultats si les données étudiées suivent ou non la loi de Newcomb-Benford et de chercher à savoir si certaines régions d'Italie modifient ou non leurs chiffres, mais aussi de comparer les résultats de nos différents tests.
+Nous traitons sur nos différents jeux de données et sur la fiscalité italienne de $20$ régions, ces données nous servirons à appliquer différents tests (classique ou lisse). Chacun des tests teste l'hypothèse nulle "la répartition du premier chiffre significatif suit la loi de Newcomb-Benford" contre l'hypothèse alternative "la répartition du premier chiffre significatif ne suit pas la loi de Newcomb-Benford". L'objectif ici est d'approuver nos résultats si les données étudiées suivent ou non la loi de Newcomb-Benford et de chercher à savoir si certaines régions d'Italie modifient ou non leurs chiffres, mais aussi de comparer les résultats de nos différents tests.
 
 
 
@@ -774,12 +774,27 @@ knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, backgrou
 
 
 
-
-
 ## CAS COVID
 
 Un article écrit par Junyi Zhang qui teste le nombre de cas du Covid-19 en Chine avec la loi de Newcomb-Benford. Il trouve une p-value de 92.8 % en faveur que les numéros respectent la loi de Newcomb-Benford. Pour confirmer le résultat, Ducharme et ses coloborateurs ont utilisée les mêmes données pour retrouver la même chose que le chercheur chinois malheureusement cela ne collait pas avec les résultats attendus. Nous-mêmes nous sommes allées chercher les données de cette article, mais le lien des données n'existe plus sur Wikipédia.
 On peut donc penser que les données ne sont pas cohérentes ou qu'il y a eu une erreur dans son étude ou frauder sur les chiffres. 
+
+\newpage
+
+# Conclusion 
+
+&nbsp;
+(Rappel de la problématique)
+Ce projet nous a permis d'approfondir nos connaissances, de pouvoir faire des expériences nous-mêmes et de nous initier au vaste problème pour detecter une fraude. Et plus particulierement à la loi de Benford-Newcomb en exposant sa genèse mais aussi de l'étudier avec divers tests. 
+(Reponse)
+Dans le déroulement de notre projet, nous avons appris que la loi de Benford-Newcomb n'est pas applicable à toutes les données comme l'expérience de Hill sité plus haut qui sont influencées par la penseé de l'Homme. De plus, lors des applications des tests, nous avons remarqué que certains tests avaient une p-value inferieurs à 5%. Les tests parraissent fiables mais pour " detecter une fraude plus y a de test mieux c'est " Car les tests ne vont pas dans les mêmes directions car chaque tests mettent en valeurs leurs "propriétés " c'est- à-dire que un permet de ... et un autre de ..
+(Ouverture)
+Pour avoir un autre point de vue, il serait bien d'appliquer la loi de Newcomb-Benford avec le deuxieme chiffre significatif et lui appliquer les differents tests pour permettre à une autre conclusion ?
+
+
+
+
+
 
 \newpage
 
