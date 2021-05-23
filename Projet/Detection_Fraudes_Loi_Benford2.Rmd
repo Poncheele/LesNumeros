@@ -298,18 +298,21 @@ On pense souvent à tort que les tests d'hypothèses statistiques visent à choi
 
 Finalement, la décision d'accepter l'hypothèse nulle n'est pas équivalente à dire que $H_0$ est vraie et que $H_1$ est fausse, mais cela traduit uniquement l'idée selon laquelle il n'y a pas d'évidence nette pour que $H_0$ soit fausse. Un test conclu donc à rejeter ou à ne pas rejeter l'hypothèse nulle mais jamais à l'accepter directement. Notons cependant que dans certains cas rares, on peut se permettre d'accepter $H_0$, par exemple dans les cas où $H_0$ et $H_1$ sont simples. Un test d'hypothèses est dit simple[^n5] si on pose sous $H_0$ le paramètre égal à une certaine valeur et sous $H_1$ celui-ci égal à une autre valeur.  
 
-Exemple de test entre deux hypothèses simples :  
-Tester $H_0$ contre $H_1$ avec $H_0 : \text{"} \theta = \theta_0 \text{"}$ et $H_1 : \text{"} \theta = \theta_1 \text{"}$.  
+\underline{Exemple de test entre deux hypothèses simples} :  
+
+Tester $H_0$ contre $H_1$ avec $H_0$ : "$\theta = \theta_0$" et $H_1$ : "$\theta = \theta_1$".  
 
 Le test d'hypothèses simples s'oppose au test d'hypothèses composites.  
 
-Exemples de test entre deux hypothèses composites :  
-Tester $H_0$ contre $H_1$ avec $H_0 : \text{"} \theta = \theta_0 \text{"}$ et $H_1 : \text{"} \theta \neq \theta_0 \text{"}$ (test bilatéral) et tester $H_0$ contre $H_1$ avec $H_0 : \text{"} \theta = \theta_0 \text{"}$ et $H_1 : \text{"} \theta \geq \theta_0 \text{"}$ (test unilatéral)
+\underline{Exemples de test entre deux hypothèses composites} : 
+
+Tester $H_0$ contre $H_1$ avec $H_0$ : "$\theta = \theta_0$" et $H_1$ : "$\theta \neq \theta_0$" (test bilatéral) et tester $H_0$ contre $H_1$ avec $H_0$ : "$\theta = \theta_0$" et $H_1$ : "$\theta \geq \theta_0$" (test unilatéral).  
 
 Dans la suite de notre projet, nous nous intéresserons aux données fiscales de $20$ régions italiennes entre $2007$ et $2011$. Nous réaliserons donc pour chacune de ces régions et chacune des années le test d'hypothèses suivant : $H_0$ : "La répartition du premier chiffre significatif suit la loi de Newcomb-Benford" contre $H_1$ : "La répartition du premier chiffre significatif ne suit pas la loi de Newcomb-Benford".  
 
 [^n5]: J. Y. BAUDOT ([*source*](http://www.jybaudot.fr/Inferentielle/tests.html#:~:text=Le%20but%20du%20test%20est,doit%20rejeter%20ou%20non%20H0.&text=Ce%20sont%20l%C3%A0%20des%20tests,test%20d%27hypoth%C3%A8se%20simple)).
 
+\newpage
 ## Les risques d'erreurs
 
 &nbsp;
@@ -320,12 +323,16 @@ L'erreur de Type I consiste à rejeter l'hypothèse nulle alors que celle-ci est
 $$\alpha = \mathbb{P}(\text{rejeter} \, H_0 | H_0 \, \text{vraie}).$$
 
 Un niveau $\alpha$ de $0.05$ indique que nous sommes disposé à avoir $5 \%$ de chances de rejeter l'hypothèse nulle à tort. Pour réduire ce risque, il est possible d'utiliser une valeur $\alpha$ plus faible. Cependant, cela implique d'être moins à même de détecter une vraie différence si celle-ci existe vraiment.  
+
 Dans notre contexte, l'erreur de Type I consiste à affirmer que les données ne suivent pas la loi de Newcomb-Benford alors que c'est le cas, soit faussement identifier une fraude.
 
 L'erreur de Type II repose sur le fait de ne pas rejeter l'hypothèse nulle alors que celle-ci est fausse. La probabilité de commettre une erreur de seconde espèce est notée $\beta$, et dépend de la puissance du test. Il est possible de réduire le risque de deuxième espèce en faisant en sorte que le test soit suffisamment puissant. Pour cela, il est nécessaire que l'effectif d'échantillon soit suffisamment grand pour permettre la détection d'une différence réelle.  
 La probabilité de rejeter l'hypothèse nulle à tort vaut $1 - \beta$, il s'agit de la puissance du test. Finalement, la puissance d'un test est donnée par :  
 $$1 - \beta = \mathbb{P}(\text{rejeter} \, H_0 | H_1 \, \text{vraie}).$$
 
+Dans ce projet, l'erreur de Type II 
+
+\newpage
 \begin{table}
 
 ```{r}
@@ -344,8 +351,9 @@ knitr::kable(rbind(c1, c2, c3), escape=F, row.names=F, align='c') %>%
 
 \vspace{0.2cm}
 
+\newpage
 Au sujet de la loi de Newcomb-Benford, notons que le test d'adéquation le plus populaire est le test du khi-deux de Pearson dont la puissance, associée au risque d'erreur de Type II est relativement faible. C'est pourquoi, d'autres tests ont été mis en place récemment. L'ensemble de ces tests seront développés par la suite.  
-G. Ducharme, S. Kaci et C. Vovor-Dassu[^n6] ont introduits de nouveaux tests d'adéquation pour cette loi, basés sur le principe des tests lisses. Ils ont également comparés ces tests aux meilleurs tests existants et ont montrés qu'ils seraient globalement plus performants. Notons aussi que la qualité d'un test dépend de sa puissance, plus forte elle est meilleur est le test. Cependant, différents tests peuvent conduire à des avantages différents. Par exemple, certains tests détecteront plus que d'autres la différence significative du premier chiffre significatif, quant à d'autres, ce sera un autre chiffre significatif.  
+G. Ducharme, S. Kaci et C. Vovor-Dassu[^n6] ont introduits de nouveaux tests d'adéquations pour cette loi, ceux-ci sont basés sur le principe des tests lisses. Ils ont également comparé ces tests aux meilleurs tests existants et ont montré qu'ils seraient globalement plus performants. Notons aussi que la qualité d'un test dépend de sa puissance, plus forte elle est meilleur est le test. Cependant, différents tests peuvent conduire à des avantages divers. Par exemple, certains tests détecteront plus que d'autres la différence significative du premier chiffre significatif, quant à d'autres, ce sera un autre chiffre significatif.  
 
 [^n6]: Tests d’adéquations lisses pour la loi de Newcomb-Benford écrit en $2020$ ([*source*](http://openscience.fr/IMG/pdf/iste_mas20v3n1_1.pdf)).
 
@@ -538,7 +546,6 @@ knitr::kable(df, escape=F, digits = 3)%>% column_spec(11:14, bold = T, backgroun
 \caption{Tableau 5 : Tests sur la région de Basilicata}
 \end{table}
 
-\newpage
 \begin{table}
 
 ```{r}
@@ -703,7 +710,7 @@ knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, backgrou
 
 \newpage
 
-Les régions de Marche et Molisse semblent n'avoir fraudé que sur une seule année, cette fraude est suspectée par plusieurs tests, notament les tests lisses. Nous voyons tout de même que pour la région de Molisse les p_value sont plutôt proche du seuil de $5\%$ pour l'année $2010$ par exemple. Il est possible que cette région à modifié sa façon de frauder pour échapper aux tests, c'est pourquoi il est important d'apporter de nouveau tests.
+Les régions de Marche et Molisse semblent n'avoir fraudé que sur une seule année, cette fraude est suspectée par plusieurs tests, notamment les tests lisses. Nous voyons tout de même que pour la région de Molisse les $p$-values sont plutôt proches du seuil de $5 \%$ pour l'année $2010$ par exemple. Il est possible que cette région à modifié sa façon de frauder pour échapper aux tests, c'est pourquoi il est important d'apporter de nouveau tests.
 
 \begin{table}
 
@@ -813,7 +820,7 @@ knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, backgrou
 \caption{Tableau 23 : Tests sur la région de Umbria}
 \end{table}
 
-On voit clairement que sur chacune des années (ou presque) les test s'affolent, un même test détecte une potentielle fraude chaque année par région. Les test qui détectent ces fraudes sont différents pour chaque régions, pour la région de la Liguria c'est le test du $\chi^2$, pour la région de la Umbria ce sont les tests lisses par exemple. Ceci nous indiquent que ces régions sont surement des régions qui trichent avec leurs chiffres, mais de manière différentes. Il est donc important de posséder une batterie de tests pour couvrir le plus possible de façons de frauder et même d'en trouver de nouveaux puisque une fois connu, il est possible de le contourner.    
+On voit clairement que sur chacune des années (ou presque) les test s'affolent, un même test détecte une potentielle fraude chaque année par région. Les tests qui détectent ces fraudes sont différents pour chaque régions, pour la région de la Liguria c'est le test du $\chi^2$, pour la région de la Umbria ce sont les tests lisses par exemple. Ceci nous indique que ces régions sont sûrement des régions qui trichent avec leurs chiffres, mais de manière différentes. Il est donc important de posséder une batterie de tests pour couvrir le plus possible de façons de frauder et même d'en trouver de nouveaux puisque une fois connu, il est possible de le contourner.    
 
 \newpage
 
@@ -823,8 +830,8 @@ On voit clairement que sur chacune des années (ou presque) les test s'affolent,
 La crise du COVID-$19$ étant au coeur des débats actuels et ayant un impact non négligeable sur notre scolarité, nous avons voulu nous intéresser aux chiffres que la Chine à publié. La Chine, à l'origine du départ de cette pandémie à publié des données sur l'expansion des cas dans son territoire.
 Un article écrit par Junyi Zhang qui recense le nombre de cas de personne atteinte du Covid-$19$ en Chine et compare la répartition des premiers chiffres significatifs avec la loi de Newcomb-Benford. 
 D'après cet article le test qui teste l'hypothèse nulle "les données diffusées par la Chine suivent la loi de Newcomb-Benford" contre l'hypothèse alternative "les données diffusées par la Chine ne suivent pas la loi de Newcomb-Benford" donne une $p$-value de $92.8 \%$.
-Pour confirmer le résultat, Ducharme et ses collaborateurs ont utilisé les mêmes données pour appliquer des tests avec les mêmes hypothèses. Malheureusement cela ne collait pas avec les résultats attendus. Nous-mêmes nous sommes allées chercher les données de cette article, mais le lien des données n'existe plus sur Wikipédia.
-On peut donc penser que les données ne sont pas cohérentes ou qu'il y a eu une erreur dans son étude ou fraude sur les chiffres.
+Pour confirmer le résultat, Ducharme et ses collaborateurs ont utilisé les mêmes données pour appliquer des tests avec les mêmes hypothèses. Malheureusement cela ne collait pas avec les résultats attendus. Nous-mêmes sommes allés chercher les données de cette article, mais le lien des données n'existe plus sur Wikipédia.
+On peut donc penser que les données ne sont pas cohérentes, qu'il y a eu une erreur dans l'étude de J. Zhang ou peut-être une fraude sur les chiffres.
 
 \newpage
 
@@ -833,8 +840,8 @@ On peut donc penser que les données ne sont pas cohérentes ou qu'il y a eu une
 &nbsp;
 Au cours de ce projet, nous avons pu acquérir de nouvelles connaissances, ce fut intéressant et enrichissant de réaliser nos propres expériences et de nous initier au vaste problème de la détection de fraudes. Nous avons plus particulièrement découvert la loi de Newcomb-Benford, en exposant sa genèse, mais aussi en l'étudiant au travers de différents tests. De ce fait, nous avons tentés de répondre à certaines questions : quelle répartition suit le premier chiffre significatif d'une suite de nombres générés naturellement ? Les tests mis en place pour détecter une fraude sont-ils fiables et vont-ils toujours dans le même sens ? Certains sont-ils meilleurs que d'autres ?  
 
-Dans la suite de ce projet, nous avons appris que la détection de fraudes était délicate. En effet, nous avons remarqué que la loi de Newcomb-Benford ne s'applique pas systématiquement à toutes les données. Comme nous l'avons découvert dans l'expérience de Hill ainsi que lorsque nous l'avons reproduite à moindre échelle, les données influencées par la pensée humaine ne suivent généralement pas la loi de Newcomb-Benford. De plus, les données dites naturelles auront moins tendance à suivre la loi de Newcomb-Benford si celles-ci sont brutes.  
-Une observation visuelle n'étant que peu efficace, nous avons réalisés différents tests. Notons que la réalisation d'un test n'est pas complètement fiable, et qu'il faut tenir compte des risques d'erreurs ; le risque de suspecter à tort une fraude (risque de première espèce) et le risque de 
+Dans la suite de ce projet, nous avons appris que la détection de fraudes était délicate. En effet, nous avons remarqué que la loi de Newcomb-Benford ne s'appliquait pas systématiquement à toutes les données. Comme nous l'avons découvert dans l'expérience de Hill ainsi que lorsque nous l'avons reproduite à moindre échelle, les données influencées par la pensée humaine ne suivent généralement pas la loi de Newcomb-Benford. De plus, les données dites naturelles auront moins tendance à suivre la loi de Newcomb-Benford si celles-ci sont brutes.  
+Une observation visuelle n'étant que peu efficace, nous avons réalisés différents tests. Notons que la réalisation d'un test n'est pas complètement fiable, et qu'il faut tenir compte des risques d'erreurs ; le risque de suspecter à tort une fraude (risque de première espèce) et le risque de laisser passer une fraude (risque de seconde espèce).
 
 Il est également important de retenir que le risque de lancer un audit pour suspicion de fraude peut coûter cher, plus cher que le risque de laisser passer une fraude.  
 
