@@ -460,8 +460,6 @@ et la statistique de test $T_{\hat{K}} \stackrel{L}{\longrightarrow} \chi_{1}^{2
 
 Dans la suite, nous appliquerons les tests $T_{\hat{K}}$ et $T_2$ qui d'après Ducharme & Collab. sont les plus performants.
 
-\newpage
-
 # Application des tests
 
 &nbsp;
@@ -475,20 +473,28 @@ Nous retenons le test du khi-deux qui est le plus connu et utilisé, il semblera
 Dans cette partie nous cherchons à confirmer ou non nos hypothèses formulées à la vu des graphiques. Nous utilisons les test cités plus haut.
 Les données se présentent comme ci-après, chaque ligne correspond à une de nos expérience, les $9$ premières colonnes (sans compter la première qui correspond à l'expérience) représente la répartition du premier chiffre significatif. Les $4$ dernières colonnes quant à elles sont les $p$-values des différents tests. Une case est rouge si l'hypothèse nulle est rejetée au seuil de $5 \%$ d'erreur.
 
+\newpage
+
+\begin{table}
 ```{r}
 df =  read.csv2('nosdonnees2.csv', header = TRUE, sep = ',', dec = '.',stringsAsFactors = FALSE)
 df=df[,1:14]
 opts <- options(knitr.kable.NA = "")
 colnames(df) <- c(" ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "$\\chi^2$", "$Freedman$", "$T_2$", "$T_{\\hat{K}}$")
-knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
-  column_spec(1, bold=TRUE) %>%kable_styling(font_size = 10)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
+knitr::kable(df, "latex", escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
+  column_spec(1, bold=TRUE) %>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 9, latex_options="HOLD_position")
 ```
 
-Les tests sont unanimes, la suite de Fibonacci et les données relevées sur le magazine AMPM suivent la loi de Newcomb-Benford, du moins on ne rejette pas cette hypothèse, ce résultat est en accord avec nos suppositions.
+\caption{Tableau 3 : Tests sur nos divers jeux de données}
+\end{table}
+
+\vspace{0.2cm}
+
+Les tests sont unanimes, la suite de Fibonacci et les données relevées sur le magazine *AMPM* suivent la loi de Newcomb-Benford, du moins on ne rejette pas cette hypothèse, ce résultat est en accord avec nos suppositions.
 
 Regardons maintenant les tests appliqués au jeu de données tirés du magazine *les échos*, nous avions remarqué une tendance décroissante similaire à celle de la répartition de la loi de Newcomb-Benford, avec cependant des valeurs relativement différentes. Les deux tests lisses ainsi que le test de Freedman donnent une $p$-value proche de zéro qui nous mène à un fort rejet de l'hypothèse nulle (avec un risque d'erreur presque nul), contrairement au test du $\chi^2$ (ici une $p$-value d'environ $0,1$ nous indique que si nous rejetons l'hypothèse nulle nous avons environ $10 \%$ de chance de nous tromper). On remarque ici que ce dernier est possiblement moins puissant que les autres.
 
-Pour terminer tous les tests mènent à un rejet de l'hypothèse nulle "le jeu de donnée suit la loi de N-B" pour les jeux de données sur les population des villes de France, le passage journalier de vélos et les nombres générés par les humains. 
+Pour terminer tous les tests mènent à un rejet de l'hypothèse nulle "le jeu de données suit la loi de N-B" pour les jeux de données sur les population des villes de France, le passage journalier de vélos et les nombres générés par les humains. 
 Pour les deux derniers pas de surprise, cependant le rejet de l'hypothèse nulle pour le jeu de données sur les population des villes de France nous paraît étonnant, l'inspection visuelle nous donnait l'impression que la répartition du PCS collait à celle de la loi de Newcomb-Benford, mais le nombre important de données à fortement amplifié les différences.
 
 Les différents tests nous ont permis ici de déceler des différences avec la loi de N-B qui nous ont échappés à l'oeil nu, mais aussi de nous rendre compte de la différence d'efficacité entre les tests. 
@@ -496,10 +502,10 @@ Les différents tests nous ont permis ici de déceler des différences avec la l
 ## Application à des données fiscales italiennes
 
 &nbsp;
-Les données utilisées dans cette partie sont tirées d'un article (voir bibliographie) traitant sur la fraude de données fiscales en Italie.
+Les données utilisées dans cette partie sont tirées d'un article (cf. bibliographie) traitant sur la fraude de données fiscales en Italie.
 Les données se présentent comme ci-après, chaque ligne correspond à une année, les $9$ premières colonnes (sans compter la première qui correspond à l'année) représente la répartition du premier chiffre significatif. Les $4$ dernières colonnes quant à elles sont les $p$-values des différents tests que nous avons cité plus haut. Une case est rouge si l'hypothèse nulle est rejetée au seuil de $5 \%$ d'erreur.
 
-Les $12$ premiers tableaux ci-dessus ne montrent pas de suspections de fraude dans leurs données avec les divers tests sélectionnés.
+Observons que les $12$ premiers tableaux ci-dessous ne montrent pas de suspections de fraudes. Ces régions italiennes, dont nous pouvons relever la région d'Abruzzo, de Basilicata, de Lombardia, ou encore de Puglia, ne permettent avec aucun des tests sélectionnés de rejeter l'hypothèse nulle, au risque de $5 \%$. Ceci signifie donc que nous serions plutôt tentés de ne pas suspecter de fraudes pour ces régions italiennes
 
 \begin{table}
 
@@ -515,7 +521,7 @@ knitr::kable(df, escape=FALSE, digits = 3) %>%
   kable_styling(font_size = 10, latex_options="HOLD_position")
 ```
 
-\caption{Tableau 3 : Tests sur la région d'Abruzzo}
+\caption{Tableau 4 : Tests sur la région d'Abruzzo}
 \end{table}
 
 \begin{table}
@@ -526,12 +532,13 @@ df=df[,1:14]
 opts <- options(knitr.kable.NA = "")
 colnames(df) <- c(" ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "$\\chi^2$", "$Freedman$", "$T_2$", "$T_{\\hat{K}}$")
 knitr::kable(df, escape=F, digits = 3)%>% column_spec(11:14, bold = T, background = ifelse(df[,11:14]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
-  column_spec(1, bold=TRUE) %>%kable_styling(font_size = 10, latex_options="HOLD_position")
+  column_spec(1, bold=TRUE) %>% kable_styling(font_size = 10, latex_options="HOLD_position")
 ```
 
-\caption{Tableau 4 : Tests sur la région de Basilicata}
+\caption{Tableau 5 : Tests sur la région de Basilicata}
 \end{table}
 
+\newpage
 \begin{table}
 
 ```{r}
@@ -543,8 +550,9 @@ knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11:14, bold = T, backg
   column_spec(1, bold=TRUE) %>%kable_styling(font_size = 10, latex_options="HOLD_position")
 ```
 
-\caption{Tableau 5 : Tests sur la région de Calabria}
+\caption{Tableau 6 : Tests sur la région de Calabria}
 \end{table}
+
 
 \begin{table}
 
@@ -553,11 +561,11 @@ df =  read.csv2('Lazio2.csv', header = TRUE, sep = ',', dec = '.',stringsAsFacto
 df=df[,1:14]
 opts <- options(knitr.kable.NA = "")
 colnames(df) <- c(" ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "$\\chi^2$", "$Freedman$", "$T_2$", "$T_{\\hat{K}}$")
-knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
+knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
   column_spec(1, bold=TRUE) %>%kable_styling(font_size = 10)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
 ```
 
-\caption{Tableau 6 : Tests sur la région de la Lazio}
+\caption{Tableau 7 : Tests sur la région de la Lazio}
 \end{table}
 
 \begin{table}
@@ -567,11 +575,11 @@ df =  read.csv2('Friuli-Venezia-Giulia2.csv', header = TRUE, sep = ',', dec = '.
 df=df[,1:14]
 opts <- options(knitr.kable.NA = "")
 colnames(df) <- c(" ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "$\\chi^2$", "$Freedman$", "$T_2$", "$T_{\\hat{K}}$")
-knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
+knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
   column_spec(1, bold=TRUE) %>%kable_styling(font_size = 10, latex_options="HOLD_position")
 ```
 
-\caption{Tableau 7 : Tests sur la région de Friuli-Venezia-Giulia}
+\caption{Tableau 8 : Tests sur la région de Friuli-Venezia-Giulia}
 \end{table}
 
 \begin{table}
@@ -581,11 +589,11 @@ df =  read.csv2('Lombardia2.csv', header = TRUE, sep = ',', dec = '.',stringsAsF
 df=df[,1:14]
 opts <- options(knitr.kable.NA = "")
 colnames(df) <- c(" ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "$\\chi^2$", "$Freedman$", "$T_2$", "$T_{\\hat{K}}$")
-knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
-  column_spec(1, bold=TRUE) %>%kable_styling(font_size = 10)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
+knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
+  column_spec(1, bold=TRUE)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
 ```
 
-\caption{Tableau 8 : Tests sur la région de Lombardia}
+\caption{Tableau 9 : Tests sur la région de Lombardia}
 \end{table}
 
 \begin{table}
@@ -595,11 +603,11 @@ df =  read.csv2('Piemonte2.csv', header = TRUE, sep = ',', dec = '.',stringsAsFa
 df=df[,1:14]
 opts <- options(knitr.kable.NA = "")
 colnames(df) <- c(" ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "$\\chi^2$", "$Freedman$", "$T_2$", "$T_{\\hat{K}}$")
-knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
-  column_spec(1, bold=TRUE) %>%kable_styling(font_size = 10)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
+knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
+  column_spec(1, bold=TRUE)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
 ```
 
-\caption{Tableau 9 : Tests sur la région de Piemonte}
+\caption{Tableau 10 : Tests sur la région de Piemonte}
 \end{table}
 
 \begin{table}
@@ -609,11 +617,11 @@ df =  read.csv2('puglia2.csv', header = TRUE, sep = ',', dec = '.',stringsAsFact
 df=df[,1:14]
 opts <- options(knitr.kable.NA = "")
 colnames(df) <- c(" ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "$\\chi^2$", "$Freedman$", "$T_2$", "$T_{\\hat{K}}$")
-knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
-  column_spec(1, bold=TRUE) %>%kable_styling(font_size = 10)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
+knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
+  column_spec(1, bold=TRUE)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
 ```
 
-\caption{Tableau 10 : Tests sur la région de Puglia}
+\caption{Tableau 11 : Tests sur la région de Puglia}
 \end{table}
 
 \begin{table}
@@ -623,11 +631,11 @@ df =  read.csv2('trentino-alto2.csv', header = TRUE, sep = ',', dec = '.',string
 df=df[,1:14]
 opts <- options(knitr.kable.NA = "")
 colnames(df) <- c(" ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "$\\chi^2$", "$Freedman$", "$T_2$", "$T_{\\hat{K}}$")
-knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
-  column_spec(1, bold=TRUE) %>%kable_styling(font_size = 10)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
+knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
+  column_spec(1, bold=TRUE)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
 ```
 
-\caption{Tableau 11 : Tests sur la région de Trentino-alto}
+\caption{Tableau 12 : Tests sur la région de Trentino-alto}
 \end{table}
 
 \begin{table}
@@ -637,15 +645,16 @@ df =  read.csv2('valledaosta2.csv', header = TRUE, sep = ',', dec = '.',stringsA
 df=df[,1:14]
 opts <- options(knitr.kable.NA = "")
 colnames(df) <- c(" ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "$\\chi^2$", "$Freedman$", "$T_2$", "$T_{\\hat{K}}$")
-knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
-  column_spec(1, bold=TRUE) %>%kable_styling(font_size = 10)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
+knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
+  column_spec(1, bold=TRUE)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
 ```
 
-\caption{Tableau 12 : Tests sur la région de Valle D'aosta}
+\caption{Tableau 13 : Tests sur la région de Valle D'aosta}
 \end{table}
 
+\newpage
+Les tableaux suivants nous montrent dans certains cas des suspicions de fraude. Les tests ne sont souvent pas en accord, on remarque que pour les régions suivantes seul un test détecte une fraude et seulement sur une année. Les p-values des autres tests sont relativement élevés.
 
-**Seulement un test**
 \begin{table}
 
 ```{r}
@@ -653,14 +662,12 @@ df =  read.csv2('Sicilia2.csv', header = TRUE, sep = ',', dec = '.',stringsAsFac
 df=df[,1:14]
 opts <- options(knitr.kable.NA = "")
 colnames(df) <- c(" ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "$\\chi^2$", "$Freedman$", "$T_2$", "$T_{\\hat{K}}$")
-knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
-  column_spec(1, bold=TRUE) %>%kable_styling(font_size = 10)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
+knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
+  column_spec(1, bold=TRUE)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
 ```
 
-\caption{Tableau 13 : Tests sur la région de la Sicilia}
+\caption{Tableau 14 : Tests sur la région de la Sicilia}
 \end{table}
-
-
 
 \begin{table}
 
@@ -669,15 +676,15 @@ df =  read.csv2('veneto2.csv', header = TRUE, sep = ',', dec = '.',stringsAsFact
 df=df[,1:14]
 opts <- options(knitr.kable.NA = "")
 colnames(df) <- c(" ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "$\\chi^2$", "$Freedman$", "$T_2$", "$T_{\\hat{K}}$")
-knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
-  column_spec(1, bold=TRUE) %>%kable_styling(font_size = 10)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
+knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
+  column_spec(1, bold=TRUE)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
 ```
 
-\caption{Tableau 14 : Tests sur la région de Veneto}
+\caption{Tableau 15 : Tests sur la région de Veneto}
 \end{table}
 
-
-
+  
+Ici la région de Campagnia semble avoir fraudé presque tous les ans, tous les test n'ont pas mis en évidence une potentielle fraude, on remarque tout de même que le test lisse $T_2$ à relevé une fraude à chaque fois que les autres l'ont fait.
 
 \begin{table}
 
@@ -686,14 +693,50 @@ df =  read.csv2('Campania2.csv', header = TRUE, sep = ',', dec = '.',stringsAsFa
 df=df[,1:14]
 opts <- options(knitr.kable.NA = "")
 colnames(df) <- c(" ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "$\\chi^2$", "$Freedman$", "$T_2$", "$T_{\\hat{K}}$")
-knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
-  column_spec(1, bold=TRUE) %>%kable_styling(font_size = 10)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
+knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
+  column_spec(1, bold=TRUE)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
 ```
 
 
-\caption{Tableau 15 : Tests sur la région de Campania}
+\caption{Tableau 16 : Tests sur la région de Campania}
 \end{table}
 
+\newpage
+
+Les régions de Marche et Molisse semblent n'avoir fraudé que sur une seule année, cette fraude est suspectée par plusieurs tests, notament les tests lisses. Nous voyons tout de même que pour la région de Molisse les p_value sont plutôt proche du seuil de $5\%$ pour l'année $2010$ par exemple. Il est possible que cette région à modifié sa façon de frauder pour échapper aux tests, c'est pourquoi il est important d'apporter de nouveau tests.
+
+\begin{table}
+
+```{r}
+df =  read.csv2('Marche2.csv', header = TRUE, sep = ',', dec = '.',stringsAsFactors = FALSE)
+df=df[,1:14]
+opts <- options(knitr.kable.NA = "")
+colnames(df) <- c(" ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "$\\chi^2$", "$Freedman$", "$T_2$", "$T_{\\hat{K}}$")
+knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
+  column_spec(1, bold=TRUE)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
+```
+
+\caption{Tableau 17 : Tests sur la région de Marche}
+\end{table}
+
+\begin{table}
+
+```{r}
+df =  read.csv2('Molise2.csv', header = TRUE, sep = ',', dec = '.',stringsAsFactors = FALSE)
+df=df[,1:14]
+opts <- options(knitr.kable.NA = "")
+colnames(df) <- c(" ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "$\\chi^2$", "$Freedman$", "$T_2$", "$T_{\\hat{K}}$")
+knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
+  column_spec(1, bold=TRUE)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
+```
+
+\caption{Tableau 18 : Tests sur la région de Molise}
+\end{table}
+
+
+\newpage
+   
+Cette partie regroupe les régions dont nous suspectons la fraude sur la quasi-totalité de l'étude.   
 
 \begin{table}
 
@@ -702,11 +745,11 @@ df =  read.csv2('emilia-romagna2.csv', header = TRUE, sep = ',', dec = '.',strin
 df=df[,1:14]
 opts <- options(knitr.kable.NA = "")
 colnames(df) <- c(" ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "$\\chi^2$", "$Freedman$", "$T_2$", "$T_{\\hat{K}}$")
-knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
-  column_spec(1, bold=TRUE) %>%kable_styling(font_size = 10)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
+knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
+  column_spec(1, bold=TRUE)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
 ```
 
-\caption{Tableau 16 : Tests sur la région d'Emilia-romagna}
+\caption{Tableau 19 : Tests sur la région d'Emilia-romagna}
 \end{table}
 
 
@@ -718,43 +761,12 @@ df =  read.csv2('Liguria2.csv', header = TRUE, sep = ',', dec = '.',stringsAsFac
 df=df[,1:14]
 opts <- options(knitr.kable.NA = "")
 colnames(df) <- c(" ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "$\\chi^2$", "$Freedman$", "$T_2$", "$T_{\\hat{K}}$")
-knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
-  column_spec(1, bold=TRUE) %>%kable_styling(font_size = 10)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
+knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
+  column_spec(1, bold=TRUE)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
 ```
 
-\caption{Tableau 17 : Tests sur la région de la Liguria}
+\caption{Tableau 20 : Tests sur la région de la Liguria}
 \end{table}
-
-
-
-\begin{table}
-
-```{r}
-df =  read.csv2('Marche2.csv', header = TRUE, sep = ',', dec = '.',stringsAsFactors = FALSE)
-df=df[,1:14]
-opts <- options(knitr.kable.NA = "")
-colnames(df) <- c(" ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "$\\chi^2$", "$Freedman$", "$T_2$", "$T_{\\hat{K}}$")
-knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
-  column_spec(1, bold=TRUE) %>%kable_styling(font_size = 10)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
-```
-
-\caption{Tableau 18 : Tests sur la région de Marche}
-\end{table}
-
-\begin{table}
-
-```{r}
-df =  read.csv2('Molise2.csv', header = TRUE, sep = ',', dec = '.',stringsAsFactors = FALSE)
-df=df[,1:14]
-opts <- options(knitr.kable.NA = "")
-colnames(df) <- c(" ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "$\\chi^2$", "$Freedman$", "$T_2$", "$T_{\\hat{K}}$")
-knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
-  column_spec(1, bold=TRUE) %>%kable_styling(font_size = 10)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
-```
-
-\caption{Tableau 19 : Tests sur la région de Molise}
-\end{table}
-
 
 \begin{table}
 
@@ -763,11 +775,11 @@ df =  read.csv2('Sardegna2.csv', header = TRUE, sep = ',', dec = '.',stringsAsFa
 df=df[,1:14]
 opts <- options(knitr.kable.NA = "")
 colnames(df) <- c(" ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "$\\chi^2$", "$Freedman$", "$T_2$", "$T_{\\hat{K}}$")
-knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
-  column_spec(1, bold=TRUE) %>%kable_styling(font_size = 10)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
+knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
+  column_spec(1, bold=TRUE)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
 ```
 
-\caption{Tableau 20 : Tests sur la région de la Sardegna}
+\caption{Tableau 21 : Tests sur la région de la Sardegna}
 \end{table}
 
 
@@ -778,14 +790,14 @@ df =  read.csv2('toscana2.csv', header = TRUE, sep = ',', dec = '.',stringsAsFac
 df=df[,1:14]
 opts <- options(knitr.kable.NA = "")
 colnames(df) <- c(" ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "$\\chi^2$", "$Freedman$", "$T_2$", "$T_{\\hat{K}}$")
-knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
-  column_spec(1, bold=TRUE) %>%kable_styling(font_size = 10)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
+knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
+  column_spec(1, bold=TRUE)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
 ```
 
-\caption{Tableau 21 : Tests sur la région de Toscana}
+\caption{Tableau 22 : Tests sur la région de Toscana}
 \end{table}
 
-
+\newpage
 
 \begin{table}
 
@@ -794,13 +806,16 @@ df =  read.csv2('Umbria2.csv', header = TRUE, sep = ',', dec = '.',stringsAsFact
 df=df[,1:14]
 opts <- options(knitr.kable.NA = "")
 colnames(df) <- c(" ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "$\\chi^2$", "$Freedman$", "$T_2$", "$T_{\\hat{K}}$")
-knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
-  column_spec(1, bold=TRUE) %>%kable_styling(font_size = 10)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
+knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
+  column_spec(1, bold=TRUE)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
 ```
 
-\caption{Tableau 22 : Tests sur la région de Umbria}
+\caption{Tableau 23 : Tests sur la région de Umbria}
 \end{table}
 
+On voit clairement que sur chacune des années (ou presque) les test s'affolent, un même test détecte une potentielle fraude chaque année par région. Les test qui détectent ces fraudes sont différents pour chaque régions, pour la région de la Liguria c'est le test du $\chi^2$, pour la région de la Umbria ce sont les tests lisses par exemple. Ceci nous indiquent que ces régions sont surement des régions qui trichent avec leurs chiffres, mais de manière différentes. Il est donc important de posséder une batterie de tests pour couvrir le plus possible de façons de frauder et même d'en trouver de nouveaux puisque une fois connu, il est possible de le contourner.    
+
+\newpage
 
 ## CAS COVID
 
@@ -895,4 +910,4 @@ MARCEL AUSLOOS, ROY CERQUETI, TARIC A. MIR *Data science for assessing possible 
 
 **\underline{Cas Covid-$19$}** :
 
-JUNYI ZHAN *Testing Case Number of Coronavirus Disease 2019 in China with Newcomb-Benford Law* ($2020$) ([*Source*](https://arxiv.org/abs/2002.05695]))  
+JUNYI ZHAN *Testing Case Number of Coronavirus Disease 2019 in China with Newcomb-Benford Law* ($2020$) ([*Source*](https://arxiv.org/abs/2002.05695])) 
