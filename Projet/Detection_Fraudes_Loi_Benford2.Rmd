@@ -1,15 +1,16 @@
 ---
-title: "**Détection de fraudes et loi de probabilité de Newcomb-Benford**"
-subtitle: "Projet Master $1$"
+title: '**Détection de fraudes et loi de probabilité de Newcomb-Benford**'
 author:
 - FERNANDEZ Christelle
 - PONCHEELE Clément
 - EL KAÏM Laura
 - Encadré par M.DUCHARME
-institute: "Faculté des Sciences - Université de Montpellier"
 date: '*$24$ mai $2021$*'
-output: 
-  pdf_document:
+output:
+  pdf_document: null
+  word_document: default
+subtitle: Projet Master $1$
+institute: Faculté des Sciences - Université de Montpellier
 fontsize: 12pt
 header-includes:
 - \oddsidemargin -1cm
@@ -141,7 +142,7 @@ knitr::kable(rbind(PCS,Benford),booktabs="T",align="c") %>%
 \caption{Tableau 1 : Répartition du premier chiffre significatif selon la loi de Newcomb-Benford}
 \end{table}
 
-\vspace{0.7cm}
+\newpage
 
 Nous retrouvons cette loi dans énormément de domaines comme les mathématiques, l'environnement, la finance, la physique, etc, plus précisément sur des données telles que la longueur des fleuves, la population des villes dans un pays, des déclarations de revenus, etc.  
 Notons cependant qu'il existe des cas où les données ne suivent pas cette loi, notamment des données dites non naturelles qui seraient influencé par la pensée humaine (nombres premiers, nombres générés par des humains, etc).  
@@ -514,7 +515,7 @@ Les différents tests nous ont permis ici de déceler des différences avec la l
 Les données utilisées dans cette partie sont tirées d'un article (cf. bibliographie) traitant sur la fraude de données fiscales en Italie.
 Les données se présentent comme ci-après, chaque ligne correspond à une année, les $9$ premières colonnes (sans compter la première qui correspond à l'année) représente la répartition du premier chiffre significatif. Les $4$ dernières colonnes quant à elles sont les $p$-values des différents tests que nous avons cité plus haut. Une case est rouge si l'hypothèse nulle est rejetée au seuil de $5 \%$ d'erreur.
 
-Observons que les tableaux $1$ à $12$ ci-dessous ne montrent pas de suspections de fraudes. Ces régions italiennes, dont nous pouvons relever la région d'Abruzzo, de Basilicata, de Lombardia, ou encore de Puglia, ne permettent avec aucun des tests sélectionnés de rejeter l'hypothèse nulle, au risque de $5 \%$. Ceci signifie donc que nous serions plutôt tentés de ne pas suspecter de fraudes pour ces régions italiennes
+Observons que les tableaux $4$ à $13$ ci-dessous ne montrent pas de suspections de fraudes. Ces régions italiennes, dont nous pouvons relever la région d'Abruzzo, de Basilicata, de Lombardia, ou encore de Puglia, ne permettent avec aucun des tests sélectionnés de rejeter l'hypothèse nulle, au risque de $5 \%$. Ceci signifie donc que nous serions plutôt tentés de ne pas suspecter de fraudes pour ces régions italiennes.  
 
 \begin{table}
 
@@ -534,7 +535,6 @@ knitr::kable(df, escape=FALSE, digits = 3) %>%
 \end{table}
 
 \begin{table}
-
 ```{r}
 df =  read.csv2('basilicata2.csv', header = TRUE, sep = ',', dec = '.',stringsAsFactors = FALSE)
 df=df[,1:14]
@@ -548,7 +548,6 @@ knitr::kable(df, escape=F, digits = 3)%>% column_spec(11:14, bold = T, backgroun
 \end{table}
 
 \begin{table}
-
 ```{r}
 df =  read.csv2('Calabria2.csv', header = TRUE, sep = ',', dec = '.',stringsAsFactors = FALSE)
 df=df[,1:14]
@@ -561,9 +560,7 @@ knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11:14, bold = T, backg
 \caption{Tableau 6 : Tests sur la région de Calabria}
 \end{table}
 
-
 \begin{table}
-
 ```{r}
 df =  read.csv2('Lazio2.csv', header = TRUE, sep = ',', dec = '.',stringsAsFactors = FALSE)
 df=df[,1:14]
@@ -574,8 +571,8 @@ knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, backgrou
 ```
 
 \caption{Tableau 7 : Tests sur la région de la Lazio}
-\end{table}
 
+\end{table}
 \begin{table}
 
 ```{r}
@@ -630,8 +627,8 @@ knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, backgrou
 ```
 
 \caption{Tableau 11 : Tests sur la région de Puglia}
-\end{table}
 
+\end{table}
 \begin{table}
 
 ```{r}
@@ -658,11 +655,15 @@ knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, backgrou
 ```
 
 \caption{Tableau 13 : Tests sur la région de Valle D'aosta}
+
 \end{table}
 
 \newpage
-Les tableaux suivants (cf. tableaux $14$ et $15$) nous montrent dans certains cas des suspicions de fraude. Les tests ne sont souvent pas en accord, on remarque que pour les régions suivantes seul un test détecte une fraude et seulement sur une année. Les p-values des autres tests sont relativement élevés.
 
+Les tableaux qui suivent montrent les régions pour lesquelles les tests nous permettent de rejeter une seule hypothèse nulle.  
+
+
+\newpage
 \begin{table}
 
 ```{r}
@@ -691,9 +692,12 @@ knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, backgrou
 \caption{Tableau 15 : Tests sur la région de Veneto}
 \end{table}
 
-  
-Ici la région de Campagnia (cf. tableau $16$) semble avoir fraudé presque tous les ans, tous les test n'ont pas mis en évidence une potentielle fraude, on remarque tout de même que le test lisse $T_2$ à relevé une fraude à chaque fois que les autres l'ont fait.
 
+\newpage
+
+Les tableaux précédents (cf. tableaux $14$ et $15$) nous montrent dans certains cas des suspicions de fraude. Les tests ne sont souvent pas en accord, on remarque que pour les régions suivantes seul un test détecte une fraude et seulement sur une année. Les p-values des autres tests sont relativement élevés. 
+
+\newpage
 \begin{table}
 
 ```{r}
@@ -705,16 +709,18 @@ knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, backgrou
   column_spec(1, bold=TRUE)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
 ```
 
-
 \caption{Tableau 16 : Tests sur la région de Campania}
 \end{table}
 
 \newpage
 
-Les régions de Marche et Molisse (cf. tableaux $17$ et $18$) semblent n'avoir fraudé que sur une seule année, cette fraude est suspectée par plusieurs tests, notamment les tests lisses. Nous voyons tout de même que pour la région de Molisse les $p$-values sont plutôt proches du seuil de $5 \%$ pour l'année $2010$ par exemple. Il est possible que cette région ait modifié sa façon de frauder pour échapper aux tests, c'est pourquoi il est important d'apporter de nouveau tests.
+Ici la région de Campania (cf. tableau $16$) semble avoir fraudé presque tous les ans, tous les test n'ont pas mis en évidence une potentielle fraude, on remarque tout de même que le test lisse $T_2$ à relevé une fraude à chaque fois que les autres l'ont fait.  
+
+Sur les tableaux qui suivent, les régions pour lesquelles un léger doute peut s'installer.
+
+\newpage
 
 \begin{table}
-
 ```{r}
 df =  read.csv2('Marche2.csv', header = TRUE, sep = ',', dec = '.',stringsAsFactors = FALSE)
 df=df[,1:14]
@@ -725,9 +731,6 @@ knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, backgrou
 ```
 
 \caption{Tableau 17 : Tests sur la région de Marche}
-\end{table}
-
-\begin{table}
 
 ```{r}
 df =  read.csv2('Molise2.csv', header = TRUE, sep = ',', dec = '.',stringsAsFactors = FALSE)
@@ -739,12 +742,16 @@ knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, backgrou
 ```
 
 \caption{Tableau 18 : Tests sur la région de Molise}
+
 \end{table}
 
+\begin{table}
 
-\newpage
+Les régions de Marche et Molisse (cf. tableaux $17$ et $18$) semblent n'avoir fraudé que sur une seule année, cette fraude est suspectée par plusieurs tests, notamment les tests lisses. Nous voyons tout de même que pour la région de Molisse les $p$-values sont plutôt proches du seuil de $5 \%$ pour l'année $2010$ par exemple. Il est possible que cette région ait modifié sa façon de frauder pour échapper aux tests, c'est pourquoi il est important d'apporter de nouveau tests.
    
 Cette partie regroupe les régions dont nous suspectons la fraude sur la quasi-totalité de l'étude (cf. tableaux $19$ à $23$).   
+
+\end{table} 
 
 \begin{table}
 
@@ -760,7 +767,7 @@ knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, backgrou
 \caption{Tableau 19 : Tests sur la région d'Emilia-romagna}
 \end{table}
 
-
+\newpage
 
 \begin{table}
 
@@ -775,7 +782,7 @@ knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, backgrou
 
 \caption{Tableau 20 : Tests sur la région de la Liguria}
 \end{table}
-
+\newpage
 \begin{table}
 
 ```{r}
@@ -789,8 +796,7 @@ knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, backgrou
 
 \caption{Tableau 21 : Tests sur la région de la Sardegna}
 \end{table}
-
-
+\newpage
 \begin{table}
 
 ```{r}
@@ -803,11 +809,7 @@ knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, backgrou
 ```
 
 \caption{Tableau 22 : Tests sur la région de Toscana}
-\end{table}
 
-\newpage
-
-\begin{table}
 
 ```{r}
 df =  read.csv2('Umbria2.csv', header = TRUE, sep = ',', dec = '.',stringsAsFactors = FALSE)
@@ -818,14 +820,21 @@ knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, backgrou
   column_spec(1, bold=TRUE)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
 ```
 
-\caption{Tableau 23 : Tests sur la région de Umbria}
-\end{table}
+\caption{Tableau 23 : Tests sur la région de Umbria}   
 
-On voit clairement que sur chacune des années (ou presque) les test s'affolent, un même test détecte une potentielle fraude chaque année par région. Les tests qui détectent ces fraudes sont différents pour chaque régions, pour la région de la Liguria c'est le test du $\chi^2$, pour la région de la Umbria ce sont les tests lisses par exemple. Ceci nous indique que ces régions sont sûrement des régions qui trichent avec leurs chiffres, mais de manière différentes. Il est donc important de posséder une batterie de tests pour couvrir le plus possible de façons de frauder et même d'en trouver de nouveaux puisque une fois connu, il est possible de le contourner.    
+\vspace{0.7cm}
 
 \newpage
+On voit clairement que sur chacune des années (ou presque) les tests s'affolent, un même test détecte une potentielle fraude chaque année par région. Les tests qui détectent ces fraudes sont différents pour chaque régions, pour la région de la Liguria c'est le test du $\chi^2$, pour la région de la Umbria ce sont les tests lisses par exemple. Ceci nous indique que ces régions sont sûrement des régions qui trichent avec leurs chiffres, mais de manière différentes. Il est donc important de posséder une batterie de tests pour couvrir le plus possible de façons de frauder et même d'en trouver de nouveaux puisque une fois connu, il est possible de le contourner.  
+\end{table}   
 
-## CAS COVID
+
+
+\newpage
+.
+\newpage
+
+## Cas Covid-19
 
 &nbsp;
 La crise du COVID-$19$ étant au coeur des débats actuels et ayant un impact non négligeable sur notre scolarité, nous avons voulu nous intéresser aux chiffres de la Chine à ce sujet. La Chine, à l'origine du départ de cette pandémie a publié des données sur l'expansion des cas dans son territoire.
@@ -835,21 +844,21 @@ Pour confirmer le résultat, Ducharme et ses collaborateurs ont utilisé les mê
 On peut donc penser que les données ne sont pas cohérentes, qu'il y a eu une erreur dans l'étude de J. Zhang ou peut-être une fraude sur les chiffres.
 
 \newpage
-
 # Conclusion 
 
 &nbsp;
-Au cours de ce projet, nous avons pu acquérir de nouvelles connaissances, ce fut intéressant et enrichissant de réaliser nos propres expériences et de nous initier au vaste problème de la détection de fraudes. Nous avons plus particulièrement découvert la loi de Newcomb-Benford, en exposant sa genèse, mais aussi en l'étudiant au travers de différents tests. De ce fait, nous avons tentés de répondre à certaines questions : quelle répartition suit le premier chiffre significatif d'une suite de nombres générés naturellement ? Les tests mis en place pour détecter une fraude sont-ils fiables et vont-ils toujours dans le même sens ? Certains sont-ils meilleurs que d'autres ?  
+Au cours de ce projet, nous avons pu acquérir de nouvelles connaissances, ce fut intéressant et enrichissant de réaliser nos propres expériences et de nous initier au vaste problème de la détection de fraudes. Nous avons tenté de répondre à certaines questions : quelle répartition suit le premier chiffre significatif d'une suite de nombres générés naturellement ? Les tests mis en place pour détecter une fraude sont-ils fiables et vont-ils toujours dans le même sens ? Certains sont-ils meilleurs que d'autres ?  
 
-Dans la suite de ce projet, nous avons appris que la détection de fraudes était délicate. En effet, nous avons remarqué que la loi de Newcomb-Benford ne s'appliquait pas systématiquement à toutes les données. Comme nous l'avons découvert dans l'expérience de Hill ainsi que lorsque nous l'avons reproduite à moindre échelle, les données influencées par la pensée humaine ne suivent généralement pas la loi de Newcomb-Benford. De plus, les données dites naturelles auront moins tendance à suivre la loi de Newcomb-Benford si celles-ci sont brutes.  
-Une observation visuelle n'étant que peu efficace, nous avons réalisés différents tests. Notons que la réalisation d'un test n'est pas complètement fiable, et qu'il faut tenir compte des risques d'erreurs ; le risque de suspecter à tort une fraude (risque de première espèce) et le risque de laisser passer une fraude (risque de seconde espèce).
+Nous avons pu voir que dans certains cas le premier chiffre peut suivre la loi de Newcomb-Benford, loi que nous avons découverte au cours de ce projet en exposant sa genèse, mais aussi en l'étudiant au travers de différents tests.  
+
+Dans la suite de ce projet, nous avons appris que la détection de fraudes était délicate. En effet, nous avons remarqué que la loi de Newcomb-Benford ne s'applique pas systématiquement à toutes les données. Comme nous l'avons découvert dans l'expérience de Hill ainsi que lorsque nous l'avons reproduite à moindre échelle, les données influencées par la pensée humaine ne suivent généralement pas la loi de Newcomb-Benford. De plus, les données dites naturelles auront moins tendance à suivre la loi de Newcomb-Benford si celles-ci sont brutes.  
+Une observation visuelle n'étant que peu efficace, nous avons réalisé différents tests. Notons que la réalisation d'un test n'est pas complètement fiable, et qu'il faut tenir compte des risques d'erreurs, le risque de suspecter à tort une fraude et le risque de laisser passer une fraude.  
 
 Il est également important de retenir que le risque de lancer un audit pour suspicion de fraude peut coûter cher, plus cher que le risque de laisser passer une fraude.  
 
-De plus, lors des applications des tests, nous avons remarqué que certains tests avaient une $p$-value inférieurs à $5 \%$. Les tests paraissent fiables mais pour " détecter une fraude plus y a de test mieux c'est " Car les tests ne vont pas dans les mêmes directions car chaque tests mettent en valeurs leurs "propriétés " c'est- à-dire que un permet de ... et un autre de ..
-(Ouverture)
-Pour avoir un autre point de vue, il serait bien d'appliquer la loi de Newcomb-Benford avec le deuxième chiffre significatif et lui appliquer les différents tests pour permettre à une autre conclusion ?
+Lors de l'application des tests, nous avons remarqué que certains tests avaient mené à une suspicion de fraude, d'autre pas. Les tests sont rarement unanimes, cela vient du fait qu'ils sont performants pour des types de fraudes différents. Un test sera plus susceptible de mettre en évidence une manière de frauder qu'une autre. Ceci encourage l'utilisation de plusieurs tests, il n'y a donc pas vraisemblablement de meilleur test, cependant un test peut couvrir un plus large éventail de fraude.  
 
+La loi de Newcomb-Benford ne s'applique pas qu'au premier chiffre significatif, pour avoir un autre point de vue, il serait bien d'appliquer la loi de Newcomb-Benford sur le deuxième chiffre significatif et lui appliquer les différents tests.  Ceci pourrait mener à une autre conclusion ?  
 
 \newpage
 
