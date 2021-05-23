@@ -259,7 +259,6 @@ Après avoir observé ces quelques jeux de données, nous étions en mesure de d
 Le but est donc de minimiser le coût que peuvent engendrer les erreurs susmentionnées, pour ce faire l'utilisation d'outils scientifiques est de rigueur. Les outils que nous aborderons dans la suite sont les tests d'adéquation, ces tests servent à vérifier si un ensemble de nombre suit ou non une loi de probabilité donnée (dans notre cas, c'est la loi de Newcomb-Benford).  
 
 
-
 # Tests
 
 ## Généralités sur les tests
@@ -451,25 +450,11 @@ Dans la suite, nous appliquerons les tests $T_{\hat{K}}$ et $T_2$ qui d'après D
 # Application des tests
 
 &nbsp;
-Nous traitons des données recueillies dans la première partie sur AMPM... et sur la fiscalité italienne de $20$ régions, ces données nous servirons à appliquer différents tests (classique ou lisse). Chacun des tests teste l'hypothèse nulle "la répartition du premier chiffre significatif suit la loi de Newcomb-Benford" contre l'hypothèse alternative "la répartition du premier chiffre significatif ne suit pas la loi de Newcomb-Benford". L'objectif ici est d'approuver nos résultats si les données étudiées suivent ou non la loi de Newcomb-Benford et de chercher à savoir si certaines régions d'Italie modifient ou non leurs chiffres, mais aussi de comparer les résultats de nos différents tests.
-=======
-
-
-
-\newpage
-
-## Application des tests
-
-
-&nbsp;
 Nous traitons sur nos différents jeux de données et sur la fiscalité italienne de $20$ régions, ces données nous servirons à appliquer différents tests (classique ou lisse). Chacun des tests teste l'hypothèse nulle "la répartition du premier chiffre significatif suit la loi de Newcomb-Benford" contre l'hypothèse alternative "la répartition du premier chiffre significatif ne suit pas la loi de Newcomb-Benford". L'objectif ici est d'approuver nos résultats si les données étudiées suivent ou non la loi de Newcomb-Benford et de chercher à savoir si certaines régions d'Italie modifient ou non leurs chiffres, mais aussi de comparer les résultats de nos différents tests.
 
->>>>>>> c279dd41f70f14b0ebd1b88d4e5f21d9854e8e15
+Nous retenons le test du khi-deux qui est le plus connu et utilisé, il semblerait cependant qu'il fasse partie des moins performants (Ducharme & Collab. 2020), le test de Freedman-Watson explicité plus haut. Pour ce qui est des tests lisses nous appliquerons les tests $T_{\hat{K}}$ et $T_2$ comme susmentionné.
 
 
-Ici nous retenons le test du khi-deux qui est le plus connu et utilisé, il semblerait cependant qu'il fasse partie des moins performants (Ducharme & Collab. 2020), le test de Freedman-Watson explicité plus haut. Pour ce qui est des tests lisses nous appliquerons les tests $T_{\hat{K}}$ et $T_2$ comme susmentionné.
-
-<<<<<<< HEAD
 ## Application sur nos jeux de données
 
 Dans cette partie nous cherchons à confirmer ou non nos hypothèses formulées à la vu des graphiques. Nous utilisons les test cités plus haut.
@@ -484,19 +469,19 @@ knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, backgrou
   column_spec(1, bold=TRUE) %>%kable_styling(font_size = 10)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
 ```
 
-Les tests sont unanimes, la suite de Fibonacci et les données relevées sur le magazine AMPM suivent la loi de Newcomb-Benford, du moins on ne rejette pas cette hypothèse, ce résulat est en accord avec nos suppositions.   
+Les tests sont unanimes, la suite de Fibonacci et les données relevées sur le magazine AMPM suivent la loi de Newcomb-Benford, du moins on ne rejette pas cette hypothèse, ce résultat est en accord avec nos suppositions.
+
+Regardons maintenant les tests appliqués au jeu de données tirés du magazine *les échos*, nous avions remarqué une tendance décroissante similaire à celle de la répartition de la loi de Newcomb-Benford, avec cependant des valeurs relativement différentes. Les deux tests lisses ainsi que le test de Freedman donnent une p_value proche de zéro qui nous mène à un fort rejet de l'hypothèse nulle (avec un risque d'erreur presque nul), contrairement au test du $\chi^2$ (ici une p_value d'environ 0,1 nous indique que si nous rejettons l'yhopthèse nulle nous avons environ 10% de chance de nous tromper). On remarque ici que ce dernier est possiblement moins puissant que les autres.
+
+Pour terminer tous les tests mènent à un rejet de l'hypothèse nulle "le jeu de donnée suit la loi de N-B" pour les jeux de données sur les population des villes de France, le passage journalier de vélos et les nombres générés par les humains. 
+Pour les deux derniers pas de surprise, cependant le rejet de l'hypothèse nulle pour le jeu de données sur les population des villes de France nous paraît étonnant, l'inspection visuelle nous donnait l'impression que la répartition du PCS collait à celle de la loi de Neewcomb-Benford, mais le nombre important de données à fortement amplifié les différences.
+
+Les différents tests nous ont permis ici de déceler des différences avec la loi de N-B qui nous ont échapés à l'oeil nu, mais aussi de nous rendre compte de la différence d'éfficacité entre les tests. 
+
 
 \newpage
-## Application a des données fiscales italiennes
-=======
-
-
-\newpage
-## Application sur nos jeux de données
 
 ## Application a des données fiscales italiennes
-
->>>>>>> c279dd41f70f14b0ebd1b88d4e5f21d9854e8e15
 
 Les données se présentent comme ci-après, chaque ligne correspond à une année, les 9 premières colonnes (sans compter la première qui correspond à l'année) représente la répartition du premier chiffre significatif. Les 4 dernières colonnes quant à elles sont les p_values des différents tests que nous avons cité plus haut. Une case est rouge si l'hypothèse nulle est rejetée au seuil de 5% d'erreur.
 
