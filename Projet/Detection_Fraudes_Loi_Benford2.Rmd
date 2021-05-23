@@ -44,7 +44,7 @@ knitr::include_graphics("Images/page_de_garde.pdf")
 &nbsp;
 Nous souhaitons remercier la faculté des Sciences de Montpellier pour les Master MIND (Mathématiques de l'Information et de la Décision) et Biostatistiques et plus particulièrement Monsieur **Ducharme** pour nous avoir permis de réaliser ce sujet.  
 Lors de ce projet, nous avons pu affiner notre travail en équipe et notre autonomie, consolider nos acquis et ce rapport signe l'aboutissement de notre première année de Master.  
-Nous remercions également nos proches qui nous ont soutenu dans l'élaboration de notre projet et remercions notamment les participants à notre expérience.  
+Nous remercions également nos proches qui nous ont soutenus dans l'élaboration de notre projet et remercions notamment les participants à notre expérience.  
 Remerciements spéciaux à nos relecteurs et correcteurs qui ont contribué au bon déroulement du rapport.  
 
 
@@ -58,7 +58,7 @@ L'objectif étant d'exposer l'émergence de la loi de Newcomb-Benford dans des d
 
 Pour répondre à nos différentes problématiques, nous allons effectuer des expériences d'abord visuelles, en extrayant des données d'un journal, d'un magazine ainsi que d'autres données réelles puis nous appliquerons différents tests sur ces jeux de données à l'aide du logiciel `R` et des packages `BenfordTests` et `BENFORDSMOOTHTEST`. Nous utiliserons également ces packages sur un jeu de données fiscales italiennes.  
 
-Les réponses récoltées dans le premier temps, nous montrerons que la loi de Newcomb-Benford n'apparaît pas partout notamment sur les données influencées par la pensée de l'homme, les données dites "non-naturelles". Nous observons également qu'une inspection visuelle n'est pas suffisante pour suspecter ou non une fraude. Puis dans un second temps, les tests réalisés nous permettrons de voir qu'il est parfois difficile de suspecter une fraude, au risque de se tromper.  
+Les réponses récoltées dans le premier temps, nous montrerons que la loi de Newcomb-Benford n'apparaît pas partout notamment sur les données influencées par la pensée de l'homme, les données dites "non naturelles". Nous observons également qu'une inspection visuelle n'est pas suffisante pour suspecter ou non une fraude. Puis dans un second temps, les tests réalisés nous permettront de voir qu'il est parfois difficile de suspecter une fraude, au risque de se tromper.  
 
 \vspace{3.8cm}
 
@@ -120,7 +120,7 @@ knitr::include_graphics("Images/table_loga1.jpg")
 
 ![Figure 1 : Table logarithmique recueillie par M. Ducharme présentant des marques d'usure plus importantes sur les premières pages](Images/table_loga2.jpg){width=50%}
 
-Cette découverte mise de côté pendant plusieurs années, ce n'est qu'en $1938$ que l'ingénieur et physicien américain Frank Benford arrivera au même résultat après avoir répertorié des dizaines de milliers de données. Celui-ci pensera être le premier à l'initiative de cette loi, et c'est pour cette raison que la *loi de Newcomb-Benford* se fera plus généralement appelée *loi de Benford*.  
+Cette découverte mise de côté pendant plusieurs années, ce n'est qu'en $1938$ que l'ingénieur et physicien américain Frank Benford arrivera au même résultat après avoir répertorié des dizaines de milliers de données. Celui-ci pensera être le premier à l'initiative de cette loi, et c'est pour cette raison que la *loi de Newcomb-Benford* se fera plus généralement appeler *loi de Benford*.  
 
 Cette loi nous dit que, dans une liste de données arbitraires, la probabilité d'avoir le chiffre $i$ comme premier chiffre significatif est de $log_{10}(1 + \frac{1}{i})$.  
 
@@ -145,7 +145,7 @@ knitr::kable(rbind(PCS,Benford),booktabs="T",align="c") %>%
 \newpage
 
 Nous retrouvons cette loi dans énormément de domaines comme les mathématiques, l'environnement, la finance, la physique, etc, plus précisément sur des données telles que la longueur des fleuves, la population des villes dans un pays, des déclarations de revenus, etc.  
-Notons cependant qu'il existe des cas où les données ne suivent pas cette loi, notamment des données dites non naturelles qui seraient influencé par la pensée humaine (nombres premiers, nombres générés par des humains, etc).  
+Notons cependant qu'il existe des cas où les données ne suivent pas cette loi, notamment des données dites non naturelles qui seraient influencées par la pensée humaine (nombres premiers, nombres générés par des humains, etc).  
 
 [^n2]: Défini en $1985$ par Marie-Paule Lecoutre ([*source*](https://fr.wikipedia.org/wiki/Biais_d%27%C3%A9quiprobabilit%C3%A9)).
 
@@ -233,7 +233,7 @@ Ici les répartitions sont fortement ressemblantes, c'est aussi le cas pour de n
 ## Passage journalier de vélos dans l'allée Beracasa à Montpellier  
 
 &nbsp;
-La ville de Montpellier étant en pleine transition écologique, elle ouvre de plus en plus l'accès aux vélos sur ses routes. Pour en mesurer l'impact, elle a mise en place des écocompteurs dans plusieurs rues. Les données issues de ces compteurs sont en libre accès, nous nous sommes donc intéressés au nombre de passages journaliers de vélos dans l'allée Beracasa sur une année.  
+La ville de Montpellier étant en pleine transition écologique, elle ouvre de plus en plus l'accès aux vélos sur ses routes. Pour en mesurer l'impact, elle a mis en place des écocompteurs dans plusieurs rues. Les données issues de ces compteurs sont en libre accès, nous nous sommes donc intéressés au nombre de passages journaliers de vélos dans l'allée Beracasa sur une année.  
 
 Nous obtenons la répartition suivante :  
 
@@ -241,7 +241,7 @@ Nous obtenons la répartition suivante :
 
 Dans ce cas la proportion du chiffre $1$ est de plus de $50 \%$ contre $30 \%$ pour la **loi de Newcomb-Benford**. La différence de répartition des chiffres $2, 3, 4, 5$ est aussi notable, elle est même environ $2$ fois moins élevée.  
 
-Visuellement, nous pourrions penser que la répartition de ces données ne suit pas la **loi de Newcomb-Benford**. Il est courant de ne pas retrouver la loi de Newcomb-Benford dans des données brutes comme celles-ci, on la retrouve empiriquement plus souvent dans des données dîtes de **deuxième génération** comme des sommes ou des produits. Ceci à été démontré par Jeff Boyle en $1994$.
+Visuellement, nous pourrions penser que la répartition de ces données ne suit pas la **loi de Newcomb-Benford**. Il est courant de ne pas retrouver la loi de Newcomb-Benford dans des données brutes comme celles-ci, on la retrouve empiriquement plus souvent dans des données dites de **deuxième génération** comme des sommes ou des produits. Ceci à été démontré par Jeff Boyle en $1994$.
 
 ## Nombres générés par les humains  
 
@@ -250,7 +250,7 @@ Dans ce paragraphe, nous tentons de reproduire à moindre échelle l'expérience
 
 Notre expérience partageant le même objectif que celle de Hill, est basée sur un protocole légèrement différent. N'ayant pas une troupe d'élèves à disposition nous avons recueilli un total de $300$ nombres. Ces $300$ nombres ont été obtenus de plusieurs manières, via des sondages sur internet ou sur les réseaux sociaux, en demandant directement à des personnes rencontrées au hasard, notre famille ou nos amis.  Plus précisément, notre expérience a consisté à rechercher auprès de ces personnes un nombre à $2$ chiffres, soit un nombre compris entre $10$ et $99$. Nous reviendrons plus loin sur l'importance que peut avoir ce détail.   
 
-D'après le biais d'équiprobabilité cité plus haut, si les nombres recensés pendant les expériences ont réellement été données de façon aléatoire la répartition du premier chiffre significatif devrait être comparable à une loi uniforme.
+D'après le biais d'équiprobabilité cité plus haut, si les nombres recensés pendant les expériences ont réellement été donnés de façon aléatoire la répartition du premier chiffre significatif devrait être comparable à une loi uniforme.
 
 Comparons les répartitions obtenues durant les deux expériences :  
 
@@ -260,9 +260,9 @@ Comparons les répartitions obtenues durant les deux expériences :
 
 Plusieurs facteurs pourraient expliquer les différences entre la distribution de la loi uniforme et la répartition du premier chiffre significatif de notre expérience, celui qui revient souvent est qu'un nombre donné au hasard par un humain est souvent influencé par son expérience, même inconsciemment. Par exemple sa date d'anniversaire, un évènement marquant ou son nombre préféré. Le fait d'avoir recueilli nos nombres par internet a aussi pu influencer le choix des personnes concernées. Un facteur psychologique est donc à prendre en considération pour approfondir la conclusion. Notons également que lors de notre expérience, la question posée stipulait de donner un nombre compris entre $10$ et $99$, soit un nombre à $2$ chiffres. Ainsi, il est important de retenir que dès lorsqu'on demande un  avec suffisamment de chiffres, plus le premier chiffre aura tendance à suivre la loi de Newcomb-Benford, mais la répartition des autres chiffres significatifs (deuxième, troisième, etc.) ne sera apparentée à aucune loi. De même si on demande un nombre avec peu de chiffres (choix d'un chiffre entre $1$ et $9$ par exemple) la répartition aura plutôt tendance à être uniforme. Ce phénomène a été exposé par A. Diekmann[^n3] en $2007$.  
 
-Après avoir observé ces quelques jeux de données, nous étions en mesure de dire si ces données semblaient ou non suivre la loi de Newcomb-Benford, le problème qui en découle est qu'une simple observation n'est pas très fiable, difficile de prendre une décision sur un constat visuel. En effet, se tromper dans l'interprétation peut entraîner deux types d'erreur, la première étant de faussement déceler une fraude (ce que nous appellerons **le risque de première espèce**) et la deuxième de laisser passer une fraude. Ces erreurs ont un coût pour l'institut qui essaye de les réprimer, celui d'engager des démarches de détections approfondies inutiles ou de ne pas percevoir les taxes dues dans le cas de la fraude fiscale par exemple. 
+Après avoir observé ces quelques jeux de données, nous étions en mesure de dire si ces données semblaient ou non suivre la loi de Newcomb-Benford, le problème qui en découle est qu'une simple observation n'est pas très fiable, difficile de prendre une décision sur un constat visuel. En effet, se tromper dans l'interprétation peut entraîner deux types d'erreurs, la première étant de faussement déceler une fraude (ce que nous appellerons **le risque de première espèce**) et la deuxième de laisser passer une fraude. Ces erreurs ont un coût pour l'institut qui essaye de les réprimer, celui d'engager des démarches de détections approfondies inutiles ou de ne pas percevoir les taxes dues dans le cas de la fraude fiscale par exemple. 
 
-Le but est donc de minimiser le coût que peuvent engendrer les erreurs susmentionnées, pour ce faire l'utilisation d'outils scientifiques est de rigueur. Les outils que nous aborderons dans la suite sont les tests d'adéquation, ces tests servent à vérifier si un ensemble de nombre suit ou non une loi de probabilité donnée (dans notre cas, c'est la loi de Newcomb-Benford).  
+Le but est donc de minimiser le coût que peuvent engendrer les erreurs susmentionnées, pour ce faire l'utilisation d'outils scientifiques est de rigueur. Les outils que nous aborderons dans la suite sont les tests d'adéquation, ces tests servent à vérifier si un ensemble de nombres suit ou non une loi de probabilité donnée (dans notre cas, c'est la loi de Newcomb-Benford).  
 
 [^n3]: Tiré de l'article *Not the First Digit! Using Benford's Law To Detect Fraudulent Scientific Data* écrit par A. Diekmann en $2007$ ([*source*](https://www.researchgate.net/publication/24083679_Not_the_First_Digit_Using_Benford%27s_Law_to_Detect_Fraudulent_Scientif_ic_Data)).
 
@@ -354,8 +354,8 @@ knitr::kable(rbind(c1, c2, c3), escape=F, row.names=F, align='c') %>%
 \vspace{0.2cm}
 
 \newpage
-Au sujet de la loi de Newcomb-Benford, notons que le test d'adéquation le plus populaire est le test du khi-deux de Pearson dont la puissance, associée au risque d'erreur de Type II est relativement faible. C'est pourquoi, d'autres tests ont été mis en place récemment. L'ensemble de ces tests seront développés par la suite.  
-G. Ducharme, S. Kaci et C. Vovor-Dassu[^n6] ont introduits de nouveaux tests d'adéquations pour cette loi, ceux-ci sont basés sur le principe des tests lisses. Ils ont également comparé ces tests aux meilleurs tests existants et ont montré qu'ils seraient globalement plus performants. Notons aussi que la qualité d'un test dépend de sa puissance, plus forte elle est meilleur est le test. Cependant, différents tests peuvent conduire à des avantages divers. Par exemple, certains tests détecteront plus que d'autres la différence significative du premier chiffre significatif, quant à d'autres, ce sera un autre chiffre significatif.  
+Au sujet de la loi de Newcomb-Benford, notons que le test d'adéquation le plus populaire est le test du khi-deux de Pearson dont la puissance, associée au risque d'erreur de Type II est relativement faible. C'est pourquoi d'autres tests ont été mis en place récemment. L'ensemble de ces tests seront développés par la suite.  
+G. Ducharme, S. Kaci et C. Vovor-Dassu[^n6] ont introduit de nouveaux tests d'adéquations pour cette loi, ceux-ci sont basés sur le principe des tests lisses. Ils ont également comparé ces tests aux meilleurs tests existants et ont montré qu'ils seraient globalement plus performants. Notons aussi que la qualité d'un test dépend de sa puissance, plus forte elle est meilleur est le test. Cependant, différents tests peuvent conduire à des avantages divers. Par exemple, certains tests détecteront plus que d'autres la différence significative du premier chiffre significatif, quant à d'autres, ce sera un autre chiffre significatif.  
 
 [^n6]: Tests d’adéquations lisses pour la loi de Newcomb-Benford écrit en $2020$ ([*source*](http://openscience.fr/IMG/pdf/iste_mas20v3n1_1.pdf)).
 
@@ -376,7 +376,7 @@ Le déroulement du test se procède en $5$ étapes :
  
 ![Figure 8 : Densité de la loi du Khi-Deux en fonction du nombre de degrés de liberté](Images/Chi-square.png){width=50%}
 
-[^n7]: Cette partie a été fortement inspiré du site *Bibmath* (cf Bibliographie).
+[^n7]: Cette partie a été fortement inspirée du site *Bibmath* (cf Bibliographie).
 
 La loi du $\chi^2$ à $n$ degrés de liberté si elle est absolument continue, admet pour densité :  
 
@@ -393,7 +393,7 @@ où $X$ admet alors pour espérance et variance $E(X) = n$ et $V(X) = 2n$.
 ## Test de Freedman-Watson
 
 &nbsp;
-Le test de Freedman peut être adaptée à des données discrètes, il permet de comparer la distribution du premier chiffre significatif d'un échantillon de données avec la distribution de la loi de Newcomb-Benford et ainsi affirmer si la répartition du premier chiffre significatif cet échantillon est bien conforme à la loi de Newcomb-Benford.  
+Le test de Freedman peut être adapté à des données discrètes, il permet de comparer la distribution du premier chiffre significatif d'un échantillon de données avec la distribution de la loi de Newcomb-Benford et ainsi affirmer si la répartition du premier chiffre significatif cet échantillon est bien conforme à la loi de Newcomb-Benford.  
 
 Spécifiquement, la statistique de test (dans le cas $k = 1$) est donnée par :  
 
@@ -473,15 +473,15 @@ Dans la suite, nous appliquerons les tests $T_{\hat{K}}$ et $T_2$ qui d'après D
 # Application des tests
 
 &nbsp;
-Nous traitons sur nos différents jeux de données et sur la fiscalité italienne de $20$ régions, ces données nous servirons à appliquer différents tests (classique ou lisse). Chacun des tests teste l'hypothèse nulle "la répartition du premier chiffre significatif suit la loi de Newcomb-Benford" contre l'hypothèse alternative "la répartition du premier chiffre significatif ne suit pas la loi de Newcomb-Benford". L'objectif ici est d'approuver nos résultats si les données étudiées suivent ou non la loi de Newcomb-Benford et de chercher à savoir si certaines régions d'Italie modifient ou non leurs chiffres, mais aussi de comparer les résultats de nos différents tests.
+Nous traitons sur nos différents jeux de données et sur la fiscalité italienne de $20$ régions, ces données nous serviront à appliquer différents tests (classique ou lisse). Chacun des tests teste l'hypothèse nulle "la répartition du premier chiffre significatif suit la loi de Newcomb-Benford" contre l'hypothèse alternative "la répartition du premier chiffre significatif ne suit pas la loi de Newcomb-Benford". L'objectif ici est d'approuver nos résultats si les données étudiées suivent ou non la loi de Newcomb-Benford et de chercher à savoir si certaines régions d'Italie modifient ou non leurs chiffres, mais aussi de comparer les résultats de nos différents tests.
 
 Nous retenons le test du khi-deux qui est le plus connu et utilisé, il semblerait cependant qu'il fasse partie des moins performants (Ducharme & Collab. $2020$), le test de Freedman-Watson explicité plus haut. Pour ce qui est des tests lisses nous appliquerons les tests $T_{\hat{K}}$ et $T_2$ comme susmentionné.
 
 ## Application sur nos jeux de données
 
 &nbsp;
-Dans cette partie nous cherchons à confirmer ou non nos hypothèses formulées à la vu des graphiques. Nous utilisons les test cités plus haut.
-Les données se présentent comme ci-après, chaque ligne correspond à une de nos expérience, les $9$ premières colonnes (sans compter la première qui correspond à l'expérience) représente la répartition du premier chiffre significatif. Les $4$ dernières colonnes quant à elles sont les $p$-values des différents tests. Une case est rouge si l'hypothèse nulle est rejetée au seuil de $5 \%$ d'erreur.
+Dans cette partie nous cherchons à confirmer ou non nos hypothèses formulées à la vue des graphiques. Nous utilisons les tests cités plus haut.
+Les données se présentent comme ci-après, chaque ligne correspond à une de nos expériences, les $9$ premières colonnes (sans compter la première qui correspond à l'expérience) représentent la répartition du premier chiffre significatif. Les $4$ dernières colonnes quant à elles sont les $p$-values des différents tests. Une case est rouge si l'hypothèse nulle est rejetée au seuil de $5 \%$ d'erreur.
 
 \newpage
 
@@ -502,10 +502,10 @@ knitr::kable(df, "latex", escape=FALSE, digits = 3)%>% column_spec(11, bold = T,
 
 Les tests sont unanimes, la suite de Fibonacci et les données relevées sur le magazine *AMPM* suivent la loi de Newcomb-Benford, du moins on ne rejette pas cette hypothèse, ce résultat est en accord avec nos suppositions.
 
-Regardons maintenant les tests appliqués au jeu de données tirés du magazine *les échos*, nous avions remarqué une tendance décroissante similaire à celle de la répartition de la loi de Newcomb-Benford, avec cependant des valeurs relativement différentes. Les deux tests lisses ainsi que le test de Freedman donnent une $p$-value proche de zéro qui nous mène à un fort rejet de l'hypothèse nulle (avec un risque d'erreur presque nul), contrairement au test du $\chi^2$ (ici une $p$-value d'environ $0,1$ nous indique que si nous rejetons l'hypothèse nulle nous avons environ $10 \%$ de chance de nous tromper). On remarque ici que ce dernier est possiblement moins puissant que les autres.
+Regardons maintenant les tests appliqués au jeu de données tiré du magazine *les échos*, nous avions remarqué une tendance décroissante similaire à celle de la répartition de la loi de Newcomb-Benford, avec cependant des valeurs relativement différentes. Les deux tests lisses ainsi que le test de Freedman donnent une $p$-value proche de zéro qui nous mène à un fort rejet de l'hypothèse nulle (avec un risque d'erreur presque nul), contrairement au test du $\chi^2$ (ici une $p$-value d'environ $0,1$ nous indique que si nous rejetons l'hypothèse nulle nous avons environ $10 \%$ de chance de nous tromper). On remarque ici que ce dernier est possiblement moins puissant que les autres.
 
-Pour terminer tous les tests mènent à un rejet de l'hypothèse nulle "le jeu de données suit la loi de N-B" pour les jeux de données sur les population des villes de France, le passage journalier de vélos et les nombres générés par les humains. 
-Pour les deux derniers pas de surprise, cependant le rejet de l'hypothèse nulle pour le jeu de données sur les population des villes de France nous paraît étonnant, l'inspection visuelle nous donnait l'impression que la répartition du PCS collait à celle de la loi de Newcomb-Benford, mais le nombre important de données à fortement amplifié les différences.
+Pour terminer, tous les tests mènent à un rejet de l'hypothèse nulle "le jeu de données suit la loi de N-B" pour les jeux de données sur les populations des villes de France, le passage journalier de vélos et les nombres générés par les humains. 
+Pour les deux derniers pas de surprise, cependant le rejet de l'hypothèse nulle pour le jeu de données sur les populations des villes de France nous paraît étonnant, l'inspection visuelle nous donnait l'impression que la répartition du PCS collait à celle de la loi de Newcomb-Benford, mais le nombre important de données à fortement amplifié les différences.
 
 Les différents tests nous ont permis ici de déceler des différences avec la loi de N-B qui nous ont échappés à l'oeil nu, mais aussi de nous rendre compte de la différence d'efficacité entre les tests. 
 
@@ -513,7 +513,7 @@ Les différents tests nous ont permis ici de déceler des différences avec la l
 
 &nbsp;
 Les données utilisées dans cette partie sont tirées d'un article (cf. bibliographie) traitant sur la fraude de données fiscales en Italie.
-Les données se présentent comme ci-après, chaque ligne correspond à une année, les $9$ premières colonnes (sans compter la première qui correspond à l'année) représente la répartition du premier chiffre significatif. Les $4$ dernières colonnes quant à elles sont les $p$-values des différents tests que nous avons cité plus haut. Une case est rouge si l'hypothèse nulle est rejetée au seuil de $5 \%$ d'erreur.
+Les données se présentent comme ci-après, chaque ligne correspond à une année, les $9$ premières colonnes (sans compter la première qui correspond à l'année) représentent la répartition du premier chiffre significatif. Les $4$ dernières colonnes quant à elles sont les $p$-values des différents tests que nous avons cités plus haut. Une case est rouge si l'hypothèse nulle est rejetée au seuil de $5 \%$ d'erreur.
 
 Observons que les tableaux $4$ à $13$ ci-dessous ne montrent pas de suspections de fraudes. Ces régions italiennes, dont nous pouvons relever la région d'Abruzzo, de Basilicata, de Lombardia, ou encore de Puglia, ne permettent avec aucun des tests sélectionnés de rejeter l'hypothèse nulle, au risque de $5 \%$. Ceci signifie donc que nous serions plutôt tentés de ne pas suspecter de fraudes pour ces régions italiennes.  
 
@@ -714,7 +714,7 @@ knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, backgrou
 
 \newpage
 
-Ici la région de Campania (cf. tableau $16$) semble avoir fraudé presque tous les ans, tous les test n'ont pas mis en évidence une potentielle fraude, on remarque tout de même que le test lisse $T_2$ à relevé une fraude à chaque fois que les autres l'ont fait.  
+Ici la région de Campania (cf. tableau $16$) semble avoir fraudé presque tous les ans, tous les tests n'ont pas mis en évidence une potentielle fraude, on remarque tout de même que le test lisse $T_2$ à relevé une fraude à chaque fois que les autres l'ont fait.  
 
 Sur les tableaux qui suivent, les régions pour lesquelles un léger doute peut s'installer.
 
@@ -747,7 +747,7 @@ knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, backgrou
 
 \begin{table}
 
-Les régions de Marche et Molisse (cf. tableaux $17$ et $18$) semblent n'avoir fraudé que sur une seule année, cette fraude est suspectée par plusieurs tests, notamment les tests lisses. Nous voyons tout de même que pour la région de Molisse les $p$-values sont plutôt proches du seuil de $5 \%$ pour l'année $2010$ par exemple. Il est possible que cette région ait modifié sa façon de frauder pour échapper aux tests, c'est pourquoi il est important d'apporter de nouveau tests.
+Les régions de Marche et Molisse (cf. tableaux $17$ et $18$) semblent n'avoir fraudé que sur une seule année, cette fraude est suspectée par plusieurs tests, notamment les tests lisses. Nous voyons tout de même que pour la région de Molisse les $p$-values sont plutôt proches du seuil de $5 \%$ pour l'année $2010$ par exemple. Il est possible que cette région ait modifié sa façon de frauder pour échapper aux tests, c'est pourquoi il est important d'apporter de nouveaux tests.
    
 Cette partie regroupe les régions dont nous suspectons la fraude sur la quasi-totalité de l'étude (cf. tableaux $19$ à $23$).   
 
@@ -825,7 +825,7 @@ knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, backgrou
 \vspace{0.7cm}
 
 \newpage
-On voit clairement que sur chacune des années (ou presque) les tests s'affolent, un même test détecte une potentielle fraude chaque année par région. Les tests qui détectent ces fraudes sont différents pour chaque régions, pour la région de la Liguria c'est le test du $\chi^2$, pour la région de la Umbria ce sont les tests lisses par exemple. Ceci nous indique que ces régions sont sûrement des régions qui trichent avec leurs chiffres, mais de manière différentes. Il est donc important de posséder une batterie de tests pour couvrir le plus possible de façons de frauder et même d'en trouver de nouveaux puisque une fois connu, il est possible de le contourner.  
+On voit clairement que sur chacune des années (ou presque) les tests s'affolent, un même test détecte une potentielle fraude chaque année par région. Les tests qui détectent ces fraudes sont différents pour chaque région, pour la région de la Liguria c'est le test du $\chi^2$, pour la région de la Umbria ce sont les tests lisses par exemple. Ceci nous indique que ces régions sont sûrement des régions qui trichent avec leurs chiffres, mais de manière différente. Il est donc important de posséder une batterie de tests pour couvrir le plus possible de façons de frauder et même d'en trouver de nouveaux puisqu'une fois connu, il est possible de le contourner.  
 \end{table}   
 
 
@@ -838,9 +838,9 @@ On voit clairement que sur chacune des années (ou presque) les tests s'affolent
 
 &nbsp;
 La crise du COVID-$19$ étant au coeur des débats actuels et ayant un impact non négligeable sur notre scolarité, nous avons voulu nous intéresser aux chiffres de la Chine à ce sujet. La Chine, à l'origine du départ de cette pandémie a publié des données sur l'expansion des cas dans son territoire.
-Un article écrit par Junyi Zhang qui recense le nombre de personne atteinte du Covid-$19$ en Chine et compare la répartition du premier chiffre significatif avec la distribution de la loi de Newcomb-Benford. 
+Un article écrit par Junyi Zhang qui recense le nombre de personnes atteintes du Covid-$19$ en Chine et compare la répartition du premier chiffre significatif avec la distribution de la loi de Newcomb-Benford. 
 D'après cet article, le test qui teste l'hypothèse nulle "les données diffusées par la Chine suivent la loi de Newcomb-Benford" contre l'hypothèse alternative "les données diffusées par la Chine ne suivent pas la loi de Newcomb-Benford" donne une $p$-value de $92.8 \%$.
-Pour confirmer le résultat, Ducharme et ses collaborateurs ont utilisé les mêmes données pour appliquer des tests avec les mêmes hypothèses. Malheureusement cela ne collait pas avec les résultats attendus. Nous-mêmes sommes allés chercher les données de cette article, mais le lien des données n'existe plus sur Wikipédia.
+Pour confirmer le résultat, Ducharme et ses collaborateurs ont utilisé les mêmes données pour appliquer des tests avec les mêmes hypothèses. Malheureusement cela ne collait pas avec les résultats attendus. Nous-mêmes sommes allés chercher les données de cet article, mais le lien des données n'existe plus sur Wikipédia.
 On peut donc penser que les données ne sont pas cohérentes, qu'il y a eu une erreur dans l'étude de J. Zhang ou peut-être une fraude sur les chiffres.
 
 \newpage
