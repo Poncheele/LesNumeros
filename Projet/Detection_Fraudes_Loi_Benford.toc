@@ -18,8 +18,7 @@
 \contentsline {subsection}{Tests lisses pour la Loi de Newcomb-Benford}{14}{section*.31}%
 \contentsline {section}{Application des tests}{16}{section*.32}%
 \contentsline {subsection}{Application sur nos jeux de données}{16}{section*.33}%
-\contentsline {subsection}{Application sur nos jeux de données}{17}{section*.35}%
-\contentsline {subsection}{Application a des données fiscales italiennes}{17}{section*.36}%
-\contentsline {subsection}{CAS COVID}{22}{section*.77}%
-\contentsline {section}{Conclusion}{23}{section*.78}%
-\contentsline {section}{Bibliographie}{24}{section*.79}%
+\contentsline {subsection}{Application a des données fiscales italiennes}{18}{section*.35}%
+\contentsline {subsection}{CAS COVID}{23}{section*.76}%
+\contentsline {section}{Conclusion}{24}{section*.77}%
+\contentsline {section}{Bibliographie}{25}{section*.78}%

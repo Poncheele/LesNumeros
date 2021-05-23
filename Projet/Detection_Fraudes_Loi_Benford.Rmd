@@ -483,6 +483,8 @@ Les différents tests nous ont permis ici de déceler des différences avec la l
 
 ## Application a des données fiscales italiennes
 
+Les données utilisées dans cette partie sont tirées d'un article (voir bibliographie) traitant sur la fraude de données fiscales en Italie.
+
 Les données se présentent comme ci-après, chaque ligne correspond à une année, les 9 premières colonnes (sans compter la première qui correspond à l'année) représente la répartition du premier chiffre significatif. Les 4 dernières colonnes quant à elles sont les p_values des différents tests que nous avons cité plus haut. Une case est rouge si l'hypothèse nulle est rejetée au seuil de 5% d'erreur.
 
 
@@ -791,8 +793,11 @@ knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, backgrou
 
 ## CAS COVID
 
-Un article écrit par Junyi Zhang qui teste le nombre de cas du Covid-19 en Chine avec la loi de Newcomb-Benford. Il trouve une p-value de 92.8 % en faveur que les numéros respectent la loi de Newcomb-Benford. Pour confirmer le résultat, Ducharme et ses coloborateurs ont utilisée les mêmes données pour retrouver la même chose que le chercheur chinois malheureusement cela ne collait pas avec les résultats attendus. Nous-mêmes nous sommes allées chercher les données de cette article, mais le lien des données n'existe plus sur Wikipédia.
-On peut donc penser que les données ne sont pas cohérentes ou qu'il y a eu une erreur dans son étude ou frauder sur les chiffres. 
+La crise du COVID-19 étant au coeur des débats actuels et ayant un impact non négligeable sur notre scolarité, nous avons voulu nous intéresser aux chiffres que la Chine à publié. La Chine, à l'origine du départ de cette pandémie à publié des données sur l'expansion des cas dans son territoire.
+Un article écrit par Junyi Zhang qui recense le nombre de cas de personne atteinte du Covid-19 en Chine et compare la répartiton des premiers chiffres significatifs avec la loi de Newcomb-Benford. 
+D'après cette article le test qui teste l'hypothèse nulle "les données diffusées par la Chine suivent la loi de Newcomb-Benford" contre l'hypothèse alternative "les données diffusées par la Chine ne suivent pas la loi de Newcomb-Benford" donne une p-value de $92.8\%$.
+Pour confirmer le résultat, Ducharme et ses collaborateurs ont utilisé les mêmes données pour appliquer des tests avec les mêmes hypothèses. Malheureusement cela ne collait pas avec les résultats attendus. Nous-mêmes nous sommes allées chercher les données de cette article, mais le lien des données n'existe plus sur Wikipédia.
+On peut donc penser que les données ne sont pas cohérentes ou qu'il y a eu une erreur dans son étude ou fraude sur les chiffres.
 
 \newpage
 
@@ -874,6 +879,10 @@ NEYMAN J. *Smooth tests for goodnesss-of-fit*, Skand. Aktuariedidskr $20$ : $150
 
 \medskip
 
+**\underline{Cas fiscalité italienne}** :
+
+MARCEL AUSLOOS, ROY CERQUETI, TARIC A. MIR *Data science for assessing possible tax incomemanipulation: the case of Italy* (2017)
+
 **\underline{Cas Covid-$19$}** :
 
-JUNYI ZHAN (2020) *Testing Case Number of Coronavirus Disease 2019 in China with Newcomb-Benford Law* ($2020$) ([*Source*](https://arxiv.org/abs/2002.05695]))  
+JUNYI ZHAN *Testing Case Number of Coronavirus Disease 2019 in China with Newcomb-Benford Law* ($2020$) ([*Source*](https://arxiv.org/abs/2002.05695]))  
