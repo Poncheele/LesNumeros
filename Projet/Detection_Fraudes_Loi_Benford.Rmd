@@ -222,6 +222,7 @@ Dans ce paragraphe, nous nous intéressons à la population des villes français
 Ici les répartitions sont fortement ressemblantes, c'est aussi le cas pour de nombreuses données démographiques naturelles. Nous aurions pu également analyser les codes postaux, la longueur des rivières ou encore la distance des villes de France à Paris.  
 
 \newpage
+
 ## Passage journalier de vélos dans l'allée Beracasa à Montpellier  
 
 &nbsp;
@@ -444,7 +445,6 @@ et la statistique de test $T_{\hat{K}} \stackrel{L}{\longrightarrow} \chi_{1}^{2
 
 Dans la suite, nous appliquerons les tests $T_{\hat{K}}$ et $T_2$ qui d'après Ducharme & Collab. sont les plus performants.
 
-<<<<<<< HEAD
 \newpage
 
 # Application des tests
@@ -476,19 +476,20 @@ Regardons maintenant les tests appliqués au jeu de données tirés du magazine 
 Pour terminer tous les tests mènent à un rejet de l'hypothèse nulle "le jeu de donnée suit la loi de N-B" pour les jeux de données sur les population des villes de France, le passage journalier de vélos et les nombres générés par les humains. 
 Pour les deux derniers pas de surprise, cependant le rejet de l'hypothèse nulle pour le jeu de données sur les population des villes de France nous paraît étonnant, l'inspection visuelle nous donnait l'impression que la répartition du PCS collait à celle de la loi de Neewcomb-Benford, mais le nombre important de données à fortement amplifié les différences.
 
-Les différents tests nous ont permis ici de déceler des différences avec la loi de N-B qui nous ont échapés à l'oeil nu, mais aussi de nous rendre compte de la différence d'éfficacité entre les tests. 
+Les différents tests nous ont permis ici de déceler des différences avec la loi de N-B qui nous ont échappés à l'oeil nu, mais aussi de nous rendre compte de la différence d'efficacité entre les tests. 
 
 
-\newpage
 
-## Application a des données fiscales italiennes
+## Application à des données fiscales italiennes
 
 Les données utilisées dans cette partie sont tirées d'un article (voir bibliographie) traitant sur la fraude de données fiscales en Italie.
 
-Les données se présentent comme ci-après, chaque ligne correspond à une année, les 9 premières colonnes (sans compter la première qui correspond à l'année) représente la répartition du premier chiffre significatif. Les 4 dernières colonnes quant à elles sont les p_values des différents tests que nous avons cité plus haut. Une case est rouge si l'hypothèse nulle est rejetée au seuil de 5% d'erreur.
+Les données se présentent comme ci-après, chaque ligne correspond à une année, les 9 premières colonnes (sans compter la première qui correspond à l'année) représente la répartition du premier chiffre significatif. Les 4 dernières colonnes quant à elles sont les p-values des différents tests que nous avons cité plus haut. Une case est rouge si l'hypothèse nulle est rejetée au seuil de 5% d'erreur.
 
 
-Les 12 premiers tableaux ci-dessus ne montrent pas de suspections de fraude dans leurs données avec les divers tests sélectionnés.
+Les 12 premiers tableaux ci-dessous ne montrent pas de suspections de fraude dans leurs données avec les divers tests sélectionnés.   
+
+
 \begin{table}
 
 ```{r}
@@ -533,6 +534,8 @@ knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11:14, bold = T, backg
 
 \caption{Tableau 5 : Tests sur la région de Calabria}
 \end{table}
+
+\newpage
 
 \begin{table}
 
@@ -629,11 +632,14 @@ knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, backgrou
   column_spec(1, bold=TRUE) %>%kable_styling(font_size = 10)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
 ```
 
-\caption{Tableau 12 : Tests sur la région de Valle     D'aosta}
+\caption{Tableau 12 : Tests sur la région de Valle D'aosta}
 \end{table}
 
+\newpage 
+    
 
-**Seulement un test**
+Les tableaux suivants nous montrent dans certains cas des suspicions de fraude. Les test ne sont souvent pas en accord, on remarque que pour les régions suivantes seul un test detecte une fraude et seulement sur une année. Les p-values des autres tests sont relativement élevés.
+
 \begin{table}
 
 ```{r}
@@ -664,8 +670,8 @@ knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, backgrou
 \caption{Tableau 15 : Tests sur la région de Veneto}
 \end{table}
 
-
-
+   
+Ici la région de Campagnia semble avoir fraudé presque tous les ans, tous les test n'ont pas mis en évidence une potentielle fraude, on remarque tout de même que le test lisse $T_2$ à relevé une fraude à chaque fois que les autres l'ont fait.
 
 \begin{table}
 
@@ -682,6 +688,41 @@ knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, backgrou
 \caption{Tableau 15 : Tests sur la région de Campania}
 \end{table}
 
+\newpage
+Les régions de Marche et Molisse semblent n'avoir fraudé que sur une seule année, cette fraude est suspectée par plusieurs tests, notament les tests lisses. Nous voyons tout de même que pour la région de Molisse les p_value sont plutôt proche du seuil de $5\%$ pour l'année $2010$ par exemple. Il est possible que cette région à modifié sa façon de frauder pour échapper aux tests, c'est pourquoi il est important d'apporter de nouveau tests.
+
+\begin{table}
+
+```{r}
+df =  read.csv2('Marche2.csv', header = TRUE, sep = ',', dec = '.',stringsAsFactors = FALSE)
+df=df[,1:14]
+opts <- options(knitr.kable.NA = "")
+colnames(df) <- c(" ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "$\\chi^2$", "$Freedman$", "$T_2$", "$T_{\\hat{K}}$")
+knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
+  column_spec(1, bold=TRUE) %>%kable_styling(font_size = 10)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
+```
+
+\caption{Tableau 18 : Tests sur la région de Marche}
+\end{table}
+
+\begin{table}
+
+```{r}
+df =  read.csv2('Molise2.csv', header = TRUE, sep = ',', dec = '.',stringsAsFactors = FALSE)
+df=df[,1:14]
+opts <- options(knitr.kable.NA = "")
+colnames(df) <- c(" ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "$\\chi^2$", "$Freedman$", "$T_2$", "$T_{\\hat{K}}$")
+knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
+  column_spec(1, bold=TRUE) %>%kable_styling(font_size = 10)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
+```
+
+\caption{Tableau 19 : Tests sur la région de Molise}
+\end{table}
+
+
+\newpage
+   
+Cette partie regroupe les régions dont nous suspectons la fraude sur la quasi-totalité de l'étude.   
 
 \begin{table}
 
@@ -718,35 +759,6 @@ knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, backgrou
 \begin{table}
 
 ```{r}
-df =  read.csv2('Marche2.csv', header = TRUE, sep = ',', dec = '.',stringsAsFactors = FALSE)
-df=df[,1:14]
-opts <- options(knitr.kable.NA = "")
-colnames(df) <- c(" ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "$\\chi^2$", "$Freedman$", "$T_2$", "$T_{\\hat{K}}$")
-knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
-  column_spec(1, bold=TRUE) %>%kable_styling(font_size = 10)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
-```
-
-\caption{Tableau 18 : Tests sur la région de Marche}
-\end{table}
-
-\begin{table}
-
-```{r}
-df =  read.csv2('Molise2.csv', header = TRUE, sep = ',', dec = '.',stringsAsFactors = FALSE)
-df=df[,1:14]
-opts <- options(knitr.kable.NA = "")
-colnames(df) <- c(" ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "$\\chi^2$", "$Freedman$", "$T_2$", "$T_{\\hat{K}}$")
-knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, background = ifelse(df[,11]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(12, bold = T, background = ifelse(df[,12]<0.05,"red", "white"))%>%kable_styling(font_size = 10)%>% column_spec(13, bold = T, background = ifelse(df[,13]<0.05,"red", "white"))%>%add_header_above(c("Année"=1, "Chiffre significatif"=9, "p-value"=4), bold=TRUE) %>%
-  column_spec(1, bold=TRUE) %>%kable_styling(font_size = 10)%>% column_spec(14, bold = T, background = ifelse(df[,14]<0.05,"red", "white"))%>%kable_styling(font_size = 10, latex_options="HOLD_position")
-```
-
-\caption{Tableau 19 : Tests sur la région de Molise}
-\end{table}
-
-
-\begin{table}
-
-```{r}
 df =  read.csv2('Sardegna2.csv', header = TRUE, sep = ',', dec = '.',stringsAsFactors = FALSE)
 df=df[,1:14]
 opts <- options(knitr.kable.NA = "")
@@ -773,7 +785,7 @@ knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, backgrou
 \caption{Tableau 21 : Tests sur la région de Toscana}
 \end{table}
 
-
+\newpage
 
 \begin{table}
 
@@ -789,23 +801,24 @@ knitr::kable(df, escape=FALSE, digits = 3)%>% column_spec(11, bold = T, backgrou
 \caption{Tableau 22 : Tests sur la région de Umbria}
 \end{table}
 
+On voit clairement que sur chacune des années (ou presque) les test s'affolent, un même test détecte une potentielle fraude chaque année par région. Les test qui détectent ces fraudes sont différents pour chaque régions, pour la région de la Ligurai c'est le test du $\chi^2$, pour la région de la Umbria ce sont les tests lisses par exemple. Ceci nous indiquent que ces régions sont surement des régions qui trichent avec leurs chiffres, mais de manière différentes. Il est donc important de posséder une batterie de tests pour couvrir le plus possible de façons de frauder et même d'en trouver de nouveaux puisque une fois connu, il est possible de le contourner.    
 
+\newpage
 
 ## CAS COVID
 
-La crise du COVID-19 étant au coeur des débats actuels et ayant un impact non négligeable sur notre scolarité, nous avons voulu nous intéresser aux chiffres que la Chine à publié. La Chine, à l'origine du départ de cette pandémie à publié des données sur l'expansion des cas dans son territoire.
-Un article écrit par Junyi Zhang qui recense le nombre de cas de personne atteinte du Covid-19 en Chine et compare la répartiton des premiers chiffres significatifs avec la loi de Newcomb-Benford. 
+La crise du COVID-19 étant au cœur des débats actuels et ayant un impact non négligeable sur notre scolarité, nous avons voulu nous intéresser aux chiffres que la Chine à publié. La Chine, à l'origine du départ de cette pandémie à publié des données sur l'expansion des cas dans son territoire.
+Un article écrit par Junyi Zhang qui recense le nombre de cas de personne atteinte du Covid-19 en Chine et compare la répartition des premiers chiffres significatifs avec la loi de Newcomb-Benford. 
 D'après cette article le test qui teste l'hypothèse nulle "les données diffusées par la Chine suivent la loi de Newcomb-Benford" contre l'hypothèse alternative "les données diffusées par la Chine ne suivent pas la loi de Newcomb-Benford" donne une p-value de $92.8\%$.
 Pour confirmer le résultat, Ducharme et ses collaborateurs ont utilisé les mêmes données pour appliquer des tests avec les mêmes hypothèses. Malheureusement cela ne collait pas avec les résultats attendus. Nous-mêmes nous sommes allées chercher les données de cette article, mais le lien des données n'existe plus sur Wikipédia.
 On peut donc penser que les données ne sont pas cohérentes ou qu'il y a eu une erreur dans son étude ou fraude sur les chiffres.
 
-\newpage
 
 # Conclusion 
 
 &nbsp;
 (Rappel de la problématique)
-Ce projet nous a permis d'approfondir nos connaissances, de pouvoir faire des expériences nous-mêmes et de nous initier au vaste problème pour detecter une fraude. Et plus particulierement à la loi de Benford-Newcomb en exposant sa genèse mais aussi de l'étudier avec divers tests. 
+Ce projet nous a permis d'approfondir nos connaissances, de pouvoir faire des expériences nous-mêmes et de nous initier au vaste problème qu'est la detection de fraude. Et plus particulierement à la loi de Benford-Newcomb en exposant sa genèse mais aussi de l'étudier avec divers tests. 
 (Reponse)
 Dans le déroulement de notre projet, nous avons appris que la loi de Benford-Newcomb n'est pas applicable à toutes les données comme l'expérience de Hill sité plus haut qui sont influencées par la penseé de l'Homme. De plus, lors des applications des tests, nous avons remarqué que certains tests avaient une p-value inferieurs à 5%. Les tests parraissent fiables mais pour " detecter une fraude plus y a de test mieux c'est " Car les tests ne vont pas dans les mêmes directions car chaque tests mettent en valeurs leurs "propriétés " c'est- à-dire que un permet de ... et un autre de ..
 (Ouverture)
